@@ -1,0 +1,23 @@
+{
+  "name": "desafiosfitness",
+  "version": "1.0.0",
+  "description": "DesafiosFitness with Soap and Tailwind",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Fitness",
+    "PHP",
+    "SOAP",
+    "Tailwind",
+    "CSS"
+  ],
+  "author": "GabrielMagM",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14"
+  }
+}
