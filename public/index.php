@@ -55,9 +55,11 @@
                     <h4 class="text-blue-600 font-semibold">Desafío de Cardio</h4>
                     <p class="text-gray-700">Corre 5 kilómetros diarios durante una semana.</p>
                 </div>
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                    <h4 class="text-blue-600 font-semibold">Desafío de Fuerza</h4>
-                    <p class="text-gray-700">Haz 100 flexiones cada día durante un mes.</p>
+                <div class="flex flex-col bg-white p-4 rounded-lg shadow-md">
+                    <h4 class="text-blue-600 font-semibold ml-5">Desafío de Fuerza</h4>
+                    <p class="text-gray-700 ml-5">Haz abdominales cada día durante un mes.</p>
+                    <!-- Aquí insertamos el GIF -->
+                    <img src="Abdominales.gif" alt="Animación de Fuerza" class="mt-3 ml-5 rounded-lg" />
                 </div>
                 <div class="bg-white p-4 rounded-lg shadow-md">
                     <h4 class="text-blue-600 font-semibold">Desafío de Flexibilidad</h4>
