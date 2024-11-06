@@ -16,8 +16,10 @@
   "author": "GabrielMagM",
   "license": "ISC",
   "dependencies": {
+    "desafiosfitness": "file:"
+  },
+  "devDependencies": {
     "autoprefixer": "^10.4.20",
-    "desafiosfitness": "file:",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14"
   }
