@@ -15,7 +15,7 @@
         <div class="container flex justify-between items-center px-12">
             <img src="../assets/Logo.png" alt="Logo" class="h-14">
             <nav>
-                <a href="#" class="ml-6 text-white hover:underline">Inicio</a>
+                <a href="index.php" class="ml-6 text-white hover:underline">Inicio</a>
                 <a href="#" class="ml-6 text-white hover:underline">Desafíos</a>
                 <a href="#" class="ml-6 text-white hover:underline">Contacto</a>
             </nav>
