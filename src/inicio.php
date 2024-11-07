@@ -4,73 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desafíos Fitness</title>
-    <!-- Enlace al archivo CSS de Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.6/lottie.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link href="colors/Tailwind.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('../assets/pexels-wallpaper.jpg'); /* Ruta de tu imagen */
+            background-size: cover; /* Cubre toda el área */
+            background-position: center center; /* Centra la imagen */
+            background-attachment: fixed; /* La imagen no se mueve al hacer scroll */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+            min-height: 100vh; /* Asegura que el fondo cubra toda la pantalla */
+        }
+    </style>
 </head>
+
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
     <!-- Encabezado -->
-    <header class="bg-cyan-800 text-white shadow-md ">
-        <div class="container flex justify-between items-center px-12">
-            <img src="../assets/Logo.png" alt="Logo" class="h-14">
-            <nav>
-                <a href="#" class="ml-6 text-white hover:underline">Inicio</a>
-                <a href="#" class="ml-6 text-white hover:underline">Desafíos</a>
-                <a href="#" class="ml-6 text-white hover:underline">Contacto</a>
-            </nav>
-            <div class="flex items-center gap-4">
-                <div class="relative group">
-                    <img src="../assets/personsvg.svg" class="w-6 h-6 cursor-pointer " alt="Perfil">
-                    <div class="hidden group-hover:block absolute right-0 pt-4 bg-slate-100 text-gray-500 rounded shadow-lg">
-                        <div class="flex flex-col gap-2 w-36 py-3 px-5">
-                            <p class="cursor-pointer hover:text-blue-700">Mi Perfil</p>
-                            <p class="cursor-pointer hover:text-green-500">Órdenes</p>
-                            <p class="cursor-pointer hover:text-red-500">Salir</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+    <?php include 'views/header_sesion.php'; ?>
 
     <!-- Contenido Principal -->
-    <main class="container mx-auto p-4 mt-4">
-        <section class="bg-white p-6 rounded-lg shadow-md">
+    <main class="mt-4 m-0">
+        <section class="flex flex-col p-6 rounded-lg shadow-md">
             <h2 class="text-xl font-semibold mb-4 text-gray-800">Bienvenido a los Desafíos Fitness</h2>        
             <p class="text-gray-700 mt-4">Aquí encontrarás una variedad de desafíos para mejorar tu condición física. Únete y mantente motivado.</p>
-        </section>
-
-        <!-- Sección de Desafíos -->
-        <section class="mt-8">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">Desafíos Recientes</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                    <h4 class="text-blue-600 font-semibold">Desafío de Cardio</h4>
-                    <p class="text-gray-700">Corre 5 kilómetros diarios durante una semana.</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md flex flex-col items-start">
-                    <h4 class="text-blue-600 font-semibold">Desafío de Fuerza</h4>
-                    <p class="text-gray-700">Haz abdominales cada día durante un mes.</p>
-                    <div id="Animation1" style="width: 300px; height: 300px;"></div>
-                    <!-- aqui va el gif de LettieFiles -->
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                    <h4 class="text-blue-600 font-semibold">Desafío de Flexibilidad</h4>
-                    <p class="text-gray-700">Practica yoga durante 30 minutos cada mañana.</p>
-                </div>
+            <br>
+            <!-- Carrusel -->
+            <div class="relative w-full h-[500px] overflow-hidden rounded-lg shadow-md">
+                    <div class="carousel-item absolute inset-0 transition-opacity duration-500 ease-in-out opacity-100">
+                        <img src="../assets/wallpaper.jpg" alt="Desafío 1" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="carousel-item absolute inset-0 transition-opacity duration-500 ease-in-out opacity-0">
+                        <img src="../assets/wallpaper1.jpg" alt="Desafío 2" class="w-full h-full object-cover" />
+                    </div>
             </div>
         </section>
     </main>
 
-    <!-- Pie de página -->
-    <footer class="bg-gray-800 text-gray-200 p-4 mt-8">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2024 Desafíos Fitness. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+    <!-- Modal de Login -->
+    <?php include 'views/modal-login.php'; ?>
+    <!-- Modal de Registro -->
+    <?php include 'views/modal-register.php'; ?>
 
-    <!-- JavaScript del Carrusel -->
-    <script src="./JS/lottiefiles.js"></script>
+    <!-- Pie de página -->
+    <?php include 'views/footer.php'; ?>
+
+    <script src="JS/carrusel.js"></script>
+    <script src="JS/modal.js"></script>
 </body>
 </html>
