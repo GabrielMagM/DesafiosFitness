@@ -65,7 +65,6 @@
                         <?php
                         if (isset($_SESSION['message'])) {
                             echo $_SESSION['message'];  // Imprimir el mensaje
-                            unset($_SESSION['message']);  // Limpiar el mensaje después de mostrarlo
                         }
                         ?>
                         <button type="submit" class="px-4 py-2 bg-cyan-800 text-white rounded hover:bg-cyan-700">Registrarse</button>
