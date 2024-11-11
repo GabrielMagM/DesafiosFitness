@@ -8,8 +8,8 @@
             </nav>
             <div class="flex items-center gap-4">
                 <!-- Se agregó el id="openModal" aquí -->
-                <button id="openModalLogin" class="px-2 py-1 border border-white-100 text-white-300 rounded hover:bg-cyan-600">Iniciar Sesion</button>
-                <button id="openModalRegister" class="px-2 py-1 border border-white-100 text-white-300 rounded hover:bg-cyan-600">Registrarse</button>
+                <button href="Login.php" class="px-2 py-1 border border-white-100 text-white-300 rounded hover:bg-cyan-600">Iniciar Sesion</button>
+                <button href="Register.php" class="px-2 py-1 border border-white-100 text-white-300 rounded hover:bg-cyan-600">Registrarse</button>
             </div>
         </div>
 </header>
