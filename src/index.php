@@ -22,8 +22,8 @@
 </head>
 
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
-    <!-- Encabezado -->
-    <?php include 'views/header.php'; ?>
+
+    <?php include 'views/header_prueba.php';?>
 
     <!-- Contenido Principal -->
     <main class="mt-4 m-0">

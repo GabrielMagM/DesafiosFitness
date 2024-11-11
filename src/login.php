@@ -20,11 +20,16 @@
             <a>Al Registrarte encontrarás los Mejores Desafios</a>
     </header>
     <!-- Contenido Principal -->
+    <?php include 'components/db_login.php'; ?>
+
     <main class="flex justify-center items-center h-3/4 bg-slate-800 pb-36 pt-14">
         <section class="flex w-3/4 h-2/4 shadow-lg rounded-lg overflow-hidden bg-slate-800 mb-20">
             <!-- Sección Izquierda: Logo y textos -->
             <div class="w-1/2 bg-slate-800 flex flex-col justify-center p-8 text-white">
-                <img src="../assets/Logo.png" alt="Logo" class="mb-4 w-30 h-26"> <!-- Logo centrado -->
+                <a href="index.php">
+                    <!-- Logo centrado -->
+                    <img src="../assets/Logo.png" alt="Logo" class="mb-4 w-30 h-26">
+                </a> 
                 <h1 class="text-3xl font-bold mb-4">Become a Member</h1>
                 <ul class="space-y-2">
                     <li class="flex items-center">
@@ -53,10 +58,10 @@
                     <p class="text-center text-gray-500 my-2">OR</p>
                     <form action="#" method="POST">
                         <div class="mb-4">
-                            <input type="text" placeholder="Email" class="w-full p-1 border rounded-md">
+                            <input type="text" placeholder="Correo" name="email" class="w-full p-1 border rounded-md">
                         </div>
                         <div class="mb-4">
-                            <input type="password" placeholder="Password" class="w-full p-1 border rounded-md">
+                            <input type="password" placeholder="Password" name="password" class="w-full p-1 border rounded-md">
                         </div>
                         <button type="submit" class="w-full bg-green-500 text-white p-3 rounded-md hover:bg-green-600">Login</button>
                     </form>

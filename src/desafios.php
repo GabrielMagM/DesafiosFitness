@@ -13,7 +13,7 @@
 
     <style>
         body {
-            background-image: url('../assets/pexels-wallpaper.jpg'); /* Ruta de tu imagen */
+            background-image: url('../assets/pexels-wallpaper.webp'); /* Ruta de tu imagen */
             background-size: cover; /* Cubre toda el área */
             background-position: center center; /* Centra la imagen */
             background-attachment: fixed; /* La imagen no se mueve al hacer scroll */
@@ -25,7 +25,7 @@
 
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
     <!-- Encabezado -->
-    <?php include 'views/header.php'; ?>
+    <?php include 'views/header_prueba.php';?>
 
     <!-- Contenido Principal -->
     <main class="container mx-auto p-4 mt-4">
