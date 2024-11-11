@@ -42,6 +42,7 @@
                     <h4 class="text-blue-600 font-semibold">Desafío de Cardio</h4>
                     <p class="text-gray-700">Corre 5 kilómetros diarios durante una semana.</p>
                     <img src="../assets/runing.webp" alt="" class="h-64 w-52 self-center" >
+                    
                 </div>
                 <div class="bg-white p-4 rounded-lg shadow-md flex flex-col items-start">
                     <h4 class="text-blue-600 font-semibold">Desafío de Fuerza</h4>

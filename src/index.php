@@ -43,10 +43,6 @@
         </section>
     </main>
 
-    <!-- Modal de Login -->
-    <?php include 'views/modal-login.php'; ?>
-    <!-- Modal de Registro -->
-    <?php include 'views/modal-register.php'; ?>
 
     <!-- Pie de página -->
     <?php include 'views/footer.php'; ?>

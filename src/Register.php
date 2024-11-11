@@ -51,7 +51,7 @@
                     <p class="text-sm mb-4 ml-28">Don't have an account? 
                     <a href="login.php" class="text-blue-500">Log in</a></p>
                     <p class="text-center text-gray-500 my-2">OR</p>
-                    <form action="#" method="POST">
+                    <form action="register.php" method="POST">
                         <div class="mb-4">
                             <input type="text" placeholder="Usuario" name="name" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="Usuario" required>
                         </div>
@@ -62,7 +62,7 @@
                             <input type="password" placeholder="Contraseña" name="password" class="w-full p-1 border rounded-md" required>
                         </div>
                         <div class="mb-4">
-                            <input type="confirm_password" placeholder="Confirmar Contraseña" name="confirm_password" class="w-full p-1 border rounded-md" required>
+                            <input type="password" placeholder="Confirmar Contraseña" name="confirm_password" class="w-full p-1 border rounded-md" required>
                         </div>
                         <button type="submit" class="w-full bg-green-500 text-white p-3 rounded-md hover:bg-green-600">Registrarte</button>
                     </form>
@@ -70,6 +70,7 @@
             </div>
         </section>
     </main>
+    <?php include 'components/db_register.php'; ?>
 
     <!-- Pie de página -->
     <?php include 'views/footer.php'; ?>
