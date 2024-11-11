@@ -49,22 +49,16 @@
                 <div class="flex flex-col justify-around p-8 bg-white rounded-lg w-3/4 mt-10">
                     <h2 class="text-2xl font-semibold mb-4">Log In</h2>
                     <p class="text-sm mb-4 ml-28">Don't have an account? 
-                    <a href="login.php" class="text-blue-500">Log in</a></p>
+                    <a href="register.php" class="text-blue-500">Sign up</a></p>
                     <p class="text-center text-gray-500 my-2">OR</p>
                     <form action="#" method="POST">
                         <div class="mb-4">
-                            <input type="text" placeholder="Usuario" name="name" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="Usuario" required>
+                            <input type="text" placeholder="Email" class="w-full p-1 border rounded-md">
                         </div>
                         <div class="mb-4">
-                            <input type="text" placeholder="Email" name="email" class="w-full p-1 border rounded-md" required>
+                            <input type="password" placeholder="Password" class="w-full p-1 border rounded-md">
                         </div>
-                        <div class="mb-4">
-                            <input type="password" placeholder="Contraseña" name="password" class="w-full p-1 border rounded-md" required>
-                        </div>
-                        <div class="mb-4">
-                            <input type="confirm_password" placeholder="Confirmar Contraseña" name="confirm_password" class="w-full p-1 border rounded-md" required>
-                        </div>
-                        <button type="submit" class="w-full bg-green-500 text-white p-3 rounded-md hover:bg-green-600">Registrarte</button>
+                        <button type="submit" class="w-full bg-green-500 text-white p-3 rounded-md hover:bg-green-600">Login</button>
                     </form>
                 </div>    
             </div>
