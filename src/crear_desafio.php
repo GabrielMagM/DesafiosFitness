@@ -30,7 +30,7 @@
                 <h2 class="text-white font-bold">Crear Desafío</h2>
                 
                 <label for="titulo" class="font-semibold text-white">Título:</label>
-                <input type="text" id="titulo" name="titulo" class="rounded-md shadow-md px-1 py-1" placeholder="Ingrese Titulo"> required>
+                <input type="text" id="titulo" name="titulo" class="rounded-md shadow-md px-1 py-1" placeholder="Ingrese Titulo"required>
 
                 <label for="descripcion" class="font-semibold text-white">Descripción:</label>
                 <textarea id="descripcion" name="descripcion" rows="3" class="rounded-md shadow-md px-1" placeholder="Ingrese Descripción"></textarea>
@@ -57,9 +57,9 @@
                 <label class="font-semibold text-white">Imagen del desafío:</label>
                 <div class="self-center" id="image-selector">
                     <button type="button" onclick="cambiarImagen(-1)">◀</button>
-                    <img id="previewImage" src="../assets/desafio_img/running.webp" alt="Imagen del desafío" style="width: 100px;">
+                    <img id="previewImage" src="../assets/desafio_img/runing.webp" alt="Imagen del desafío" style="width: 100px;">
                     <button type="button" onclick="cambiarImagen(1)">▶</button>
-                    <input type="hidden" id="imagen_url" name="imagen_url" value="running.webp">
+                    <input type="hidden" id="imagen_url" name="imagen_url" value="runing.webp">
                 </div>
 
                 <button type="submit" class="bg-green-600 font-bold rounded-lg px-4 py-2">Crear Desafío</button>
