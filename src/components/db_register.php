@@ -31,7 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($stmt->execute()) {
             // Guardar el mensaje en la sesión
             $_SESSION['mensaje_registro'] = "Registro exitoso. Ahora debe logearse.";
-            header("Location: login.php"); // Redirigir a la página de inicio de sesión
+            echo "<script>
+                    alert('Registro exitoso. Ahora debe logearse.');
+                    window.location.href = 'login.php';
+                </script>";
             exit;
         } else {
             echo "Error en el registro.";

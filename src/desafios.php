@@ -35,25 +35,28 @@
         </section>
 
         <!-- Sección de Desafíos -->
-        <section class="mt-8">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">Desafíos Recientes</h3>
+        <section class="mt-4">
+            <div class="flex justify-between items-center mb-4 px-4" >
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Desafíos Recientes</h3>
+                <button onclick="window.location.href='crear_desafio.php'" class="bg-green-600 font-bold rounded-lg px-4 py-2">Crear un Desafio</button>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                 <div class="bg-white p-4 rounded-lg shadow-md flex flex-col">
                     <h4 class="text-blue-600 font-semibold">Desafío de Cardio</h4>
                     <p class="text-gray-700">Corre 5 kilómetros diarios durante una semana.</p>
-                    <img src="../assets/runing.webp" alt="" class="h-64 w-52 self-center" >
+                    <img src="../assets/desafio_img/runing.webp" alt="" class="h-64 w-52 self-center" >
                     
                 </div>
                 <div class="bg-white p-4 rounded-lg shadow-md flex flex-col items-start">
                     <h4 class="text-blue-600 font-semibold">Desafío de Fuerza</h4>
                     <p class="text-gray-700">Haz abdominales cada día durante un mes.</p>
-                    <img src="../assets/peso_muerto.webp" alt="" class="h-64 w-52 self-center" >
+                    <img src="../assets/desafio_img/peso_muerto.webp" alt="" class="h-64 w-52 self-center" >
                     <!-- aqui va el gif de LettieFiles -->
                 </div>
                 <div class="bg-white p-4 rounded-lg shadow-md flex flex-col items-start">
                     <h4 class="text-blue-600 font-semibold">Desafío de Flexibilidad</h4>
                     <p class="text-gray-700">Practica yoga durante 30 minutos cada mañana.</p>
-                    <img src="../assets/estiramiento.webp" alt="" class="h-64 w-52 self-center">
+                    <img src="../assets/desafio_img/estiramiento.webp" alt="" class="h-64 w-52 self-center">
                 </div>
             </div>
         </section>

@@ -72,7 +72,5 @@
 
     <!-- Pie de página -->
     <?php include 'views/footer.php'; ?>
-
-    <script src="JS/carrusel.js"></script>
 </body>
 </html>

@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <style>
         body {
-            background-image: url('../assets/pexels-wallpaper.webp'); /* Ruta de tu imagen */
+            background-image: url('../assets/wallpaper/pexels-wallpaper.webp'); /* Ruta de tu imagen */
             background-size: cover; /* Cubre toda el área */
             background-position: center center; /* Centra la imagen */
             background-attachment: fixed; /* La imagen no se mueve al hacer scroll */
@@ -34,10 +34,10 @@
             <!-- Carrusel -->
             <div class="relative w-full h-[500px] overflow-hidden rounded-lg shadow-md">
                     <div class="carousel-item absolute inset-0 transition-opacity duration-500 ease-in-out opacity-100">
-                        <img src="../assets/wallpaper.webp" alt="Desafío 1" class="w-full h-full object-cover" />
+                        <img src="../assets/wallpaper/wallpaper.webp" alt="Desafío 1" class="w-full h-full object-cover" />
                     </div>
                     <div class="carousel-item absolute inset-0 transition-opacity duration-500 ease-in-out opacity-0">
-                        <img src="../assets/wallpaper1.webp" alt="Desafío 2" class="w-full h-full object-cover" />
+                        <img src="../assets/wallpaper/wallpaper1.webp" alt="Desafío 2" class="w-full h-full object-cover" />
                     </div>
             </div>
         </section>
@@ -48,6 +48,5 @@
     <?php include 'views/footer.php'; ?>
 
     <script src="JS/carrusel.js"></script>
-    <script src="JS/modal.js"></script>
 </body>
 </html>
