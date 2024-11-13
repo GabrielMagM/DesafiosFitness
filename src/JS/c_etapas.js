@@ -6,9 +6,11 @@
 
             for (let i = 1; i <= etapas; i++) {
                 contenedor.innerHTML += `
-                    <div class="grid grid-cols-1 md:grid-cols-2 px-20">
-                            <label for="etapa_${i}">Descripción de la etapa ${i}:</label>
-                            <input type="text" id="etapa_${i}" name="etapa_${i}" class="mt-1 rounded-md" required>  
+                    <div class="grid grid-cols-1 gap-1">
+                        <div class="flex flex-col shadow-md w-11/12 justify-self-center">
+                            <label class="text-white" for="etapa_${i}">Descripción de la etapa ${i}:</label>
+                            <textarea rows="2" type="text" id="etapa_${i}" name="etapa_${i}" class="mt-1 rounded-md pb-3 text-wrap" required></textarea>  
+                        </div>
                     </div>
                         `;
             }

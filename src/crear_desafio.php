@@ -24,6 +24,9 @@
 <body>
 
     <?php include 'views/header_prueba.php';?>
+
+    <?php include 'components/db_desafios.php'; ?>
+    
     <main class="flex mx-auto p-4 mt-4 items-center justify-center">
         <section class="flex flex-col bg-slate-800 p-6 rounded-md shadow-md w-6/12">
             <form action="crear_desafio.php" method="POST" class="flex flex-col gap-y-2">
