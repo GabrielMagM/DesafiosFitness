@@ -62,41 +62,88 @@
                 <?php endif; ?>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                <div class="bg-white p-4 rounded-lg shadow-md flex flex-col">
-                    <h4 class="text-blue-600 font-semibold">Desafío de Cardio</h4>
-                    <p class="text-gray-700">Corre 5 kilómetros diarios durante una semana.</p>
-                    <img src="../assets/desafio_img/runing.webp" alt="" class="h-64 w-52 self-center" >
-                    
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md flex flex-col items-start">
-                    <h4 class="text-blue-600 font-semibold">Desafío de Fuerza</h4>
-                    <p class="text-gray-700">Haz abdominales cada día durante un mes.</p>
-                    <img src="../assets/desafio_img/peso_muerto.webp" alt="" class="h-64 w-52 self-center" >
-                    <!-- aqui va el gif de LettieFiles -->
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md flex flex-col items-start">
-                    <h4 class="text-blue-600 font-semibold">Desafío de Flexibilidad</h4>
-                    <p class="text-gray-700">Practica yoga durante 30 minutos cada mañana.</p>
-                    <img src="../assets/desafio_img/estiramiento.webp" alt="" class="h-64 w-52 self-center">
-                </div>
-                <?php
-                // Verifica si se encontraron resultados
-                if ($result->rowCount() > 0) {
-                    // Recorre cada desafío y genera el HTML
-                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                        ?>
-                        <div class="bg-white p-4 rounded-lg shadow-md flex flex-col items-start">
-                            <h4 class="text-blue-600 font-semibold"><?php echo htmlspecialchars($row['titulo']); ?></h4>
-                            <p class="text-gray-700"><?php echo htmlspecialchars($row['descripcion']); ?></p>
-                            <img src="../assets/desafio_img/<?php echo htmlspecialchars($row['imagen_url']); ?>" alt="" class="h-64 w-52 self-center">
+                <div class="bg-white rounded-lg shadow-md flex flex-col w-4/5 p-2 items-center">
+                    <div class="flex flex-col w-10/12">
+                        <h4 class="text-blue-600 font-semibold">Desafío de Cardio</h4>
+                        <p class="text-gray-700 break-words">Corre 5 kilómetros diarios durante una semana.</p>
+                    </div>
+                    <div class="flex gap-1">
+                        <div class="flex border-cyan-600 border-2">
+                            <img src="../assets/desafio_img/runing.webp" alt="" class="h-56 w-42 object-cover">
                         </div>
-                        <?php
-                    }
-                } else {
-                    echo "<p>No hay desafíos disponibles en este momento.</p>";
-                }
-                ?>
+                        <div class="flex flex-col border-cyan-600 border-2">
+                            <div class="flex-wrap px-2 gap-1 ">
+                                <p class="text-gray-700 font-bold">Etapa 1 : </p>
+                                <p class="self-start text-blue-500 ">Correr 4km</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-5 mt-1 ">
+                        <button class="bg-green-500 p-1 rounded-md">Unirse al Desafio</button>
+                        <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
+                    </div>
+                </div>
 
+                <div class="bg-white rounded-lg shadow-md flex flex-col w-4/5 p-2 items-center">
+                    <div class="flex flex-col w-10/12">
+                        <h4 class="text-blue-600 font-semibold">Desafío de Fuerza</h4>
+                        <p class="text-gray-700 flex">Haz abdominales cada día durante 3dias.</p>
+                    </div>
+                    <div class="flex gap-1">
+                        <div class="flex border-cyan-600 border-2">
+                            <img src="../assets/desafio_img/peso_muerto.webp" alt="" class="h-56 w-42 object-cover">
+                        </div>
+                        <div class="flex flex-col border-cyan-600 border-2">
+                            <div class="flex-wrap px-2 gap-1 ">
+                                <p class="text-gray-700 font-bold">Etapa 1 : </p>
+                                <p class="self-start text-blue-500 ">Correr 4km</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-5 mt-1 ">
+                        <button class="bg-green-500 p-1 rounded-md">Unirse al Desafio</button>
+                        <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md flex flex-col w-4/5 p-2 items-center">
+                    <div class="flex flex-col w-10/12">
+                        <h4 class="text-blue-600 font-semibold flex">Desafío de Flexibilidad</h4>
+                        <p class="text-gray-700 flex">Practica yoga durante 30 minutos cada mañana.</p>
+                    </div>
+                    <div class="flex gap-1">
+                        <div class="flex border-cyan-600 border-2">
+                            <img src="../assets/desafio_img/estiramiento.webp" alt="" class="h-56 w-42 object-cover">
+                        </div>
+                        <div class="flex flex-col border-cyan-600 border-2">
+                            <div class="flex-wrap px-2 gap-1 ">
+                                <p class="text-gray-700 font-bold">Etapa 1 : </p>
+                                <p class="self-start text-blue-500 ">Correr 4km</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="flex gap-5 mt-1 ">
+                        <button class="bg-green-500 p-1 rounded-md">Unirse al Desafio</button>
+                        <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- Desafios creados por el usuario -->
+            <div class="flex justify-between items-center my-4 px-4" >
+                <h3 class="text-lg font-semibold text-gray-800  self-center">Tus Desafios</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <?php include 'components/db_desafios_user.php';?>
+            </div>
+            <!-- Desafios creados por Otros Usuarios -->
+            <div class="flex justify-between items-center my-4 px-4" >
+                <h3 class="text-lg font-semibold text-gray-800  self-center">Desafíos Creados</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <?php include 'components/db_desafios_all.php';?>
             </div>
         </section>
     </main>

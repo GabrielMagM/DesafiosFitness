@@ -24,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Preparar e insertar el desafío en la base de datos con PDO
         $sql = "INSERT INTO desafios (user_id, titulo, descripcion, duracion_dias, etapas, imagen_url) VALUES (:user_id, :titulo, :descripcion, :duracion_dias, :etapas, :imagen_url)";
         $stmt = $conn->prepare($sql);
-        
-        // Asociar parámetros usando bindValue para PDO
+
+        // Asignar valores a los parámetros
         $stmt->bindValue(':user_id', $user_id);
         $stmt->bindValue(':titulo', $titulo);
         $stmt->bindValue(':descripcion', $descripcion);
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bindValue(':etapas', $etapas);
         $stmt->bindValue(':imagen_url', $imagen_url);
 
-        // Ejecutar la declaración
+        // Ejecutar la consulta
         if ($stmt->execute()) {
             echo "Desafío creado exitosamente.";
             // Redireccionar al usuario a la página de desafíos

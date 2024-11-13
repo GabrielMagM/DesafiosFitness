@@ -15,13 +15,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // Encriptar la contraseña
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
     // Conectar a la base de datos
     $conexion = Conexion::Conectar();
 
     if ($conexion) {
+        // Verificar si el email ya está registrado
+        $stmt = $conexion->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        // Si el email ya existe
+        if ($stmt->fetchColumn() > 0) {
+            echo "<script>
+                    alert('Este correo electrónico ya está registrado. Por favor, usa otro.');
+                    window.location.href = 'register.php'; // Redirige a la página de registro
+                </script>";
+            exit;
+        }
+
+        // Encriptar la contraseña
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
         // Insertar el usuario en la base de datos
         $stmt = $conexion->prepare("INSERT INTO users (name, email, password, created_at) VALUES (:name, :email, :password, NOW())");
         $stmt->bindParam(':name', $name);
@@ -33,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['mensaje_registro'] = "Registro exitoso. Ahora debe logearse.";
             echo "<script>
                     alert('Registro exitoso. Ahora debe logearse.');
-                    window.location.href = 'login.php';
+                    window.location.href = 'login.php'; // Redirige al login
                 </script>";
             exit;
         } else {
