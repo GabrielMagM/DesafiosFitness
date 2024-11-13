@@ -13,7 +13,7 @@
 
     <style>
         body {
-            background-image: url('../assets/pexels-wallpaper.webp'); /* Ruta de tu imagen */
+            background-image: url('../assets/wallpaper/pexels-wallpaper.webp'); /* Ruta de tu imagen */
             background-size: cover; /* Cubre toda el área */
             background-position: center center; /* Centra la imagen */
             background-attachment: fixed; /* La imagen no se mueve al hacer scroll */

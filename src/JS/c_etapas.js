@@ -1,27 +1,47 @@
-// Control de las etapas
-        function mostrarCamposEtapas() {
-            const etapas = document.getElementById("etapas").value;
-            const contenedor = document.getElementById("camposEtapas");
-            contenedor.innerHTML = "";
+function mostrarCamposEtapas() {
+    var numeroEtapas = document.getElementById("etapas").value;
+    var camposEtapas = document.getElementById("camposEtapas");
+    
+    // Limpiar el contenedor de etapas
+    camposEtapas.innerHTML = '';
+    
+    // Opciones de título para las etapas
+    var opcionesTitulo = ["Introducción", "Desarrollo", "Práctica", "Conclusión"];
 
-            for (let i = 1; i <= etapas; i++) {
-                contenedor.innerHTML += `
-                    <div class="grid grid-cols-1 gap-1">
-                        <div class="flex flex-col shadow-md w-11/12 justify-self-center">
-                            <label class="text-white" for="etapa_${i}">Descripción de la etapa ${i}:</label>
-                            <textarea rows="2" type="text" id="etapa_${i}" name="etapa_${i}" class="mt-1 rounded-md pb-3 text-wrap" required></textarea>  
-                        </div>
-                    </div>
-                        `;
-            }
-        }
+    for (var i = 1; i <= numeroEtapas; i++) {
+        // Crear campo de selección de título para la etapa
+        var tituloLabel = document.createElement("label");
+        tituloLabel.className = "font-semibold text-white";
+        tituloLabel.innerHTML = "Título de la Etapa " + i + ":";
+        camposEtapas.appendChild(tituloLabel);
 
-        // Selector de imagen
-        const images = ["runing.webp", "estiramiento.webp", "peso_muerto.webp"];
-        let currentIndex = 0;
+        var tituloSelect = document.createElement("select");
+        tituloSelect.name = "titulo_etapa_" + i;
+        tituloSelect.className = "rounded-md shadow-md px-1 py-1";
+        tituloSelect.required = true;
 
-        function cambiarImagen(direction) {
-            currentIndex = (currentIndex + direction + images.length) % images.length;
-            document.getElementById("previewImage").src = "../assets/desafio_img/" + images[currentIndex];
-            document.getElementById("imagen_url").value = images[currentIndex];
-        }
+        // Añadir opciones al select
+        opcionesTitulo.forEach(function(titulo) {
+            var option = document.createElement("option");
+            option.value = titulo;
+            option.text = titulo;
+            tituloSelect.appendChild(option);
+        });
+        camposEtapas.appendChild(tituloSelect);
+
+        // Crear campo de descripción para la etapa
+        var descripcionLabel = document.createElement("label");
+        descripcionLabel.className = "font-semibold text-white";
+        descripcionLabel.innerHTML = "Descripción de la Etapa " + i + ":";
+        camposEtapas.appendChild(descripcionLabel);
+
+        var descripcionTextarea = document.createElement("textarea");
+        descripcionTextarea.name = "descripcion_etapa_" + i;
+        descripcionTextarea.rows = 2;
+        descripcionTextarea.className = "rounded-md shadow-md px-1";
+        descripcionTextarea.placeholder = "Ingrese Descripción de la Etapa " + i;
+        descripcionTextarea.maxLength = 80;
+        descripcionTextarea.required = true;
+        camposEtapas.appendChild(descripcionTextarea);
+    }
+}
