@@ -29,45 +29,57 @@
     
     <main class="flex mx-auto p-4 mt-4 items-center justify-center">
         <section class="flex flex-col bg-slate-800 p-6 rounded-md shadow-md w-6/12">
-            <form action="crear_desafio.php" method="POST" class="flex flex-col gap-y-2">
-                <h2 class="text-white font-bold">Crear Desafío</h2>
+            <form id="addChallenge" action="../assets/addChallenge.php" method="POST" class="bg-white p-4 rounded shadow">
+    <div class="mb-4">
+        <label for="description" class="block text-gray-700">Descripción</label>
+        <input type="text" id="description" name="description" required class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Descripción del desafío">
+    </div>
+    <div class="mb-4">
+        <label for="duration" class="block text-gray-700">Duración (días)</label>
+        <input type="number" id="duration" name="duration" required class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Duración del desafío">
+    </div>
+    <div class="mb-4">
+        <label for="goal" class="block text-gray-700">Objetivo</label>
+        <input type="text" id="goal" name="goal" required class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Objetivo del desafío">
+    </div>
+    
+    <select id="etapas" name="etapas" class="mt-1 p-2 border border-gray-300 rounded w-full mb-4" required onchange="mostrarCamposEtapas()">
+        <option value="1">1 Etapa</option>
+        <option value="2">2 Etapas</option>
+        <option value="3">3 Etapas</option>
+        <option value="4">4 Etapas</option>
+    </select>
 
-                <!-- Título del Desafío -->
-                <label for="titulo_desafio" class="font-semibold text-white">Título del Desafío:</label>
-                <input type="text" id="titulo_desafio" name="titulo_desafio" class="rounded-md shadow-md px-1 py-1" placeholder="Ingrese Título del Desafío" required>
+    <!-- Contenedor de Campos de Etapas -->
+    <div id="etapasContainer"></div>
 
-                <!-- Duración en días del Desafío -->
-                <label for="duracion_dias" class="font-semibold text-white">Duración (días):</label>
-                <select id="duracion_dias" name="duracion_dias" class="rounded-md shadow-md" required>
-                    <option value="1">1 día</option>
-                    <option value="2">2 días</option>
-                    <option value="3">3 días</option>
-                </select>
+    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded">Crear Desafío</button>
+</form>
 
-                <!-- Número de Etapas -->
-                <label for="etapas" class="font-semibold text-white">Número de Etapas:</label>
-                <select id="etapas" name="etapas" class="rounded-md shadow-md" required onchange="mostrarCamposEtapas()">
-                    <option value="1">1 etapa</option>
-                    <option value="2">2 etapas</option>
-                    <option value="3">3 etapas</option>
-                    <option value="4">4 etapas</option>
-                </select>
+<script>
+    function mostrarCamposEtapas() {
+        const etapasContainer = document.getElementById('etapasContainer');
+        const etapasCount = document.getElementById('etapas').value;
+        
+        // Limpiar el contenedor de etapas antes de agregar nuevos campos
+        etapasContainer.innerHTML = '';
+        
+        // Crear campos dinámicamente para las etapas seleccionadas
+        for (let i = 1; i <= etapasCount; i++) {
+            const etapaDiv = document.createElement('div');
+            etapaDiv.classList.add('mb-4');
+            etapaDiv.innerHTML = `
+                <label for="etapa${i}" class="block text-gray-700">Etapa ${i}</label>
+                <input type="text" id="etapa${i}" name="etapas[${i}]" required class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Nombre de la etapa">
+                <textarea name="etapa_descripciones[${i}]" required class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Descripción de la etapa (máximo 80 palabras)" maxlength="500"></textarea>
+            `;
+            etapasContainer.appendChild(etapaDiv);
+        }
+    }
+</script>
 
-                <!-- Contenedor de Campos de Etapas -->
-                <div id="camposEtapas" class="flex flex-col"></div>
 
-                <!-- Selección de Imagen del Desafío -->
-                <label class="font-semibold text-white">Imagen del desafío:</label>
-                <div class="self-center" id="image-selector">
-                    <button type="button" onclick="cambiarImagen(-1)">◀</button>
-                    <img id="previewImage" src="../assets/desafio_img/runing.webp" alt="Imagen del desafío" style="width: 100px;">
-                    <button type="button" onclick="cambiarImagen(1)">▶</button>
-                    <input type="hidden" id="imagen_url" name="imagen_url" value="runing.webp">
-                </div>
-
-                <!-- Botón para Crear el Desafío -->
-                <button type="submit" class="bg-green-600 font-bold rounded-lg px-4 py-2">Crear Desafío</button>
-            </form>
+            
         </section>
     </main>    
     <script src="JS/c_etapas.js"></script>

@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2024 a las 16:18:20
--- Versión del servidor: 10.4.32-MariaDB
+-- Tiempo de generación: 13-11-2024 a las 21:42:46
+-- Versión del servidor: 11.4.2-MariaDB
 -- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -28,22 +28,43 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `desafios` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `titulo` varchar(255) NOT NULL,
   `descripcion` text DEFAULT NULL,
-  `duracion_dias` int(11) NOT NULL CHECK (`duracion_dias` between 1 and 3),
-  `etapas` int(11) NOT NULL CHECK (`etapas` between 1 and 6),
+  `duracion_dias` int(11) NOT NULL,
+  `etapas` int(11) NOT NULL,
   `imagen_url` varchar(255) DEFAULT NULL,
-  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `desafios`
 --
 
-INSERT INTO `desafios` (`id`, `user_id`, `titulo`, `descripcion`, `duracion_dias`, `etapas`, `imagen_url`, `fecha_creacion`) VALUES
-(1, 1, 'Carrera Final', 'Correrás 10km muy rápido', 2, 2, 'runing.webp', '2024-11-13 15:15:19');
+INSERT INTO `desafios` (`id`, `user_id`, `titulo`, `descripcion`, `duracion_dias`, `etapas`, `imagen_url`, `created_at`) VALUES
+(1, 1, 'Desafio para Titulares', NULL, 1, 2, 'runing.webp', '2024-11-13 19:58:17');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `desafio_etapas`
+--
+
+CREATE TABLE `desafio_etapas` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `desafio_id` bigint(20) UNSIGNED NOT NULL,
+  `titulo_etapa` varchar(255) NOT NULL,
+  `descripcion_etapa` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `desafio_etapas`
+--
+
+INSERT INTO `desafio_etapas` (`id`, `desafio_id`, `titulo_etapa`, `descripcion_etapa`) VALUES
+(1, 1, 'Desarrollo', 'holaaa'),
+(2, 1, 'Desarrollo', 'holaaaa');
 
 -- --------------------------------------------------------
 
@@ -78,6 +99,13 @@ ALTER TABLE `desafios`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indices de la tabla `desafio_etapas`
+--
+ALTER TABLE `desafio_etapas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `desafio_id` (`desafio_id`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
@@ -92,7 +120,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `desafios`
 --
 ALTER TABLE `desafios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `desafio_etapas`
+--
+ALTER TABLE `desafio_etapas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -109,6 +143,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `desafios`
   ADD CONSTRAINT `desafios_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `desafio_etapas`
+--
+ALTER TABLE `desafio_etapas`
+  ADD CONSTRAINT `desafio_etapas_ibfk_1` FOREIGN KEY (`desafio_id`) REFERENCES `desafios` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
