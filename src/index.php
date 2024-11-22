@@ -8,8 +8,9 @@
     <link href="colors/Tailwind.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <style>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+   <style>
         body {
             background-image: url('../assets/wallpaper/pexels-wallpaper.webp'); /* Ruta de tu imagen */
             background-size: cover; /* Cubre toda el área */
@@ -18,6 +19,12 @@
             background-repeat: no-repeat; /* Evita que la imagen se repita */
             min-height: 100vh; /* Asegura que el fondo cubra toda la pantalla */
         }
+        .bebas-neue-regular {
+  font-family: "Bebas Neue", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
     </style>
 </head>
 

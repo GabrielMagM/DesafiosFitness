@@ -3,7 +3,7 @@ class Conexion {
     public static function Conectar(){
         // Datos de conexión
         $host = "localhost";
-        $baseDeDatos = 'desafios_fitness';
+        $baseDeDatos = 'fitness_app';
         $usuario = 'root';
         $contrasena = "";
 
