@@ -1,0 +1,30 @@
+-- Creacion Tabla Usuarios
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(20) NOT NULL,
+    correo VARCHAR(30) NOT NULL UNIQUE,
+    contrasena VARCHAR(30) NOT NULL,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabla de desafios
+CREATE TABLE IF NOT EXISTS desafios (
+    id_desafio INT AUTO_INCREMENT PRIMARY KEY,
+    titulo_desafio VARCHAR(255) NOT NULL,
+    imagen_url TEXT NOT NULL,
+    cantidad_etapas INT, NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    FOREIGN KEY (id_usuario_desafio_fk) REFERENCES usuarios(id_usuario)
+);
+
+-- Tabla etapas
+CREATE TABLE etapas (
+    id_etapa SERIAL PRIMARY KEY,
+    id_desafio INTEGER NOT NULL,
+    accion_etapa VARCHAR(150) NOT NULL,
+    descripcion_etapa TEXT NOT NULL,
+    orden INT NOT NULL,
+    FOREIGN KEY (id_desafio_etapa_fk) REFERENCES desafios(id_desafio)
+);
+
+
