@@ -20,12 +20,9 @@
         }
     </style>
 </head>
-
 <body>
-
     <?php include 'views/header_prueba.php';?>
-
-    <?php include 'components/db_desafios.php'; ?>
+    <?php include 'components/add_desafios.php'; ?>
     
     <main class="flex mx-auto p-4 mt-4 items-center justify-center">
         <section class="flex flex-col bg-slate-800 p-6 rounded-md shadow-md w-6/12">

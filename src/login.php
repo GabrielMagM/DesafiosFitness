@@ -20,7 +20,7 @@
             <a>Al Registrarte encontrarás los Mejores Desafios</a>
     </header>
     <!-- Contenido Principal -->
-    <?php include 'components/db_login.php'; ?>
+    <?php include 'components/add_login.php'; ?>
 
     <main class="flex justify-center items-center h-3/4 bg-slate-800 pb-36 pt-14">
         <section class="flex w-3/4 h-2/4 shadow-lg rounded-lg overflow-hidden bg-slate-800 mb-20">

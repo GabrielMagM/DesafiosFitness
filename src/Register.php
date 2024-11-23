@@ -73,7 +73,7 @@
             </div>
         </section>
     </main>
-    <?php include 'components/db_register.php'; ?>
+    <?php include 'components/add_register.php'; ?>
 
     <!-- Pie de página -->
     <?php include 'views/footer.php'; ?>
