@@ -32,8 +32,7 @@
     require_once 'components/Conexion.php'; // Asegúrate de tener la conexión a la base de datos
     $conn = Conexion::Conectar(); // Usamos el método estático para obtener la conexión
     // Consulta para obtener todos los desafíos
-    $sql = "SELECT titulo, descripcion, imagen_url FROM desafios";
-    $result = $conn->query($sql);
+    
     ?>
 
     <!-- Contenido Principal -->
@@ -136,14 +135,14 @@
                 <h3 class="text-lg font-semibold text-gray-800  self-center">Tus Desafios</h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                <?php include 'components/db_desafios_user.php';?>
+                
             </div>
             <!-- Desafios creados por Otros Usuarios -->
             <div class="flex justify-between items-center my-4 px-4" >
                 <h3 class="text-lg font-semibold text-gray-800  self-center">Desafíos Creados</h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                <?php include 'components/db_desafios_all.php';?>
+                
             </div>
         </section>
     </main>
