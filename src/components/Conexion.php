@@ -5,7 +5,7 @@ class Conexion {
         $host = "localhost";
         $baseDeDatos = 'fitness_app';
         $usuario = 'root';
-        $contrasena = "";
+        $contrasena = "newpassword";
 
         try {
             // Crear la conexión con PDO

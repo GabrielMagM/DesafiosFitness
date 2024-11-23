@@ -1,6 +1,6 @@
 <?php
 // Asegúrate de que el usuario esté autenticado antes de intentar acceder a los desafíos
-if (!isset($_SESSION['id_usuario'])) {
+if (!isset($_SESSION['user_id'])) {
     die("<p>Debes iniciar sesión para ver los desafíos.</p>");
 }
 
@@ -8,12 +8,12 @@ if (!isset($_SESSION['id_usuario'])) {
 $conn = Conexion::Conectar();
 
 // Obtener el ID del usuario que está autenticado
-$id_usuario = $_SESSION['id_usuario'];
+$user_id = $_SESSION['user_id'];
 
 // Realizar la consulta para obtener solo los desafíos del usuario autenticado
-$sql = "SELECT * FROM desafios WHERE id_usuario = :id_usuario";
+$sql = "SELECT * FROM desafios WHERE user_id = :user_id";
 $stmt = $conn->prepare($sql);
-$stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
 $stmt->execute();
 
 // Verifica si se encontraron resultados
@@ -21,10 +21,10 @@ if ($stmt->rowCount() > 0) {
     // Recorre cada desafío y genera el HTML
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         // Obtener las etapas de este desafío
-        $id_desafio = $row['id'];
-        $sql_etapas = "SELECT * FROM etapas WHERE id_desafio = :id_desafio ORDER BY id ASC";
+        $desafio_id = $row['id'];
+        $sql_etapas = "SELECT * FROM desafio_etapas WHERE desafio_id = :desafio_id ORDER BY id ASC";
         $stmt_etapas = $conn->prepare($sql_etapas);
-        $stmt_etapas->bindValue(':id_desafio', $id_desafio, PDO::PARAM_INT);
+        $stmt_etapas->bindValue(':desafio_id', $desafio_id, PDO::PARAM_INT);
         $stmt_etapas->execute();
 
         // Verifica si hay etapas para este desafío
@@ -38,6 +38,8 @@ if ($stmt->rowCount() > 0) {
                 <div class="flex flex-col w-10/12">
                     <!-- Mostrar título del desafío -->
                     <h4 class="text-blue-600 font-semibold flex text-left"><?php echo htmlspecialchars($row['titulo']); ?></h4>
+                    <p class="text-gray-700 flex text-left"><?php echo htmlspecialchars($row['descripcion']); ?></p>
+                    
                     <!-- Mostrar la etapa actual y el total de etapas -->
                     <p class="text-gray-700 flex text-left">Etapa 1/<?php echo $total_etapas; ?>: <?php echo htmlspecialchars($etapas[0]['titulo_etapa']);
                      ?>
