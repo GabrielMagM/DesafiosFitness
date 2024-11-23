@@ -12,47 +12,45 @@ $conn = Conexion::Conectar(); // Conexión a la base de datos usando PDO
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validar la entrada de $_POST
     $user_id = $_SESSION['user_id'];
-    $titulo = isset($_POST['titulo_desafio']) ? $_POST['titulo_desafio'] : null;
-    $duracion_dias = isset($_POST['duracion_dias']) ? $_POST['duracion_dias'] : null;
-    $etapas = isset($_POST['etapas']) ? $_POST['etapas'] : null;
+    $tittle = isset($_POST['tittle']) ? $_POST['tittle'] : null;
+    $total_stages = isset($_POST['total_stages']) ? $_POST['total_stages'] : null;
     $imagen_url = isset($_POST['imagen_url']) ? $_POST['imagen_url'] : null;
 
     // Verificar que todos los campos requeridos están presentes
-    if ($titulo && $duracion_dias && $etapas && $imagen_url) {
+    if ($tittle && $total_stages && $imagen_url) {
         // Preparar e insertar el desafío en la base de datos
-        $sql = "INSERT INTO desafios (user_id, titulo, duracion_dias, etapas, imagen_url) 
-                VALUES (:user_id, :titulo, :duracion_dias, :etapas, :imagen_url)";
+        $sql = "INSERT INTO desafios (user_id, tittle, total_stages, imagen_url) 
+                VALUES (:user_id, :tittle, :total_stages, :imagen_url)";
         $stmt = $conn->prepare($sql);
 
         // Asignar valores a los parámetros
         $stmt->bindValue(':user_id', $user_id);
-        $stmt->bindValue(':titulo', $titulo);
-        $stmt->bindValue(':duracion_dias', $duracion_dias);
-        $stmt->bindValue(':etapas', $etapas);
+        $stmt->bindValue(':tittle', $tittle);
+        $stmt->bindValue(':total_stages', $total_stages);
         $stmt->bindValue(':imagen_url', $imagen_url);
 
 
         // Ejecutar la consulta
         if ($stmt->execute()) {
             // Obtener el id del desafío insertado
-            $desafio_id = $conn->lastInsertId();
+            $challenge_id = $conn->lastInsertId();
 
             // Insertar las etapas en la tabla desafio_etapas
-            for ($i = 1; $i <= $etapas; $i++) {
+            for ($i = 1; $i <= $total_stages; $i++) {
                 // Obtener los datos de cada etapa del formulario
-                $titulo_etapa = isset($_POST['titulo_etapa_' . $i]) ? $_POST['titulo_etapa_' . $i] : null;
-                $descripcion_etapa = isset($_POST['descripcion_etapa_' . $i]) ? $_POST['descripcion_etapa_' . $i] : null;
+                $stage_name = isset($_POST['stage_name' . $i]) ? $_POST['stage_name' . $i] : null;
+                $stage_goal = isset($_POST['stage_goal' . $i]) ? $_POST['stage_goal' . $i] : null;
 
                 // Verificar que ambos campos de la etapa estén presentes
-                if ($titulo_etapa && $descripcion_etapa) {
+                if ($stage_name && $stage_goal) {
                     // Insertar las etapas en la base de datos
-                    $sql_etapa = "INSERT INTO desafio_etapas (desafio_id, titulo_etapa, descripcion_etapa) 
-                                  VALUES (:desafio_id, :titulo_etapa, :descripcion_etapa)";
-                    $stmt_etapa = $conn->prepare($sql_etapa);
-                    $stmt_etapa->bindValue(':desafio_id', $desafio_id);
-                    $stmt_etapa->bindValue(':titulo_etapa', $titulo_etapa);
-                    $stmt_etapa->bindValue(':descripcion_etapa', $descripcion_etapa);
-                    $stmt_etapa->execute();
+                    $sql_stages = "INSERT INTO desafio_etapas (challenge_id, stage_name, stage_goal) 
+                                  VALUES (:challenge_id, :stage_name, :stage_goal)";
+                    $stmt_stages = $conn->prepare($sql_stages);
+                    $stmt_stages->bindValue(':challenge_id', $challenge_id);
+                    $stmt_stages->bindValue(':stage_name', $stage_name);
+                    $stmt_stages->bindValue(':stage_goal', $stage_goal);
+                    $stmt_stages->execute();
                 } else {
                     echo "Error: Todos los campos de la etapa son obligatorios.";
                     exit;

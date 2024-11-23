@@ -3,9 +3,14 @@
         $conn = Conexion::Conectar();
 
         // Obtener los desafíos creados por otros usuarios (excluyendo al usuario autenticado)
-        $sql = "SELECT * FROM desafios WHERE user_id != :user_id";
+        $sql = "SELECT * FROM challenges WHERE user_id != :user_id";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $sql = "SELECT * FROM stages WHERE challenge_id != :challenge_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':challenge_id', $challenge_id, PDO::PARAM_INT);
         $stmt->execute();
 
         // Verifica si se encontraron resultados
@@ -13,26 +18,16 @@
             // Recorre cada desafío y genera el HTML
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 ?>
-                <div class="bg-white rounded-lg shadow-md flex flex-col w-4/5 p-2 items-center">
-                    <div class="flex flex-col w-10/12">
-                        <h4 class="text-blue-600 font-semibold flex"><?php echo htmlspecialchars($row['titulo']); ?></h4>
-                        <p class="text-gray-700 flex"><?php echo htmlspecialchars($row['descripcion']); ?></p>
+                <div class="flex flex-col bg-gray-900 rounded-lg shadow-md p-2 items-center gap-2 w-3/4">
+                    <div class="flex flex-col  w-5/6" >
+                        <h4 class="text-white font-semibold self-center rounded-sm bg-gray-600 p-1"><?php echo htmlspecialchars($row['tittle']); ?></h4>
+                        <p class="text-white font-bold break-all self-center">Etapa 1/5: Correr</p>
+                        <p class="text-white font-bold break-all">Corre por 20min y sin parar</p>
                     </div>
-                    <div class="flex gap-1">
-                        <div class="flex border-cyan-600 border-2">
-                            <img src="../assets/desafio_img/<?php echo htmlspecialchars($row['imagen_url']); ?>" alt="" class="h-56 w-42 object-cover">
-                        </div>
-                        <div class="flex flex-col border-cyan-600 border-2">
-                            <div class="flex-wrap px-2 gap-1 ">
-                                <p class="text-gray-700 font-bold">aqui va la etapa  </p>
-                                <p class="self-start text-blue-500 ">aqui su descripcion</p>
-                            </div>
-                        </div>
+                    <div class="flex" >
+                        <img src="../assets/desafio_img/<?php echo htmlspecialchars($row['imagen_url']); ?>" alt="" class="h-56 w-56 rounded-lg">
                     </div>
-                    <div class="flex gap-5 mt-1 ">
-                        <button class="bg-green-500 p-1 rounded-md">Unirse al Desafio</button>
-                        <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
-                    </div>
+                    <button class="bg-indigo-600 p-1 rounded-md font-bold">Unirse al Desafio</button>
                 </div>
                 <?php
             }

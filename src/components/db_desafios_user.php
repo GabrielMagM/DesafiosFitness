@@ -11,7 +11,7 @@ $conn = Conexion::Conectar();
 $user_id = $_SESSION['user_id'];
 
 // Realizar la consulta para obtener solo los desafíos del usuario autenticado
-$sql = "SELECT * FROM desafios WHERE user_id = :user_id";
+$sql = "SELECT * FROM challenges WHERE user_id = :user_id";
 $stmt = $conn->prepare($sql);
 $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
 $stmt->execute();
@@ -21,44 +21,31 @@ if ($stmt->rowCount() > 0) {
     // Recorre cada desafío y genera el HTML
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         // Obtener las etapas de este desafío
-        $desafio_id = $row['id'];
-        $sql_etapas = "SELECT * FROM desafio_etapas WHERE desafio_id = :desafio_id ORDER BY id ASC";
-        $stmt_etapas = $conn->prepare($sql_etapas);
-        $stmt_etapas->bindValue(':desafio_id', $desafio_id, PDO::PARAM_INT);
-        $stmt_etapas->execute();
+        $challenge_id = $row['id'];
+        $sql_stages = "SELECT * FROM stages WHERE challenge_id = :challenge_id ORDER BY id ASC";
+        $stmt_stages = $conn->prepare($sql_stages);
+        $stmt_stages->bindValue(':challenge_id', $challenge_id, PDO::PARAM_INT);
+        $stmt_stages->execute();
 
         // Verifica si hay etapas para este desafío
-        if ($stmt_etapas->rowCount() > 0) {
-            $etapas = $stmt_etapas->fetchAll(PDO::FETCH_ASSOC);
-            $total_etapas = count($etapas); // Contamos las etapas
+        if ($stmt_stages->rowCount() > 0) {
+            $stages = $stmt_stages->fetchAll(PDO::FETCH_ASSOC);
+            $total_stages = count($stages); // Contamos las etapas
 
             // Mostrar el desafío y la primera etapa (suponiendo que el desafío tiene etapas)
             ?>
-            <div class="bg-white rounded-lg shadow-md flex flex-col w-4/5 p-2 items-center">
-                <div class="flex flex-col w-10/12">
-                    <!-- Mostrar título del desafío -->
-                    <h4 class="text-blue-600 font-semibold flex text-left"><?php echo htmlspecialchars($row['titulo']); ?></h4>
-                    <p class="text-gray-700 flex text-left"><?php echo htmlspecialchars($row['descripcion']); ?></p>
-                    
-                    <!-- Mostrar la etapa actual y el total de etapas -->
-                    <p class="text-gray-700 flex text-left">Etapa 1/<?php echo $total_etapas; ?>: <?php echo htmlspecialchars($etapas[0]['titulo_etapa']);
-                     ?>
-                     </p>
-                     <p class="text-gray-700 flex text-left"><?php echo htmlspecialchars($etapas[0]['descripcion_etapa']); ?></p>
-                </div>
-
-                <!-- Verificar si existe la imagen antes de mostrarla -->
-                <div class="flex gap-1">
-                    <div class="flex border-cyan-600 border-2">
-                        <img src="../assets/desafio_img/<?php echo htmlspecialchars($row['imagen_url']); ?>" alt="" class="h-56 w-42 object-cover">
+            
+            <div class="flex flex-col bg-gray-900 rounded-lg shadow-md p-2 items-center gap-2 w-3/4">
+                    <div class="flex flex-col  w-5/6" >
+                        <h4 class="text-white font-semibold self-center rounded-sm bg-gray-600 p-1"><?php echo htmlspecialchars($row['tittle']); ?></h4>
+                        <p class="text-white font-bold break-all self-center">Etapa <?php echo htmlspecialchars($stages[0]['stage_num']); ?> /<?php echo $total_stages; ?> : <?php echo htmlspecialchars($stages[0]['stage_name']);?></p>
+                        <p class="text-white font-bold break-all"><?php echo htmlspecialchars($stages[0]['stage_goal']);?></p>
                     </div>
+                    <div class="flex" >
+                        <img src="../assets/desafio_img/<?php echo htmlspecialchars($row['imagen_url']); ?>" alt="" class="h-56 w-56 rounded-lg">
+                    </div>
+                    <button class="bg-indigo-600 p-1 rounded-md font-bold">Unirse al Desafio</button>
                 </div>
-
-                <!-- Botón de "Unirse al Desafío" -->
-                <div class="flex gap-5 mt-1">
-                    <button class="bg-green-500 p-1 rounded-md">Unirse al Desafío</button>
-                </div>
-            </div>
             <?php
         } else {
             echo "<p>No hay etapas para este desafío.</p>";

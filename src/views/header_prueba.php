@@ -47,7 +47,7 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) {
             </div>
         </header>
     <?php else: ?>
-        <header class="bg-slate-800 text-white shadow-md mt-0.5 mx-6 rounded-md py-1">
+        <header class="bg-gray-900 text-white shadow-md mt-3 mx-6 rounded-md py-1">
             <div class="flex flex-wrap justify-between items-center px-12">
                 <img src="../assets/Siiiu.png" alt="Logo" class="h-14">
                 <nav class="flex justify-between gap-6 mx-3">
