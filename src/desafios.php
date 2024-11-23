@@ -9,21 +9,28 @@
     <link href="colors/Tailwind.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
+        *{
+            
+        }
         body {
-            background-image: url('../assets/wallpaper/pexels-wallpaper.webp'); /* Ruta de tu imagen */
+            /* background-image: url('../assets/wallpaper/pexels-wallpaper.webp'); Ruta de tu imagen */
             background-size: cover; /* Cubre toda el área */
             background-position: center center; /* Centra la imagen */
             background-attachment: fixed; /* La imagen no se mueve al hacer scroll */
             background-repeat: no-repeat; /* Evita que la imagen se repita */
-            min-height: 100vh; /* Asegura que el fondo cubra toda la pantalla */
+            min-height: 100vh; /*Asegura que el fondo cubra toda la pantalla */
+        }
+        .bebas-neue-regular {
+            font-family: "Bebas Neue", serif;
+            font-weight: 400;
+            font-style: normal;
         }
     </style>
 </head>
 
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<body class="bg-slate-800 font-sans leading-normal tracking-normal">
     <!-- Encabezado -->
     <?php include 'views/header_prueba.php';?>
 
@@ -36,16 +43,16 @@
     ?>
 
     <!-- Contenido Principal -->
-    <main class="container mx-auto p-4 mt-4">
-        <section class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-xl font-semibold mb-4 text-gray-800">Bienvenido a los Desafíos Fitness</h2>        
-            <p class="text-gray-700 mt-4">Algunos desafíos para mejorar tu condición física. Únete y mantente motivado.</p>
+    <main class="container mx-auto p-4 mt-4 ">
+        <section class="bg-gray-900 p-6 rounded-lg shadow-md ">
+            <h2 class="text-white text-xl font-semibold mb-4 ">Bienvenido a los Desafíos Fitness</h2>        
+            <p class="mt-4 text-white">Algunos desafíos para mejorar tu condición física. Únete y mantente motivado.</p>
         </section>
 
         <!-- Sección de Desafíos -->
         <section class="mt-4">
-            <div class="flex justify-between items-center mb-4 px-4" >
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">Desafíos Recientes</h3>
+            <div class="flex justify-between mb-4 items-center" >
+                <h3 class="text-lg font-semibold text-gray-800">Desafíos Recientes</h3>
                 <?php if (isset($_SESSION['user_id'])): ?>
         <!-- Si el usuario está registrado, permite crear un desafío -->
                     <button onclick="window.location.href='crear_desafio.php'" class="bg-green-600 font-bold rounded-lg px-4 py-2">Crear un Desafío</button>
@@ -60,74 +67,46 @@
                     </script>
                 <?php endif; ?>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                <div class="bg-white rounded-lg shadow-md flex flex-col w-4/5 p-2 items-center">
-                    <div class="flex flex-col w-10/12">
-                        <h4 class="text-blue-600 font-semibold">Desafío de Cardio</h4>
-                        <p class="text-gray-700 break-words">Corre 5 kilómetros diarios durante una semana.</p>
+            <div class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
+                <!--Aqui se crea el primer desafio-->
+                <div class="flex flex-col bg-gray-900 rounded-lg shadow-md p-2 items-center gap-2 w-3/4">
+                    <div class="flex flex-col  w-5/6" >
+                        <h4 class="text-white font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Cardio</h4>
+                        <p class="text-white font-bold break-all self-center">Etapa 1/5: Correr</p>
+                        <p class="text-white font-bold break-all">Corre por 20min y sin parar</p>
                     </div>
-                    <div class="flex gap-1">
-                        <div class="flex border-cyan-600 border-2">
-                            <img src="../assets/desafio_img/runing.webp" alt="" class="h-56 w-42 object-cover">
-                        </div>
-                        <div class="flex flex-col border-cyan-600 border-2">
-                            <div class="flex-wrap px-2 gap-1 ">
-                                <p class="text-gray-700 font-bold">Etapa 1 : </p>
-                                <p class="self-start text-blue-500 ">Correr 4km</p>
-                            </div>
-                        </div>
+                    <div class="flex" >
+                        <img src="../assets/desafio_img/runing.webp" alt="" class="h-56 w-56 rounded-lg">
                     </div>
-                    <div class="flex gap-5 mt-1 ">
-                        <button class="bg-green-500 p-1 rounded-md">Unirse al Desafio</button>
-                        <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
-                    </div>
+                    <button class="bg-green-500 p-1 rounded-md font-bold">Unirse al Desafio</button>
+                    <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
                 </div>
 
-                <div class="bg-white rounded-lg shadow-md flex flex-col w-4/5 p-2 items-center">
-                    <div class="flex flex-col w-10/12">
-                        <h4 class="text-blue-600 font-semibold">Desafío de Fuerza</h4>
-                        <p class="text-gray-700 flex">Haz abdominales cada día durante 3dias.</p>
+                <div class="flex flex-col bg-gray-900 rounded-lg shadow-md p-2 items-center gap-2 w-3/4">
+                    <div class="flex flex-col  w-5/6" >
+                        <h4 class="text-white font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Fuerza</h4>
+                        <p class="text-white font-bold break-all self-center">Etapa 1/5: Press Banca</p>
+                        <p class="text-white font-bold break-all">20 Repeticiones, hasta llegar al fallo</p>
                     </div>
-                    <div class="flex gap-1">
-                        <div class="flex border-cyan-600 border-2">
-                            <img src="../assets/desafio_img/peso_muerto.webp" alt="" class="h-56 w-42 object-cover">
-                        </div>
-                        <div class="flex flex-col border-cyan-600 border-2">
-                            <div class="flex-wrap px-2 gap-1 ">
-                                <p class="text-gray-700 font-bold">Etapa 1 : </p>
-                                <p class="self-start text-blue-500 ">Correr 4km</p>
-                            </div>
-                        </div>
+                    <div class="flex" >
+                        <img src="../assets/desafio_img/peso_muerto.webp" alt="" class="h-56 w-56 rounded-lg">
                     </div>
-                    <div class="flex gap-5 mt-1 ">
-                        <button class="bg-green-500 p-1 rounded-md">Unirse al Desafio</button>
-                        <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
-                    </div>
+                    <button class="bg-green-500 p-1 rounded-md font-bold">Unirse al Desafio</button>
+                    <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
                 </div>
 
-                <div class="bg-white rounded-lg shadow-md flex flex-col w-4/5 p-2 items-center">
-                    <div class="flex flex-col w-10/12">
-                        <h4 class="text-blue-600 font-semibold flex">Desafío de Flexibilidad</h4>
-                        <p class="text-gray-700 flex">Practica yoga durante 30 minutos cada mañana.</p>
+                <div class="flex flex-col bg-gray-900 rounded-lg shadow-md p-2 items-center gap-2 w-3/4">
+                    <div class="flex flex-col  w-5/6" >
+                        <h4 class="text-white font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Flexibilidad</h4>
+                        <p class="text-white font-bold break-all self-center">Etapa 1/5: yoga</p>
+                        <p class="text-white font-bold break-all">durante 30 minutos estiramiento completo de piernas</p>
                     </div>
-                    <div class="flex gap-1">
-                        <div class="flex border-cyan-600 border-2">
-                            <img src="../assets/desafio_img/estiramiento.webp" alt="" class="h-56 w-42 object-cover">
-                        </div>
-                        <div class="flex flex-col border-cyan-600 border-2">
-                            <div class="flex-wrap px-2 gap-1 ">
-                                <p class="text-gray-700 font-bold">Etapa 1 : </p>
-                                <p class="self-start text-blue-500 ">Correr 4km</p>
-                            </div>
-                        </div>
-                        
+                    <div class="flex" >
+                        <img src="../assets/desafio_img/estiramiento.webp" alt="" class="h-56 w-56 rounded-lg">
                     </div>
-                    <div class="flex gap-5 mt-1 ">
-                        <button class="bg-green-500 p-1 rounded-md">Unirse al Desafio</button>
-                        <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
-                    </div>
+                    <button class="bg-green-500 p-1 rounded-md font-bold">Unirse al Desafio</button>
+                    <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
                 </div>
-
 
             </div>
             <!-- Desafios creados por el usuario -->

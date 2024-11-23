@@ -20,10 +20,10 @@
             min-height: 100vh; /* Asegura que el fondo cubra toda la pantalla */
         }
         .bebas-neue-regular {
-  font-family: "Bebas Neue", serif;
-  font-weight: 400;
-  font-style: normal;
-}
+            font-family: "Bebas Neue", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
 
     </style>
 </head>

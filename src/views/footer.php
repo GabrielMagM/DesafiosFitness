@@ -1,4 +1,4 @@
-<footer class="flex flex-col items-center justify-center bg-gray-800 text-gray-200 p-4">
+<footer class="flex flex-col items-center justify-center bg-gray-900 text-gray-200 p-4">
     <!-- Texto de derechos reservados -->
     <div class="flex mx-auto text-center">
         <p>&copy; 2024 Desafíos Fitness. Todos los derechos reservados.</p>
