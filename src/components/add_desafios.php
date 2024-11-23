@@ -1,75 +1,53 @@
 <?php
-include 'Conexion.php'; // Asegúrate de iniciar la sesión para acceder a $_SESSION
+// Iniciar sesión
+session_start();
 
-// Asegúrate de que la sesión esté iniciada
+// Incluir la conexión a la base de datos
+include 'Conexion.php';  // Asegúrate de que la ruta sea correcta
 
-// Verificar si el usuario está autenticado
+// Verificar si el usuario está logueado
 if (!isset($_SESSION['user_id'])) {
-    header("Location: Login.php"); // Redirige si no está autenticado
-    exit();
+    die("No estás logueado. Por favor, inicia sesión.");
 }
 
-$conn = Conexion::Conectar(); // Conexión a la base de datos usando PDO
+// Obtener la conexión a la base de datos
+$conn = Conexion::Conectar(); // Usamos el método estático para obtener la conexión
 
 // Verificar si el formulario fue enviado
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Validar la entrada de $_POST
-    $user_id = $_SESSION['user_id'];  // Aquí tomamos el ID del usuario de la sesión
-    $tittle = isset($_POST['tittle']) ? $_POST['tittle'] : null;
-    $total_stages = isset($_POST['total_stages']) ? $_POST['total_stages'] : null;
-    $imagen_url = isset($_POST['imagen_url']) ? $_POST['imagen_url'] : null;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obtener los valores del formulario
+    $tittle = $_POST['tittle'];
+    $imagen_url = $_POST['imagen_url'];
+    $total_stages = $_POST['total_stages'];
+    $user_id = $_SESSION['user_id'];  // Obtener el user_id de la sesión
 
-    // Verificar que todos los campos requeridos están presentes
-    if ($tittle && $total_stages && $imagen_url) {
-        // Preparar e insertar el desafío en la base de datos
+    // Validar que los campos no estén vacíos
+    if (empty($tittle) || empty($imagen_url) || empty($total_stages)) {
+        echo "Por favor, completa todos los campos.";
+    } else {
+        // Preparar la consulta SQL para insertar el desafío
         $sql = "INSERT INTO challenges (user_id, tittle, total_stages, imagen_url) 
                 VALUES (:user_id, :tittle, :total_stages, :imagen_url)";
+        
+        // Preparar la sentencia SQL
         $stmt = $conn->prepare($sql);
+        
+        // Vincular los parámetros
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':tittle', $tittle);
+        $stmt->bindParam(':total_stages', $total_stages, PDO::PARAM_INT);
+        $stmt->bindParam(':imagen_url', $imagen_url);
 
-        // Asignar valores a los parámetros
-        $stmt->bindValue(':user_id', $user_id);  // Usamos el user_id de la sesión
-        $stmt->bindValue(':tittle', $tittle);
-        $stmt->bindValue(':total_stages', $total_stages);
-        $stmt->bindValue(':imagen_url', $imagen_url);
-
-        // Ejecutar la consulta
-        if ($stmt->execute()) {
-            // Obtener el id del desafío insertado
-            $challenge_id = $conn->lastInsertId();
-
-            // Insertar las etapas en la tabla stages
-            for ($i = 1; $i <= $total_stages; $i++) {
-                // Obtener los datos de cada etapa del formulario
-                $stage_name = isset($_POST['stage_name'][$i]) ? $_POST['stage_name'][$i] : null;
-                $stage_goal = isset($_POST['stage_goal'][$i]) ? $_POST['stage_goal'][$i] : null;
-
-                // Verificar que ambos campos de la etapa estén presentes
-                if ($stage_name && $stage_goal) {
-                    // Insertar las etapas en la base de datos
-                    $sql_stages = "INSERT INTO stages (user_id, challenge_id, stage_num, stage_name, stage_goal) 
-                                  VALUES (:user_id, :challenge_id, :stage_num, :stage_name, :stage_goal)";
-                    $stmt_stages = $conn->prepare($sql_stages);
-                    $stmt_stages->bindValue(':user_id', $user_id);  // El mismo user_id
-                    $stmt_stages->bindValue(':challenge_id', $challenge_id); // El ID del desafío insertado
-                    $stmt_stages->bindValue(':stage_num', $i); // Establecer el número de la etapa
-                    $stmt_stages->bindValue(':stage_name', $stage_name);
-                    $stmt_stages->bindValue(':stage_goal', $stage_goal);
-                    $stmt_stages->execute();
-                } else {
-                    echo "Error: Todos los campos de la etapa son obligatorios.";
-                    exit;
-                }
+        try {
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                echo "Desafío creado exitosamente.";
+            } else {
+                echo "Error al crear el desafío.";
             }
-
-            echo "Desafío creado exitosamente.";
-            header("Location: desafios.php");
-            exit;
-        } else {
-            echo "Error: " . $stmt->errorInfo()[2];
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
         }
-    } else {
-        echo "Error: Todos los campos son obligatorios.";
     }
 }
-
 ?>

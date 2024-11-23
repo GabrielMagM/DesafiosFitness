@@ -133,7 +133,8 @@
             <div class="flex justify-between items-center my-4 px-4 border-b border-gray-300" >
                 <h3 class="text-lg font-semibold   self-center">Tus Desafios</h3>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <div class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
+                <?php include 'components/db_desafios_user.php'?>
                 
             </div>
             <!-- Desafios creados por Otros Usuarios -->
