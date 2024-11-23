@@ -28,7 +28,7 @@
             <div class="w-1/2 bg-slate-800 flex flex-col justify-center p-8 text-white">
                 <a href="index.php">
                     <!-- Logo centrado -->
-                    <img src="../assets/Logo.png" alt="Logo" class="mb-4 w-30 h-26">
+                    <img src="../assets/Siiiu.png" alt="Logo" class="mb-4 w-30 h-26">
                 </a> 
                 <h1 class="text-3xl font-bold mb-4">Become a Member</h1>
                 <ul class="space-y-2">
@@ -53,7 +53,7 @@
             <div class="w-1/2 bg-slate-800 flex flex-col justify-center items-center ">
                 <div class="flex flex-col justify-around p-8 bg-white rounded-lg w-3/4 mt-10">
                     <h2 class="text-2xl font-semibold mb-4">Log In</h2>
-                    <p class="text-sm mb-4 ml-28">Don't have an account? 
+                    <p class="text-sm mb-4  self-end ">Don't have an account? 
                     <a href="register.php" class="text-blue-500">Sign up</a></p>
                     <p class="text-center text-gray-500 my-2">OR</p>
                     <form action="#" method="POST">

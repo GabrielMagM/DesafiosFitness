@@ -31,7 +31,6 @@
 </head>
 
 <body class="bg-slate-800 font-sans leading-normal tracking-normal text-white">
-
     <?php include 'views/header_prueba.php';?>
 
     <!-- Contenido Principal -->

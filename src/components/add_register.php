@@ -1,5 +1,4 @@
-<?php
-session_start(); // Inicia la sesión para poder usar $_SESSION
+<?php // Inicia la sesión para poder usar $_SESSION
 
 include 'Conexion.php'; // Incluye la clase de conexión
 

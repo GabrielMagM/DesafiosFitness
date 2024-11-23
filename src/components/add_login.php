@@ -1,7 +1,6 @@
 <?php
 // Iniciar sesión
 session_start();
-
 // Incluir la conexión a la base de datos
 include 'Conexion.php';  // Asegúrate de que la ruta sea correcta
 

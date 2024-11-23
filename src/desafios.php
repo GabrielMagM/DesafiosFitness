@@ -42,16 +42,16 @@
     ?>
 
     <!-- Contenido Principal -->
-    <main class="container mx-auto p-4 mt-4 ">
+    <main class="container mx-auto p-4 mt-4 text-white">
         <section class="bg-gray-900 p-6 rounded-lg shadow-md ">
-            <h2 class="text-white text-xl font-semibold mb-4 ">Bienvenido a los Desafíos Fitness</h2>        
-            <p class="mt-4 text-white">Algunos desafíos para mejorar tu condición física. Únete y mantente motivado.</p>
+            <h2 class=" text-xl font-semibold mb-4 ">Bienvenido a los Desafíos Fitness</h2>        
+            <p class="mt-4 ">Algunos desafíos para mejorar tu condición física. Únete y mantente motivado.</p>
         </section>
 
         <!-- Sección de Desafíos -->
         <section class="mt-4">
             <div class="flex justify-between items-center my-4 px-4 border-b border-gray-300 pb-2" >
-                <h3 class="text-lg font-semibold text-white">Desafíos Recientes</h3>
+                <h3 class="text-lg font-semibold ">Desafíos Recientes</h3>
                 <?php if (isset($_SESSION['user_id'])): ?>
         <!-- Si el usuario está registrado, permite crear un desafío -->
                     <button onclick="window.location.href='crear_desafio.php'" class="bg-indigo-500 font-bold rounded-lg px-4 py-2">Crear un Desafío</button>
@@ -74,9 +74,9 @@
                 <!--Aqui se crea el primer desafio-->
                 <div class="flex flex-col bg-gray-900 rounded-lg shadow-md p-2 items-center gap-2 w-3/4">
                     <div class="flex flex-col  w-5/6" >
-                        <h4 class="text-white font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Cardio</h4>
-                        <p class="text-white font-bold break-all self-center">Etapa 1/5: Correr</p>
-                        <p class="text-white font-bold break-all">Corre por 20min y sin parar</p>
+                        <h4 class=" font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Cardio</h4>
+                        <p class=" font-bold break-all self-center">Etapa 1/5: Correr</p>
+                        <p class=" font-bold break-all">Corre por 20min y sin parar</p>
                     </div>
                     <div class="flex" >
                         <img src="../assets/desafio_img/runing.webp" alt="" class="h-56 w-56 rounded-lg">
@@ -91,9 +91,9 @@
 
                 <div class="flex flex-col bg-gray-900 rounded-lg shadow-md p-2 items-center gap-2 w-3/4">
                     <div class="flex flex-col  w-5/6" >
-                        <h4 class="text-white font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Cardio</h4>
-                        <p class="text-white font-bold break-all self-center">Etapa 1/5: Correr</p>
-                        <p class="text-white font-bold break-all">Corre por 20min y sin parar</p>
+                        <h4 class=" font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Cardio</h4>
+                        <p class=" font-bold break-all self-center">Etapa 1/5: Correr</p>
+                        <p class=" font-bold break-all">Corre por 20min y sin parar</p>
                     </div>
                     <div class="flex" >
                         <img src="../assets/desafio_img/runing.webp" alt="" class="h-56 w-56 rounded-lg">
@@ -104,9 +104,9 @@
 
                 <div class="flex flex-col bg-gray-900 rounded-lg shadow-md p-2 items-center gap-2 w-3/4">
                     <div class="flex flex-col  w-5/6" >
-                        <h4 class="text-white font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Fuerza</h4>
-                        <p class="text-white font-bold break-all self-center">Etapa 1/5: Press Banca</p>
-                        <p class="text-white font-bold break-all">20 Repeticiones, hasta llegar al fallo</p>
+                        <h4 class=" font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Fuerza</h4>
+                        <p class=" font-bold break-all self-center">Etapa 1/5: Press Banca</p>
+                        <p class=" font-bold break-all">20 Repeticiones, hasta llegar al fallo</p>
                     </div>
                     <div class="flex" >
                         <img src="../assets/desafio_img/peso_muerto.webp" alt="" class="h-56 w-56 rounded-lg">
@@ -117,9 +117,9 @@
 
                 <div class="flex flex-col bg-gray-900 rounded-lg shadow-md p-2 items-center gap-2 w-3/4">
                     <div class="flex flex-col  w-5/6" >
-                        <h4 class="text-white font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Flexibilidad</h4>
-                        <p class="text-white font-bold break-all self-center">Etapa 1/5: yoga</p>
-                        <p class="text-white font-bold break-all">durante 30 minutos estiramiento completo de piernas</p>
+                        <h4 class=" font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Flexibilidad</h4>
+                        <p class=" font-bold break-all self-center">Etapa 1/5: yoga</p>
+                        <p class=" font-bold break-all">durante 30 minutos estiramiento completo de piernas</p>
                     </div>
                     <div class="flex" >
                         <img src="../assets/desafio_img/estiramiento.webp" alt="" class="h-56 w-56 rounded-lg">
@@ -131,14 +131,14 @@
             </div>
             <!-- Desafios creados por el usuario -->
             <div class="flex justify-between items-center my-4 px-4 border-b border-gray-300" >
-                <h3 class="text-lg font-semibold text-white  self-center">Tus Desafios</h3>
+                <h3 class="text-lg font-semibold   self-center">Tus Desafios</h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                 
             </div>
             <!-- Desafios creados por Otros Usuarios -->
             <div class="flex justify-between items-center my-4 px-4 border-b border-gray-300">
-                <h3 class="text-lg font-semibold text-white self-center">Desafíos Creados</h3>
+                <h3 class="text-lg font-semibold  self-center">Desafíos Creados</h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                 

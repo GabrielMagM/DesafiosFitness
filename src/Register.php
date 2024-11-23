@@ -51,7 +51,7 @@
             <div class="w-1/2 bg-slate-800 flex flex-col justify-center items-center ">
                 <div class="flex flex-col justify-around p-8 bg-white rounded-lg w-3/4 mt-10">
                     <h2 class="text-2xl font-semibold mb-4">Sign Up</h2>
-                    <p class="text-sm mb-4 ml-28">Don't have an account? 
+                    <p class="text-sm mb-4 self-end">Don't have an account? 
                     <a href="login.php" class="text-blue-500">Log in</a></p>
                     <p class="text-center text-gray-500 my-2">OR</p>
                     <form action="#" method="POST">
