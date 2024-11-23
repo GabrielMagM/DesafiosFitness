@@ -11,13 +11,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
    <style>
+
         body {
-            background-image: url('../assets/wallpaper/pexels-wallpaper.webp'); /* Ruta de tu imagen */
+           /* background-image: url('../assets/wallpaper/pexels-wallpaper.webp'); /* Ruta de tu imagen */
             background-size: cover; /* Cubre toda el área */
             background-position: center center; /* Centra la imagen */
             background-attachment: fixed; /* La imagen no se mueve al hacer scroll */
             background-repeat: no-repeat; /* Evita que la imagen se repita */
             min-height: 100vh; /* Asegura que el fondo cubra toda la pantalla */
+            color: white;
         }
         .bebas-neue-regular {
             font-family: "Bebas Neue", serif;
@@ -28,15 +30,15 @@
     </style>
 </head>
 
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<body class="bg-slate-800 font-sans leading-normal tracking-normal text-white">
 
     <?php include 'views/header_prueba.php';?>
 
     <!-- Contenido Principal -->
     <main class="mt-4 m-0">
         <section class="flex flex-col p-6 rounded-lg shadow-md">
-            <h2 class="text-xl font-semibold mb-4 text-gray-800">Bienvenido a los Desafíos Fitness</h2>        
-            <p class="text-gray-700 mt-4">Aquí encontrarás una variedad de desafíos para mejorar tu condición física. Únete y mantente motivado.</p>
+            <h2 class="text-xl font-semibold mb-4 ">Bienvenido a los Desafíos Fitness</h2>        
+            <p class="mt-4">Aquí encontrarás una variedad de desafíos para mejorar tu condición física. Únete y mantente motivado.</p>
             <br>
             <!-- Carrusel -->
             <div class="relative w-full h-[500px] overflow-hidden rounded-lg shadow-md">

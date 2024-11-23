@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
    <style>
         body {
-            background-image: url('../assets/pexels-wallpaper.webp'); /* Ruta de tu imagen */
+           /* background-image: url('../assets/pexels-wallpaper.webp'); /* Ruta de tu imagen */
             background-size: cover; /* Cubre toda el área */
             background-position: center center; /* Centra la imagen */
             background-attachment: fixed; /* La imagen no se mueve al hacer scroll */
@@ -20,15 +20,15 @@
         }
     </style>
 </head>
-<body>
+<body class="bg-slate-800" >
     <?php include 'views/header_prueba.php';?>
     <?php include 'components/add_desafios.php'; ?>
     
-    <main class="flex mx-auto p-4 mt-4 items-center justify-center">
+    <main class=" flex mx-auto py-4 pb-60 items-center justify-center ">
         <section class="flex flex-col bg-slate-800 p-6 rounded-md shadow-md w-6/12">
-            <form id="add_desafios" action="../components/add_desafios.php" method="POST" class="bg-white p-4 rounded shadow">
+            <form id="add_desafios" action="../components/add_desafios.php" method="POST" class="bg-indigo-600 font-semibold p-4 rounded shadow">
                 <div class="mb-4">
-                    <label for="tittle" class="block text-gray-700">Descripción</label>
+                    <label for="tittle" class="block">Descripción</label>
                     <input type="text" id="description" name="tittle" required class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Titulo del desafío">
                 </div>
                 <select id="etapas" name="total_stages" class="mt-1 p-2 border border-gray-300 rounded w-full mb-4" required onchange="mostrarCamposEtapas()">
@@ -42,7 +42,7 @@
                 <!-- Contenedor de Campos de Etapas -->
                 <div id="etapasContainer"></div>
 
-                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded">Crear Desafío</button>
+                <button type="submit" class="w-full bg-green-600 hover:bg-blue-600 text-white font-bold py-2 rounded">Crear Desafío</button>
             </form>
             <script>
                 function mostrarCamposEtapas() {
@@ -57,7 +57,7 @@
                         const etapaDiv = document.createElement('div');
                         etapaDiv.classList.add('mb-4');
                         etapaDiv.innerHTML = `
-                            <label for="etapa${i}" class="block text-gray-700">Etapa ${i}</label>
+                            <label for="etapa${i}" class="block">Etapa ${i}</label>
                             <input type="text" id="etapa${i}" name="stage_name[${i}]" required class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Nombre de la etapa">
                             <textarea name="stage_goal[${i}]" required class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="Descripción de la etapa (máximo 80 palabras)" maxlength="500"></textarea>
                         `;

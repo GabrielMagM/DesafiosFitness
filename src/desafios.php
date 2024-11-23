@@ -6,7 +6,6 @@
     <title>Desafíos Fitness</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.6/lottie.min.js"></script>
-    <link href="colors/Tailwind.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -51,14 +50,14 @@
 
         <!-- Sección de Desafíos -->
         <section class="mt-4">
-            <div class="flex justify-between mb-4 items-center" >
-                <h3 class="text-lg font-semibold text-gray-800">Desafíos Recientes</h3>
+            <div class="flex justify-between items-center my-4 px-4 border-b border-gray-300 pb-2" >
+                <h3 class="text-lg font-semibold text-white">Desafíos Recientes</h3>
                 <?php if (isset($_SESSION['user_id'])): ?>
         <!-- Si el usuario está registrado, permite crear un desafío -->
-                    <button onclick="window.location.href='crear_desafio.php'" class="bg-green-600 font-bold rounded-lg px-4 py-2">Crear un Desafío</button>
+                    <button onclick="window.location.href='crear_desafio.php'" class="bg-indigo-500 font-bold rounded-lg px-4 py-2">Crear un Desafío</button>
                 <?php else: ?>
                     <!-- Si el usuario no está registrado, muestra el mensaje de alerta y redirige a login.php -->
-                    <button onclick="alertaIniciarSesion()" class="bg-green-600 font-bold rounded-lg px-4 py-2">Crear un Desafío</button>
+                    <button onclick="alertaIniciarSesion()" class="bg-indigo-500 font-bold rounded-lg px-4 py-2">Crear un Desafío</button>
                     <script>
                         function alertaIniciarSesion() {
                             alert('Para Crear un Desafío debe Iniciar Sesión.');
@@ -69,6 +68,10 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
                 <!--Aqui se crea el primer desafio-->
+                <!--Aqui se crea el primer desafio-->
+                <!--Aqui se crea el primer desafio-->
+                <!--Aqui se crea el primer desafio-->
+                <!--Aqui se crea el primer desafio-->
                 <div class="flex flex-col bg-gray-900 rounded-lg shadow-md p-2 items-center gap-2 w-3/4">
                     <div class="flex flex-col  w-5/6" >
                         <h4 class="text-white font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Cardio</h4>
@@ -78,7 +81,24 @@
                     <div class="flex" >
                         <img src="../assets/desafio_img/runing.webp" alt="" class="h-56 w-56 rounded-lg">
                     </div>
-                    <button class="bg-green-500 p-1 rounded-md font-bold">Unirse al Desafio</button>
+                    <button class="bg-indigo-600 p-1 rounded-md font-bold">Unirse al Desafio</button>
+                </div>
+                <!--Aqui se crea el primer desafio-->
+                <!--Aqui se crea el primer desafio-->
+                <!--Aqui se crea el primer desafio-->
+                <!--Aqui se crea el primer desafio-->
+                <!--Aqui se crea el primer desafio-->
+
+                <div class="flex flex-col bg-gray-900 rounded-lg shadow-md p-2 items-center gap-2 w-3/4">
+                    <div class="flex flex-col  w-5/6" >
+                        <h4 class="text-white font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Cardio</h4>
+                        <p class="text-white font-bold break-all self-center">Etapa 1/5: Correr</p>
+                        <p class="text-white font-bold break-all">Corre por 20min y sin parar</p>
+                    </div>
+                    <div class="flex" >
+                        <img src="../assets/desafio_img/runing.webp" alt="" class="h-56 w-56 rounded-lg">
+                    </div>
+                    <button class="bg-indigo-600 p-1 rounded-md font-bold">Unirse al Desafio</button>
                     <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
                 </div>
 
@@ -91,7 +111,7 @@
                     <div class="flex" >
                         <img src="../assets/desafio_img/peso_muerto.webp" alt="" class="h-56 w-56 rounded-lg">
                     </div>
-                    <button class="bg-green-500 p-1 rounded-md font-bold">Unirse al Desafio</button>
+                    <button class="bg-indigo-600 p-1 rounded-md font-bold">Unirse al Desafio</button>
                     <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
                 </div>
 
@@ -104,21 +124,21 @@
                     <div class="flex" >
                         <img src="../assets/desafio_img/estiramiento.webp" alt="" class="h-56 w-56 rounded-lg">
                     </div>
-                    <button class="bg-green-500 p-1 rounded-md font-bold">Unirse al Desafio</button>
+                    <button class="bg-indigo-600 p-1 rounded-md font-bold">Unirse al Desafio</button>
                     <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
                 </div>
 
             </div>
             <!-- Desafios creados por el usuario -->
-            <div class="flex justify-between items-center my-4 px-4" >
-                <h3 class="text-lg font-semibold text-gray-800  self-center">Tus Desafios</h3>
+            <div class="flex justify-between items-center my-4 px-4 border-b border-gray-300" >
+                <h3 class="text-lg font-semibold text-white  self-center">Tus Desafios</h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                 
             </div>
             <!-- Desafios creados por Otros Usuarios -->
-            <div class="flex justify-between items-center my-4 px-4" >
-                <h3 class="text-lg font-semibold text-gray-800  self-center">Desafíos Creados</h3>
+            <div class="flex justify-between items-center my-4 px-4 border-b border-gray-300">
+                <h3 class="text-lg font-semibold text-white self-center">Desafíos Creados</h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                 
