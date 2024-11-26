@@ -1,5 +1,5 @@
 <?php
-include 'Conexion.php'; 
+include '../config/Conexion.php'; 
         // Conectar a la base de datos
         $conn = Conexion::Conectar();
 

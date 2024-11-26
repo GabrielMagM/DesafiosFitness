@@ -2,7 +2,7 @@
 // Iniciar sesión
 session_start();
 // Incluir la conexión a la base de datos
-include 'Conexion.php';  // Asegúrate de que la ruta sea correcta
+include '../config/Conexion.php';   // Asegúrate de que la ruta sea correcta
 
 // Obtener la conexión a la base de datos utilizando la clase Conexion
 $conn = Conexion::Conectar(); // Usamos el método estático para obtener la conexión

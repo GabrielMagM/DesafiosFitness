@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desafíos Fitness</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="colors/Tailwind.css" rel="stylesheet">
+    <link href="assets/css/Tailwind.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -31,7 +31,7 @@
 </head>
 
 <body class="bg-slate-800 font-sans leading-normal tracking-normal text-white">
-    <?php include 'views/header_prueba.php';?>
+    <?php include 'includes/header_prueba.php';?>
 
     <!-- Contenido Principal -->
     <main class="mt-4 m-0">
@@ -42,19 +42,19 @@
             <!-- Carrusel -->
             <div class="relative w-full h-[500px] overflow-hidden rounded-lg shadow-md">
                     <div class="carousel-item absolute inset-0 transition-opacity duration-500 ease-in-out opacity-100">
-                        <img src="../assets/wallpaper/wallpaper.webp" alt="Desafío 1" class="w-full h-full object-cover" />
+                        <img src="assets/images/wallpaper.webp" alt="Desafío 1" class="w-full h-full object-cover" />
                     </div>
                     <div class="carousel-item absolute inset-0 transition-opacity duration-500 ease-in-out opacity-0">
-                        <img src="../assets/wallpaper/wallpaper1.webp" alt="Desafío 2" class="w-full h-full object-cover" />
+                        <img src="assets/images/wallpaper1.webp" alt="Desafío 2" class="w-full h-full object-cover" />
                     </div>
             </div>
         </section>
     </main>
-
+    
 
     <!-- Pie de página -->
-    <?php include 'views/footer.php'; ?>
+    <?php include 'includes/footer.php'; ?>
 
-    <script src="JS/carrusel.js"></script>
+    <script src="assets/JS/carrusel.js"></script>
 </body>
 </html>

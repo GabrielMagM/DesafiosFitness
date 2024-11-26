@@ -21,7 +21,7 @@
     </style>
 </head>
 <body class="bg-slate-800" >
-    <?php include 'views/header_prueba.php';?>
+    <?php include 'includes/header_prueba.php';?>
     
     <main class=" flex mx-auto py-4 pb-60 items-center justify-center ">
         <section class="flex flex-col bg-slate-800 p-6 rounded-md shadow-md w-6/12">
@@ -95,6 +95,6 @@
             </script>
         </section>
     </main>    
-    <?php include 'views/footer.php'; ?>
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html>

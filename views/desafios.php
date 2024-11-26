@@ -31,11 +31,11 @@
 
 <body class="bg-slate-800 font-sans leading-normal tracking-normal">
     <!-- Encabezado -->
-    <?php include 'views/header_prueba.php';?>
+    <?php include '../includes/header_prueba.php';?>
 
     <?php
     // Conexión a la base de datos
-    require_once 'components/Conexion.php'; // Asegúrate de tener la conexión a la base de datos
+    require_once 'config/Conexion.php'; // Asegúrate de tener la conexión a la base de datos
     $conn = Conexion::Conectar(); // Usamos el método estático para obtener la conexión
     // Consulta para obtener todos los desafíos
     
@@ -122,7 +122,7 @@
                         <p class=" font-bold break-all">durante 30 minutos estiramiento completo de piernas</p>
                     </div>
                     <div class="flex" >
-                        <img src="../assets/desafio_img/estiramiento.webp" alt="" class="h-56 w-56 rounded-lg">
+                        <img src="../assets/images/estiramiento.webp" alt="" class="h-56 w-56 rounded-lg">
                     </div>
                     <button class="bg-indigo-600 p-1 rounded-md font-bold">Unirse al Desafio</button>
                     <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
@@ -134,7 +134,7 @@
                 <h3 class="text-lg font-semibold   self-center">Tus Desafios</h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
-                <?php include 'components/db_desafios_user.php'?>
+                <?php include '../actions/db_desafios_user.php'?>
                 
             </div>
             <!-- Desafios creados por Otros Usuarios -->
@@ -148,9 +148,9 @@
     </main>
 
     <!-- Pie de página -->
-    <?php include 'views/footer.php'; ?>
+    <?php include '../includes/footer.php'; ?>
 
-    <script src="JS/carrusel.js"></script>
-    <script src="JS/lottiefiles.js"></script>
+    <script src="../assets/JS/carrusel.js"></script>
+    <script src="../assets/JS/lottiefiles.js"></script>
 </body>
 </html>
