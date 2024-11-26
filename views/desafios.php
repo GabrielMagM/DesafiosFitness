@@ -35,7 +35,7 @@
 
     <?php
     // Conexión a la base de datos
-    require_once 'config/Conexion.php'; // Asegúrate de tener la conexión a la base de datos
+    require_once '../config/Conexion.php'; // Asegúrate de tener la conexión a la base de datos
     $conn = Conexion::Conectar(); // Usamos el método estático para obtener la conexión
     // Consulta para obtener todos los desafíos
     
@@ -79,7 +79,7 @@
                         <p class=" font-bold break-all">Corre por 20min y sin parar</p>
                     </div>
                     <div class="flex" >
-                        <img src="../assets/desafio_img/runing.webp" alt="" class="h-56 w-56 rounded-lg">
+                        <img src="../assets/images/runing.webp" alt="" class="h-56 w-56 rounded-lg">
                     </div>
                     <button class="bg-indigo-600 p-1 rounded-md font-bold">Unirse al Desafio</button>
                 </div>
@@ -96,7 +96,7 @@
                         <p class=" font-bold break-all">Corre por 20min y sin parar</p>
                     </div>
                     <div class="flex" >
-                        <img src="../assets/desafio_img/runing.webp" alt="" class="h-56 w-56 rounded-lg">
+                        <img src="../assets/images/runing.webp" alt="" class="h-56 w-56 rounded-lg">
                     </div>
                     <button class="bg-indigo-600 p-1 rounded-md font-bold">Unirse al Desafio</button>
                     <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->
@@ -109,7 +109,7 @@
                         <p class=" font-bold break-all">20 Repeticiones, hasta llegar al fallo</p>
                     </div>
                     <div class="flex" >
-                        <img src="../assets/desafio_img/peso_muerto.webp" alt="" class="h-56 w-56 rounded-lg">
+                        <img src="../assets/images/peso_muerto.webp" alt="" class="h-56 w-56 rounded-lg">
                     </div>
                     <button class="bg-indigo-600 p-1 rounded-md font-bold">Unirse al Desafio</button>
                     <!--<button type="button" onclick="cambiarImagen(1)">Siguente Etapa▶</button>-->

@@ -24,7 +24,7 @@
         <section class="flex w-3/4 h-2/4 shadow-lg rounded-lg overflow-hidden bg-slate-800 mb-20">
             <!-- Sección Izquierda: Logo y textos -->
             <div class="w-1/2 bg-slate-800 flex flex-col justify-center p-8 text-white">
-                <a href="../index.php">
+                <a href="index.php">
                     <!-- Logo centrado -->
                     <img src="../assets/images/Siiiu.png" alt="Logo" class="mb-4 w-30 h-26">
                 </a> 

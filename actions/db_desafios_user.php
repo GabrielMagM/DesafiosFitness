@@ -55,8 +55,8 @@ try {
                     $buttonText = "Siguiente Desafío";
                     $buttonAction = "nextStage.php?challenge_id={$challengeId}&current_stage={$stageNum}";
                 } elseif ($completed && $stageNum == $total_stages) {
-                    $buttonText = "Completar Desafío";
-                    $buttonAction = "completeChallenge.php?challenge_id={$challengeId}";
+                    // El desafío ya está completado, no mostrar el botón
+                    continue; // Salir de este ciclo y no mostrar el desafío en la lista
                 }
             }
 
@@ -68,7 +68,7 @@ try {
                         <p class='font-bold break-all self-center'>Etapa: {$stageNum}/ {$total_stages}</p>
                     </div>
                     <div class='flex'>
-                        <img src='../assets/desafio_img/{$imagen_url}' alt='Imagen del desafío' class='h-56 w-56 rounded-lg'>
+                        <img src='../assets/images/{$imagen_url}' alt='Imagen del desafío' class='h-56 w-56 rounded-lg'>
                     </div>
                     <a href='{$buttonAction}' class='bg-indigo-600 p-1 rounded-md font-bold'>{$buttonText}</a>
                 </div>
