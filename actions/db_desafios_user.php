@@ -1,83 +1,57 @@
 <?php
-// Iniciar sesión
-
-// Verificar si el usuario está logueado
+// Asegúrate de que el usuario esté autenticado antes de intentar acceder a los desafíos
 if (!isset($_SESSION['user_id'])) {
-    echo "<p>No estás logueado. Por favor, inicia sesión.</p>";
-    exit();
+    die("<p>Debes iniciar sesión para ver los desafíos.</p>");
 }
 
-// Obtener la conexión a la base de datos
+// Conectar a la base de datos
 $conn = Conexion::Conectar();
 
-// Obtener el user_id del usuario logueado
+// Obtener el ID del usuario que está autenticado
 $user_id = $_SESSION['user_id'];
 
-try {
-    // Consultar los desafíos creados por el usuario
-    $sqlChallenges = "SELECT id, tittle, total_stages, imagen_url, created_at 
-                      FROM challenges 
-                      WHERE user_id = :user_id 
-                      ORDER BY created_at DESC";
-    $stmtChallenges = $conn->prepare($sqlChallenges);
-    $stmtChallenges->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    $stmtChallenges->execute();
+// Realizar la consulta para obtener solo los desafíos del usuario autenticado
+$sql = "SELECT * FROM challenges WHERE user_id = :user_id";
+$stmt = $conn->prepare($sql);
+$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+$stmt->execute();
 
-    // Verificar si hay desafíos
-    if ($stmtChallenges->rowCount() > 0) {
-        while ($row = $stmtChallenges->fetch(PDO::FETCH_ASSOC)) {
-            $challengeId = $row['id'];
-            $tittle = htmlspecialchars($row['tittle']);
-            $total_stages = (int)$row['total_stages'];
-            $imagen_url = htmlspecialchars($row['imagen_url']);
-            $created_at = htmlspecialchars($row['created_at']);
+// Verifica si se encontraron resultados
+if ($stmt->rowCount() > 0) {
+    // Recorre cada desafío y genera el HTML
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        // Obtener las etapas de este desafío
+        $challenge_id = $row['id'];
+        $sql_stages = "SELECT * FROM stages WHERE challenge_id = :challenge_id ORDER BY id ASC";
+        $stmt_stages = $conn->prepare($sql_stages);
+        $stmt_stages->bindValue(':challenge_id', $challenge_id, PDO::PARAM_INT);
+        $stmt_stages->execute();
 
-            // Verificar el progreso del usuario en este desafío
-            $sqlProgress = "SELECT stage_id, completed 
-                            FROM user_stages 
-                            WHERE user_id = :user_id AND challenge_id = :challenge_id 
-                            ORDER BY stage_id DESC LIMIT 1";
-            $stmtProgress = $conn->prepare($sqlProgress);
-            $stmtProgress->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-            $stmtProgress->bindParam(':challenge_id', $challengeId, PDO::PARAM_INT);
-            $stmtProgress->execute();
+        // Verifica si hay etapas para este desafío
+        if ($stmt_stages->rowCount() > 0) {
+            $stages = $stmt_stages->fetchAll(PDO::FETCH_ASSOC);
+            $total_stages = count($stages); // Contamos las etapas
 
-            $stageNum = 0;
-            $buttonText = "Unirse al Desafío";
-            $buttonAction = "joinChallenge.php?challenge_id={$challengeId}";
-
-            if ($stmtProgress->rowCount() > 0) {
-                $progress = $stmtProgress->fetch(PDO::FETCH_ASSOC);
-                $stageNum = (int)$progress['stage_id'];
-                $completed = (bool)$progress['completed'];
-
-                if ($completed && $stageNum < $total_stages) {
-                    $buttonText = "Siguiente Desafío";
-                    $buttonAction = "nextStage.php?challenge_id={$challengeId}&current_stage={$stageNum}";
-                } elseif ($completed && $stageNum == $total_stages) {
-                    // El desafío ya está completado, no mostrar el botón
-                    continue; // Salir de este ciclo y no mostrar el desafío en la lista
-                }
-            }
-
-            // Generar el HTML
-            echo "
-                <div class='flex flex-col bg-gray-900 rounded-lg shadow-md p-2 items-center gap-2 w-3/4'>
-                    <div class='flex flex-col w-5/6'>
-                        <h4 class='font-semibold self-center rounded-sm bg-gray-600 p-1'>{$tittle}</h4>
-                        <p class='font-bold break-all self-center'>Etapa: {$stageNum}/ {$total_stages}</p>
+            // Mostrar el desafío y la primera etapa (suponiendo que el desafío tiene etapas)
+            ?>
+            
+            <div class="flex flex-col bg-gray-900 rounded-lg shadow-md p-2 items-center gap-2 w-3/4">
+                    <div class="flex flex-col  w-5/6" >
+                        <h4 class="text-white font-semibold self-center rounded-sm bg-gray-600 p-1"><?php echo htmlspecialchars($row['tittle']); ?></h4>
+                        <p class="text-white font-bold break-all self-center">Etapa <?php echo htmlspecialchars($stages[0]['stage_num']); ?> /<?php echo $total_stages; ?> : <?php echo htmlspecialchars($stages[0]['stage_name']);?></p>
+                        <p class="text-white font-bold break-all"><?php echo htmlspecialchars($stages[0]['stage_goal']);?></p>
                     </div>
-                    <div class='flex'>
-                        <img src='../assets/images/{$imagen_url}' alt='Imagen del desafío' class='h-56 w-56 rounded-lg'>
+                    <div class="flex" >
+                        <img src="../assets/images/<?php echo htmlspecialchars($row['imagen_url']); ?>" alt="" class="h-56 w-56 rounded-lg">
                     </div>
-                    <a href='{$buttonAction}' class='bg-indigo-600 p-1 rounded-md font-bold'>{$buttonText}</a>
+                    <button class="bg-indigo-600 p-1 rounded-md font-bold">Unirse al Desafio</button>
                 </div>
-            ";
+            <?php
+        } else {
+            echo "<p>No hay etapas para este desafío.</p>";
         }
-    } else {
-        echo "<p class='text-gray-500'>No has creado ningún desafío aún.</p>";
     }
-} catch (PDOException $e) {
-    echo "<p>Error: " . $e->getMessage() . "</p>";
+} else {
+    echo "<p>No tienes desafíos disponibles en este momento.</p>";
 }
 ?>
