@@ -34,10 +34,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_email'] = $user['email'];   // Almacenar el correo del usuario (si es necesario)
 
                 // Redirigir al usuario a la página principal (index.php)
-                header("Location: index.php");
+                echo "<script>
+                    alert('Bienvenido');
+                    window.location.href = 'index.php'; // Redirige a la página de registro
+                </script>";
                 exit();
             } else {
-                echo "Contraseña incorrecta.";
+                echo "<script>
+                    alert('La contraseña es incorrecta. intenta otra vez');
+                    window.location.href = 'login.php'; // Redirige a la página de registro
+                </script>";
             }
         } else {
             echo "Usuario no encontrado.";
