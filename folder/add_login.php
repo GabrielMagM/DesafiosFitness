@@ -3,10 +3,8 @@
 session_start();
 // Incluir la conexión a la base de datos
    // Asegúrate de que la ruta sea correcta
-
 // Obtener la conexión a la base de datos utilizando la clase Conexion
 $conn = Conexion::Conectar(); // Usamos el método estático para obtener la conexión
-
 // Verificar si el formulario fue enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los valores del formulario
@@ -21,11 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-
         // Verificar si el usuario existe
         if ($stmt->rowCount() > 0) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            
             // Verificar la contraseña
             if (password_verify($password, $user['password'])) {
                 // Iniciar sesión y redirigir al usuario
@@ -34,16 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_email'] = $user['email'];   // Almacenar el correo del usuario (si es necesario)
 
                 // Redirigir al usuario a la página principal (index.php)
-                echo "<script>
-                    alert('Bienvenido');
-                    window.location.href = 'index.php'; // Redirige a la página de registro
-                </script>";
+                header("Location: index.php");
                 exit();
             } else {
-                echo "<script>
-                    alert('La contraseña es incorrecta. intenta otra vez');
-                    window.location.href = 'login.php'; // Redirige a la página de registro
-                </script>";
+                echo "Contraseña incorrecta.";
             }
         } else {
             echo "Usuario no encontrado.";
