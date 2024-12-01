@@ -25,7 +25,7 @@
     
     <main class=" flex mx-auto py-4 pb-60 items-center justify-center ">
         <section class="flex flex-col bg-slate-800 p-6 rounded-md shadow-md w-6/12">
-                <form id="formulario-desafio" action="components/add_desafios.php" method="POST" class="bg-indigo-600 font-semibold p-4 rounded shadow">
+                <form id="formulario-desafio" action="#" method="POST" class="bg-indigo-600 font-semibold p-4 rounded shadow">
                 <!-- Campo de título -->
                 <div class="mb-4">
                     <label for="tittle" class="block text-gray-100">Título del Desafío</label>

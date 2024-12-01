@@ -3,7 +3,7 @@
 session_start();
 
 // Incluir la conexión a la base de datos
-include '../config/Conexion.php';  // Asegúrate de que la ruta sea correcta
+ // Asegúrate de que la ruta sea correcta
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['user_id'])) {

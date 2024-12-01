@@ -9,9 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
    <style>
-
         body {
            /* background-image: url('../assets/wallpaper/pexels-wallpaper.webp'); /* Ruta de tu imagen */
             background-size: cover; /* Cubre toda el área */
@@ -26,13 +24,10 @@
             font-weight: 400;
             font-style: normal;
         }
-
     </style>
 </head>
-
 <body class="bg-slate-800 font-sans leading-normal tracking-normal text-white">
     <?php include '../includes/header_prueba.php';?>
-
     <!-- Contenido Principal -->
     <main class="mt-4 m-0">
         <section class="flex flex-col p-6 rounded-lg shadow-md">
@@ -49,12 +44,9 @@
                     </div>
             </div>
         </section>
-    </main>
-    
-
+    </main> 
     <!-- Pie de página -->
     <?php include '../includes/footer.php'; ?>
-
     <script src="assets/JS/carrusel.js"></script>
 </body>
 </html>

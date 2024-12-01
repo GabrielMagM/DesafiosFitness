@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 
 </head>
-
 <body class="flex flex-col h-3/4 bg-slate-800 font-sans leading-normal tracking-normal">
     <!-- Encabezado -->
     <header class="flex items-center justify-center bg-emerald-600 text-white shadow-md py-2"> 
@@ -73,8 +72,6 @@
             </div>
         </section>
     </main>
-    <?php include '../actions/add_register.php'; ?>
-
     <!-- Pie de página -->
     <?php include '../includes/footer.php'; ?>
 
