@@ -1,6 +1,6 @@
 <?php // Inicia la sesión para poder usar $_SESSION
 
-include '../config/Conexion.php';  // Incluye la clase de conexión
+ // Incluye la clase de conexión
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
