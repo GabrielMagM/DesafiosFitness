@@ -1,0 +1,31 @@
+Create database if not exists app_fitness;
+USE app_fitness
+
+-- Creacion Tabla Usuarios
+CREATE TABLE users(
+    id_user INT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL
+    created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+);
+
+--Creacion Tabla Desafíos
+CREATE TABLE desafios(
+    id_challenge INT PRIMARY KEY AUTO_INCREMENT,
+    name_challenge VARCHAR(50) NOT NULL,
+    created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+    creator_by INT,
+    total_stages INT,
+    FOREIGN KEY (creator_by) REFERENCES users(id_user) ON DELETE CASCADE
+);
+
+--Creacion Tabla stages
+CREATE TABLE stages (
+    id_stage INT PRIMARY KEY AUTO_INCREMENT,
+    id_challenge INT,
+    num_stage INT NOT NULL,
+    name_stage  VARCHAR(50) NOT NULL,
+    goal_stage VARCHAR(50) NOT NULL,
+    FOREIGN KEY (id_challenge) REFERENCES challenges(id_challenge) ON DELETE CASCADE
+);
+
