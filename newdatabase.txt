@@ -4,22 +4,23 @@ USE app_fitness
 -- Creacion Tabla Usuarios
 CREATE TABLE users(
     id_user INT PRIMARY KEY AUTO_INCREMENT,
+    username Varchar(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL
-    created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+    password VARCHAR(50) NOT NULL,
+    created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP
 );
 
---Creacion Tabla Desafíos
-CREATE TABLE desafios(
+-- Creacion Tabla Desafíos
+CREATE TABLE challenges(
     id_challenge INT PRIMARY KEY AUTO_INCREMENT,
     name_challenge VARCHAR(50) NOT NULL,
     created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-    creator_by INT,
+    created_by INT,
     total_stages INT,
-    FOREIGN KEY (creator_by) REFERENCES users(id_user) ON DELETE CASCADE
+    FOREIGN KEY (created_by) REFERENCES users(id_user) ON DELETE CASCADE
 );
 
---Creacion Tabla stages
+-- Creacion Tabla stages
 CREATE TABLE stages (
     id_stage INT PRIMARY KEY AUTO_INCREMENT,
     id_challenge INT,

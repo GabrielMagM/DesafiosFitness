@@ -1,3 +1,11 @@
+<?php
+// dashboard.php
+session_start();
+include '../Core/functions.php';
+
+$user = new Functions();
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

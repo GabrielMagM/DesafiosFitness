@@ -1,3 +1,11 @@
+<?php
+// dashboard.php
+session_start();
+include '../Core/functions.php';
+
+$user = new Functions();
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,7 +29,7 @@
     </style>
 </head>
 <body class="bg-slate-800" >
-    <?php include 'includes/header_prueba.php';?>
+    <?php include '../includes/header_prueba.php';?>
     
     <main class=" flex mx-auto py-4 pb-60 items-center justify-center ">
         <section class="flex flex-col bg-slate-800 p-6 rounded-md shadow-md w-6/12">
@@ -36,7 +44,7 @@
                     <label for="imagen_url" class="self-center mb-4 text-gray-100">Selecciona una imagen para el desafío</label>
                     <div class="flex items-center self-center">
                         <button type="button" onclick="cambiarImagen(-1)" class="p-2 bg-gray-300 rounded hover:bg-gray-400">◀</button>
-                        <img id="previewImage" src="../assets/desafio_img/runing.webp" alt="Imagen del desafío" class="mx-2 w-20 h-auto border rounded">
+                        <img id="previewImage" src="../assets/images/runing.webp" alt="Imagen del desafío" class="mx-2 w-20 h-auto border rounded">
                         <button type="button" onclick="cambiarImagen(1)" class="p-2 bg-gray-300 rounded hover:bg-gray-400">▶</button>
                     </div>
                     <input type="hidden" id="imagen_url" name="imagen_url" value="runing.webp">
@@ -67,7 +75,7 @@
 
                 function cambiarImagen(direction) {
                     currentIndex = (currentIndex + direction + images.length) % images.length;
-                    document.getElementById("previewImage").src = "../assets/desafio_img/" + images[currentIndex];
+                    document.getElementById("previewImage").src = "../assets/images/" + images[currentIndex];
                     document.getElementById("imagen_url").value = images[currentIndex];
                 }
 

@@ -1,3 +1,21 @@
+<?php 
+session_start();
+include '../Core/functions.php';
+
+$user = new Functions();
+
+if (!empty($_POST['email']) && !empty($_POST['password'])) {
+    if ($user->loginUser($_POST['email'], $_POST['password'])) {
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['id_user'] = $user->getIdUser($_POST['email']);
+        $_SESSION['login_exitoso'] = "Inicio de sesión exitoso. Redirigiendo al dashboard...";
+        header("Location: index.php");
+        exit;
+    } else {
+        $error = "Usuario o contraseña incorrectos";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desafíos Fitness</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="assets/css/Tailwind.css" rel="stylesheet">
+    <link href="../assets/css/Tailwind.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -54,15 +72,27 @@
                     <p class="text-sm mb-4  self-end ">Don't have an account? 
                     <a href="register.php" class="text-blue-500">Sign up</a></p>
                     <p class="text-center text-gray-500 my-2">OR</p>
-                    <form action="#" method="POST">
-                        <div class="mb-4">
-                            <input type="text" placeholder="Correo" name="email" class="w-full p-1 border rounded-md">
-                        </div>
-                        <div class="mb-4">
-                            <input type="password" placeholder="Password" name="password" class="w-full p-1 border rounded-md">
-                        </div>
-                        <button type="submit" class="w-full bg-green-500 text-white p-3 rounded-md hover:bg-green-600">Login</button>
-                    </form>
+                    <?php if (isset($_SESSION['login_exitoso'])): ?>
+                    <p style="color: white;"><?php echo $_SESSION['login_exitoso']; ?></p>
+                    <?php unset($_SESSION['login_exitoso']); ?>
+                    <!-- Redirección automática usando JavaScript -->
+                    <script>
+                    setTimeout(function() {
+                        window.location.href = "dashboard.php";
+                    }, 2000); // Redirige después de 2 segundos
+                    </script>
+                    <?php else: ?>
+                    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+                        <form action="login.php" method="POST">
+                            <div class="mb-4">
+                                <input type="text" placeholder="Correo" name="email" class="w-full p-1 border rounded-md">
+                            </div>
+                            <div class="mb-4">
+                                <input type="password" placeholder="Password" name="password" class="w-full p-1 border rounded-md">
+                            </div>
+                            <button type="submit" class="w-full bg-green-500 text-white p-3 rounded-md hover:bg-green-600">Login</button>
+                        </form>
+                    <?php endif; ?>
                 </div>    
             </div>
         </section>

@@ -1,3 +1,21 @@
+<?php
+session_start();
+include '../Core/functions.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $functions = new Functions();
+    $functions->registerUser($username, $email, $password);
+
+    // Mensaje de registro exitoso y redirección
+    $_SESSION['registro_exitoso'] = "Registro exitoso. Redirigiendo a la página de inicio de sesión...";
+    header("Location: Register.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desafíos Fitness</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="assets/css/Tailwind.css" rel="stylesheet">
+    <link href="../assets/css/Tailwind.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -53,9 +71,19 @@
                     <p class="text-sm mb-4 self-end">Don't have an account? 
                     <a href="login.php" class="text-blue-500">Log in</a></p>
                     <p class="text-center text-gray-500 my-2">OR</p>
-                    <form action="#" method="POST">
+                <?php if (isset($_SESSION['registro_exitoso'])): ?>
+                    <p style="color: white;"><?php echo $_SESSION['registro_exitoso']; ?></p>
+                <?php unset($_SESSION['registro_exitoso']); ?>
+                    <!-- Redirección automática usando JavaScript -->
+                <script>
+                    setTimeout(function() {
+                        window.location.href = "login.php";
+                    }, 3000);
+                </script>
+                <?php else: ?>   
+                    <form action="Register.php" method="POST">
                         <div class="mb-4">
-                            <input type="text" placeholder="Usuario" name="name" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="Usuario" required>
+                            <input type="text" placeholder="Usuario" name="username" class="w-full p-2 border border-gray-300 rounded mt-2" placeholder="Usuario" required>
                         </div>
                         <div class="mb-4">
                             <input type="text" placeholder="Email" name="email" class="w-full p-1 border rounded-md" required>
@@ -63,11 +91,12 @@
                         <div class="mb-4">
                             <input type="password" placeholder="Contraseña" name="password" class="w-full p-1 border rounded-md" required>
                         </div>
-                        <div class="mb-4">
-                            <input type="password" placeholder="Confirmar Contraseña" name="confirm_password" class="w-full p-1 border rounded-md" required>
-                        </div>
+                       <!--  <div class="mb-4">
+                              <input type="password" placeholder="Confirmar Contraseña" name="confirm_password" class="w-full p-1 border rounded-md" required>
+                        </div>-->
                         <button type="submit" class="w-full bg-green-500 text-white p-3 rounded-md hover:bg-green-600">Registrarte</button>
                     </form>
+                    <?php endif; ?>
                 </div>    
             </div>
         </section>
@@ -75,6 +104,5 @@
     <!-- Pie de página -->
     <?php include '../includes/footer.php'; ?>
 
-    <script src="../assets/JS/carrusel.js"></script>
 </body>
 </html>

@@ -1,3 +1,11 @@
+<?php
+// dashboard.php
+session_start();
+include '../Core/functions.php';
+
+$user = new Functions();
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -38,7 +46,6 @@
     require_once '../config/Conexion.php'; // Asegúrate de tener la conexión a la base de datos
     $conn = Conexion::Conectar(); // Usamos el método estático para obtener la conexión
     // Consulta para obtener todos los desafíos
-    
     ?>
 
     <!-- Contenido Principal -->
@@ -56,7 +63,7 @@
             <div class="flex flex-col bg-gray-900 rounded-md w-full mb-2">
                 <div class="flex justify-between items-center my-2 px-12 border-b border-gray-300 pb-2" >
                     <h3 class="text-lg font-semibold ">Desafíos Recientes</h3>
-                    <?php if (isset($_SESSION['user_id'])): ?>
+                    <?php if (isset($_SESSION['email'])): ?>
             <!-- Si el usuario está registrado, permite crear un desafío -->
                         <button onclick="window.location.href='crear_desafio.php'" class="bg-indigo-500 font-bold rounded-lg px-4 py-2">Crear un Desafío</button>
                     <?php else: ?>
@@ -70,39 +77,18 @@
                         </script>
                     <?php endif; ?>
                 </div>
+                <!--Desafios Creados or la Pagina-->
                 <div class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
-                    <!--Aqui se crea el primer desafio-->
-                    <div class="flex flex-col bg-gray-800 rounded-lg shadow-md p-1 items-center gap-y-1 w-10/12">
-                        <div class="flex flex-col w-5/6" >
-                            <h4 class=" font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Cardio</h4>
-                            <p class=" font-bold break-all self-center">Etapa 1/5: Correr</p>
-                            <p class=" font-bold break-all text-xs">Corre por 20min y sin parar</p>
-                        </div>
-                        <div class="flex" >
-                            <img src="../assets/images/runing.webp" alt="" class="h-44 w-44 rounded-lg">
-                        </div>
-                        <button class="bg-indigo-600 p-1 rounded-md font-bold">Unirse al Desafio</button>
-                    </div>
-                    <!--Aqui se crea el primer desafio-->
-                    <div class="flex flex-col bg-gray-800 rounded-lg shadow-md p-1 items-center gap-y-1 w-10/12">
-                        <div class="flex flex-col  w-5/6" >
-                            <h4 class=" font-semibold self-center rounded-sm bg-gray-600 p-1">Desafío de Cardio</h4>
-                            <p class=" font-bold break-all self-center">Etapa 1/5: Correr</p>
-                            <p class=" font-bold break-all text-xs">Corre por 20min y sin parar</p>
-                        </div>
-                        <div class="flex" >
-                            <img src="../assets/images/runing.webp" alt="" class="h-44 w-44 rounded-lg">
-                        </div>
-                        <button class="bg-indigo-600 p-1 rounded-md font-bold">Unirse al Desafio</button>
-                    </div>
-                    
+                    <?php include '../includes/desafio_start.php' ?>
                 </div>
+
+
                 <!-- Desafios creados por el usuario -->
                 <div class="flex justify-between items-center my-4 px-4 border-b border-gray-300" >
                     <h3 class="text-lg font-semibold   self-center">Tus Desafios</h3>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
-                    <!-- aqui dentro van los desafios -->
+                    
                 </div>
                 <!-- Desafios creados por Otros Usuarios -->
                 <div class="flex justify-between items-center my-4 px-4 border-b border-gray-300">
