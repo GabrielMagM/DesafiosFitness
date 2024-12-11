@@ -1,11 +1,13 @@
 <?php
-// dashboard.php
+
 session_start();
 include '../Core/functions.php';
 
 $user = new Functions();
-
+// Lógica para cerrar sesión
+include '../Core/logout.php'
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -39,14 +41,24 @@ $user = new Functions();
 
 <body class="bg-slate-800 font-sans leading-normal tracking-normal">
     <!-- Encabezado -->
-    <?php include '../includes/header_prueba.php';?>
-
-    <?php
-    // Conexión a la base de datos
-    require_once '../config/Conexion.php'; // Asegúrate de tener la conexión a la base de datos
-    $conn = Conexion::Conectar(); // Usamos el método estático para obtener la conexión
-    // Consulta para obtener todos los desafíos
-    ?>
+    <nav>
+        <style>
+            .bebas-neue-regular {
+                font-family: "Bebas Neue", serif;
+                font-weight: 400;
+                font-style: normal;
+            }
+        </style>
+        <?php if (isset($_SESSION['email'])): ?>
+            <?php
+            // Obtener el nombre del usuario basado en su correo electrónico
+            $userName = $user->searchUser($_SESSION['email']);
+            ?>
+            <?php include '../includes/header_log.php';?>
+        <?php else: ?>
+            <?php include '../includes/header_noLog.php';?>
+        <?php endif; ?>
+    </nav>
 
     <!-- Contenido Principal -->
     <main class="mx-6 mb-2 mt-2 text-white">
@@ -88,7 +100,7 @@ $user = new Functions();
                     <h3 class="text-lg font-semibold   self-center">Tus Desafios</h3>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
-                    
+                <?php include '../includes/desafio_user.php' ?>
                 </div>
                 <!-- Desafios creados por Otros Usuarios -->
                 <div class="flex justify-between items-center my-4 px-4 border-b border-gray-300">

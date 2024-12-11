@@ -83,5 +83,56 @@ class Functions extends Conexion{
         }
     }
 
+
+    //------Aqui Estará la Seccion de Desafios-------------//
+
+    public function createChallenge($name_challenge, $image_url, $total_stages, $createdBy) {
+        $con = Conexion::Conectar();
+    
+        // Verificar si el desafío con el mismo nombre ya existe
+        $verificarConsulta = $con->prepare("SELECT COUNT(*) FROM challenges WHERE name_challenge = :name_challenge");
+        $verificarConsulta->bindParam(':name_challenge', $name_challenge);
+        $verificarConsulta->execute();
+        $existe = $verificarConsulta->fetchColumn();
+        if ($existe > 0) {
+            return false;
+        }
+    
+        // Si no existe, insertar el nuevo desafío
+        $consulta = $con->prepare("
+            INSERT INTO challenges (name_challenge, imagen_url, total_stages, created_by, created_at) 
+            VALUES (:name_challenge, :imagen_url ,:total_stages, :created_by, NOW())
+        ");
+        $consulta->bindParam(':name_challenge', $name_challenge);
+        $consulta->bindParam(':imagen_url', $image_url);
+        $consulta->bindParam(':total_stages', $total_stages);
+        $consulta->bindParam(':created_by', $createdBy);
+        return $consulta->execute();
+    }
+    
+    public function createStage($id_challenge, $num_stage, $name_stage, $goal_stage) {
+        $con = Conexion::Conectar();
+        $consulta = $con->prepare("
+            INSERT INTO stages (id_challenge, num_stage, name_stage, goal_stage) 
+            VALUES (:id_challenge, :num_stage, :name_stage, :goal_stage)
+        ");
+        $consulta->bindParam(':id_challenge', $id_challenge);
+        $consulta->bindParam(':num_stage', $num_stage);
+        $consulta->bindParam(':name_stage', $name_stage);
+        $consulta->bindParam(':goal_stage', $goal_stage);
+        return $consulta->execute();
+    }
+    
+    public function getIdChallenge($name_challenge) {
+        $con = Conexion::Conectar();
+        $consulta = $con->prepare("SELECT id_challenge FROM challenges WHERE name_challenge = :name_challenge LIMIT 1");
+        $consulta->bindParam(':name_challenge', $name_challenge);
+        $consulta->execute();
+        return $consulta->fetchColumn();
+    }
+    
+
 } 
+
+
 ?>

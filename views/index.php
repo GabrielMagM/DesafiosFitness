@@ -1,10 +1,11 @@
 <?php
-// dashboard.php
+
 session_start();
 include '../Core/functions.php';
 
 $user = new Functions();
-
+// Lógica para cerrar sesión
+include '../Core/logout.php'
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,7 +14,7 @@ $user = new Functions();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desafíos Fitness</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="../assets/css/Tailwind.css" rel="stylesheet">
+    <link href="../assets/css/index.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -35,7 +36,26 @@ $user = new Functions();
     </style>
 </head>
 <body class="bg-slate-800 font-sans leading-normal tracking-normal text-white">
-    <?php include '../includes/header_prueba.php';?>
+    <!-- Header parte Superior de la Página -->
+    <nav>
+        <style>
+            .bebas-neue-regular {
+                font-family: "Bebas Neue", serif;
+                font-weight: 400;
+                font-style: normal;
+            }
+        </style>
+        <?php if (isset($_SESSION['email'])): ?>
+            <?php
+            // Obtener el nombre del usuario basado en su correo electrónico
+            $userName = $user->searchUser($_SESSION['email']);
+            ?>
+            <?php include '../includes/header_log.php';?>
+        <?php else: ?>
+            <?php include '../includes/header_noLog.php';?>
+        <?php endif; ?>
+    </nav>
+
     <!-- Contenido Principal -->
     <main class="mt-4 m-0">
         <section class="flex flex-col p-6 rounded-lg shadow-md">

@@ -1,11 +1,15 @@
 <?php
+session_start();
+include '../Core/functions.php';
+$user = new Functions();
+
 // Lógica para cerrar sesión
 if (isset($_GET['logout']) && $_GET['logout'] == 1) {
     // Limpiar y destruir la sesión
     session_unset();
     session_destroy();
     // Redirigir al index.php después del logout
-    header("Location: index.php");
+    header("Location: login.php");
     exit();
 }
 ?>

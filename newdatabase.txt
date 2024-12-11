@@ -14,9 +14,10 @@ CREATE TABLE users(
 CREATE TABLE challenges(
     id_challenge INT PRIMARY KEY AUTO_INCREMENT,
     name_challenge VARCHAR(50) NOT NULL,
-    created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-    created_by INT,
+    imagen_url TEXT NOT NULL,
     total_stages INT,
+    created_by INT,
+    created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (created_by) REFERENCES users(id_user) ON DELETE CASCADE
 );
 
