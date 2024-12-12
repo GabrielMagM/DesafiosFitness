@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include '../Core/functions.php';
+include_once '../Core/functions.php';
 
 $user = new Functions();
 // Lógica para cerrar sesión
@@ -15,22 +15,14 @@ include '../Core/logout.php'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desafíos Fitness</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.6/lottie.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         *{
-            
+            outline: 1px solid red;
         }
-        body {
-            /* background-image: url('../assets/wallpaper/pexels-wallpaper.webp'); Ruta de tu imagen */
-            background-size: cover; /* Cubre toda el área */
-            background-position: center center; /* Centra la imagen */
-            background-attachment: fixed; /* La imagen no se mueve al hacer scroll */
-            background-repeat: no-repeat; /* Evita que la imagen se repita */
-            min-height: 100vh; /*Asegura que el fondo cubra toda la pantalla */
-        }
+       
         .bebas-neue-regular {
             font-family: "Bebas Neue", serif;
             font-weight: 400;
@@ -62,7 +54,7 @@ include '../Core/logout.php'
 
     <!-- Contenido Principal -->
     <main class="mx-6 mb-2 mt-2 text-white">
-        <section class="bg-gray-900 p-6 rounded-lg shadow-md">
+        <section id="txt_welcome" class="bg-gray-900 p-6 rounded-lg shadow-md">
             <h2 class=" text-xl font-semibold mb-4 ">Bienvenido a los Desafíos Fitness</h2>        
             <p class="mt-4 ">Algunos desafíos para mejorar tu condición física. Únete y mantente motivado.</p>
         </section>
@@ -72,15 +64,15 @@ include '../Core/logout.php'
             
             <?php include '../includes/sidebar.php';?>
 
-            <div class="flex flex-col bg-gray-900 rounded-md w-full mb-2">
-                <div class="flex justify-between items-center my-2 px-12 border-b border-gray-300 pb-2" >
+            <div id="desafios_container" class="flex flex-col bg-gray-900 rounded-md w-full mb-2">
+                <div id="crear_desafios" class="flex justify-between items-center my-2 px-12 border-b border-gray-300 pb-2" >
                     <h3 class="text-lg font-semibold ">Desafíos Recientes</h3>
                     <?php if (isset($_SESSION['email'])): ?>
             <!-- Si el usuario está registrado, permite crear un desafío -->
-                        <button onclick="window.location.href='crear_desafio.php'" class="bg-indigo-500 font-bold rounded-lg px-4 py-2">Crear un Desafío</button>
+                        <button id="button" onclick="window.location.href='crear_desafio.php'" class="bg-indigo-500 font-bold rounded-lg px-4 py-2">Crear un Desafío</button>
                     <?php else: ?>
                         <!-- Si el usuario no está registrado, muestra el mensaje de alerta y redirige a login.php -->
-                        <button onclick="alertaIniciarSesion()" class="bg-indigo-500 font-bold rounded-lg px-4 py-2">Crear un Desafío</button>
+                        <button id="button" onclick="alertaIniciarSesion()" class="bg-indigo-500 font-bold rounded-lg px-4 py-2">Crear un Desafío</button>
                         <script>
                             function alertaIniciarSesion() {
                                 alert('Para Crear un Desafío debe Iniciar Sesión.');
@@ -90,20 +82,20 @@ include '../Core/logout.php'
                     <?php endif; ?>
                 </div>
                 <!--Desafios Creados or la Pagina-->
-                <div class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
+                <div id="pag_desafios" class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
                     <?php include '../includes/desafio_start.php' ?>
                 </div>
 
 
                 <!-- Desafios creados por el usuario -->
-                <div class="flex justify-between items-center my-4 px-4 border-b border-gray-300" >
+                <div class="flex justify-between items-center my-2 px-12 border-b border-gray-300 pb-2" >
                     <h3 class="text-lg font-semibold   self-center">Tus Desafios</h3>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
                 <?php include '../includes/desafio_user.php' ?>
                 </div>
                 <!-- Desafios creados por Otros Usuarios -->
-                <div class="flex justify-between items-center my-4 px-4 border-b border-gray-300">
+                <div class="flex justify-between items-center my-2 px-12 border-b border-gray-300 pb-2">
                     <h3 class="text-lg font-semibold  self-center">Desafíos Creados</h3>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">

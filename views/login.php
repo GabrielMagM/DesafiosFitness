@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include '../Core/functions.php';
+include_once '../Core/functions.php';
 
 $user = new Functions();
 
@@ -23,7 +23,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desafíos Fitness</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="../assets/css/Tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/tailwind.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">

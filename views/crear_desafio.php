@@ -3,7 +3,7 @@ session_start();
 // Lógica para cerrar sesión
 include '../Core/logout.php';
 
-include '../Core/functions.php';
+include_once '../Core/functions.php';
 $user = new Functions();
 if (!isset($_SESSION['email'])) {
     header('Location: login.php');
@@ -55,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desafíos Fitness</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="colors/Tailwind.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">

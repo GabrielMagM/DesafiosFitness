@@ -1,0 +1,92 @@
+body{
+    background-color: #1e293b;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    line-height: 1.5;
+    letter-spacing: 0em;
+}
+
+nav{
+    padding: 0 1rem 0 1rem;
+}
+
+main{
+    margin: 1rem 1rem 1rem 1rem;
+    color: white;
+}
+
+#txt_welcome{
+    background-color: #111827;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    flex-direction: column;
+    padding-left: 2rem;
+
+}
+
+#txt_welcome > h2{
+    font-size: 1.25rem ;
+    line-height: 1.75rem ;
+    font: bold;
+    margin-bottom: 0.25rem;
+}
+
+#txt_welcome > p{
+    margin-top: 0.25rem;
+}
+
+section{
+    display: flex;
+    margin-top: 1rem;
+    gap: 1.25rem;
+    border-radius: 0.375rem;    
+}
+
+#desafios_container{
+    display: flex;
+    flex-direction: column;
+    background-color: #111827;
+    border-radius: 0.375rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+#crear_desafios{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 3rem 0.5rem 3rem;
+    border-bottom-width: 2px;
+    border-color: #d1d5db;
+    padding-bottom: 0.5rem;
+}
+
+#crear_desafios > h3{
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font: 600;
+}
+
+#crear_desafios > h3{
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+}
+
+#crear_desafios > #button{
+    background-color: #6366f1;
+    font-weight: bold;
+    border-radius: 0.3rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+#crear_desafios > #button:hover{
+    background-color: #b4b5c0;
+}
+
+#pag_desafios{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 4fr));
+    align-items: center;
+    gap: 1.5rem 0 1.5rem 0;
+    justify-content: center;
+    place-items: center;
+}

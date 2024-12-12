@@ -1,5 +1,5 @@
 <?php 
-include '../config/Conexion.php';
+include_once '../config/Conexion.php';
 
 class Functions extends Conexion{
 
@@ -131,6 +131,11 @@ class Functions extends Conexion{
         return $consulta->fetchColumn();
     }
     
+    public function getChallenge() {
+        $con = Conexion::Conectar();
+        $consulta = $con->query("SELECT * FROM challenges");
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 } 
 
