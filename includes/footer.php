@@ -1,4 +1,4 @@
-
+<!--<link rel="stylesheet" href="../assets/css/footer.css">-->
 
 <footer id="container" class="flex flex-col items-center justify-center bg-gray-900 text-gray-200 p-4">
     <!-- Texto de derechos reservados -->

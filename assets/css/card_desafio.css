@@ -1,11 +1,69 @@
-#container{
+*{
+    outline: 1px solid red;
+}
+
+#cart_desafios{
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #1f2937;
     border-radius: 0.5rem;
+    width: 83.333333%;
+}
+
+#cart_info{
+    display: flex;
+    flex-direction: column;
+}
+
+#cart_info #tittle_name_challenge{
+    font-weight: 700;
+    align-self: center;
+    border-radius: 0.125rem;
+    background-color: #4b5563;
+}
+
+#cart_info #cart_info_total_stage_name{
+    font-weight: 600;
+    word-break: break-all;
+    align-self: center;
+}
+#cart_info #cart_info_goal{
+    font-weight: 600;
+    word-break: break-all;
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+#image_container{
+    display: flex;
+    padding: 1rem;
+}
+
+#image_container img{
+    height: 11rem;
+    width: 11rem;
+    border-radius: 0.5rem;
+}
+
+#container_btn_cart_next_back{
+    display: flex;
+    justify-content: space-between;
+}
+
+#container_btn_cart_next_back #btn_cart{
+    background-color: #4f46e5;
     padding: 0.25rem;
-    column-gap: 0.25rem;
+    border-radius: 0.375rem;
+    font-weight: bold;
+}
+
+/*#container_df{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1f2937;
+    border-radius: 0.5rem;
     width: 83.333333%;
 }
 
@@ -22,7 +80,7 @@
     padding: 0.25rem;
 }
 
-#challenge_info > #p{
+#challenge_info p{
     font-weight: 600;
     word-break: break-all;
     align-self: center;

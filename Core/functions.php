@@ -123,19 +123,18 @@ class Functions extends Conexion{
         return $consulta->execute();
     }
     
-    public function getIdChallenge($name_challenge) {
-        $con = Conexion::Conectar();
-        $consulta = $con->prepare("SELECT id_challenge FROM challenges WHERE name_challenge = :name_challenge LIMIT 1");
-        $consulta->bindParam(':name_challenge', $name_challenge);
-        $consulta->execute();
-        return $consulta->fetchColumn();
-    }
-    
     public function getChallenge() {
         $con = Conexion::Conectar();
         $consulta = $con->query("SELECT * FROM challenges");
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+
+
+
+    //----------------Agregar Usuarios a los Desafios------------->
+    
 
 } 
 
