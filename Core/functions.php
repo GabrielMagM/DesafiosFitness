@@ -122,8 +122,6 @@ class Functions extends Conexion{
         $consulta->bindParam(':goal_stage', $goal_stage);
         return $consulta->execute();
     }
-
-    
     
     public function getChallenge() {
         $con = Conexion::Conectar();
@@ -131,7 +129,60 @@ class Functions extends Conexion{
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getIdChallenge($name_challenge) {
+        $con = Conexion::Conectar();
+        $consulta = $con->prepare("SELECT id_challenge FROM challenges WHERE name_challenge = :name_challenge LIMIT 1");
+        $consulta->bindParam(':name_challenge', $name_challenge);
+        $consulta->execute();
+        return $consulta->fetchColumn();
+    }
 
+    
+
+    public function getChallengesWithStages($id_challenge) {
+        try {
+            $con = Conexion::Conectar();
+            $sql = "SELECT 
+                        c.id AS challenge_id,
+                        c.name_challenge,
+                        c.imagen_url,
+                        c.total_stages,
+                        s.num_stage,
+                        s.name_stage,
+                        s.goal_stage
+                    FROM challenges AS c
+                    LEFT JOIN stages AS s ON c.id = s.id_challenge
+                    WHERE c.id = :id_challenge
+                    ORDER BY s.num_stage";
+            $consulta = $con->prepare($sql);
+            $consulta->bindParam(':id_challenge', $id_challenge);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener desafíos con etapas: " . $e->getMessage();
+            return [];
+        }
+    }
+    
+    public function getStagesByChallengeId($id_challenge) {
+        $con = Conexion::Conectar();
+        try {
+            // Obtener todas las etapas de un desafío específico
+            $consulta = $con->prepare("
+                SELECT id_stage, num_stage, name_stage, goal_stage
+                FROM stages
+                WHERE id_challenge = :id_challenge
+                ORDER BY num_stage
+            ");
+            $consulta->bindParam(':id_challenge', $id_challenge);
+            $consulta->execute();
+    
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener las etapas del desafío: " . $e->getMessage();
+            return [];
+        }
+    }
 
 
 

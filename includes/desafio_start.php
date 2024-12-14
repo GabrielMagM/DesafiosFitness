@@ -1,18 +1,4 @@
-<!--<link rel="stylesheet" href="../assets/css/card_desafio.css">-->
-<?php
-// Incluir el archivo con la función
-include_once '../Core/functions.php';
 
-$funciones = new Functions();
-$Challenges = $funciones->getChallenge();
-
-foreach ($Challenges as $Challenge): 
-  
-?>
-
-
-
-<?php endforeach; ?>
 
 <!--<div id="container" class="flex flex-col bg-gray-800 rounded-lg shadow-md p-1 items-center gap-y-1 w-10/12">
     <div id="challenge_info" class="flex flex-col w-5/6" >
