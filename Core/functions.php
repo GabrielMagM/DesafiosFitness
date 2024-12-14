@@ -128,7 +128,14 @@ class Functions extends Conexion{
         $consulta = $con->query("SELECT * FROM challenges");
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    public function getIdChallenge($name_challenge) {
+        $con = Conexion::Conectar();
+        $consulta = $con->prepare("SELECT id_challenge FROM challenges WHERE name_challenge = :name_challenge LIMIT 1");
+        $consulta->bindParam(':name_challenge', $name_challenge);
+        $consulta->execute();
+        return $consulta->fetchColumn();
+    }
+    
 
 
 
