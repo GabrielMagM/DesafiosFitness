@@ -84,7 +84,7 @@ class Functions extends Conexion{
     }
 
 
-    //------Aqui Estará la Seccion de Desafios-------------//
+    //------Aqui Estará la Seccion de challenges-------------//
 
     public function createChallenge($name_challenge, $image_url, $total_stages, $createdBy) {
         $con = Conexion::Conectar();
@@ -132,7 +132,7 @@ class Functions extends Conexion{
     }
 
     
-    //----------------Mostrar Desafios------------->
+    //----------------Mostrar challenges------------->
     
     public function getChallenge() {
         $con = Conexion::Conectar();
@@ -140,8 +140,29 @@ class Functions extends Conexion{
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function obtenerRetosPorDesafio($idDesafio, $idUsuario) {
-        
+    public function obtenerDesafioPorId($id_challenge) {
+        $con = Conexion::Conectar();
+        $consulta = $con->prepare("SELECT * FROM challenges WHERE id_challenge = :id_challenge");
+        $consulta->bindParam(':id_challenge', $id_challenge);
+        $consulta->execute();
+        return $consulta->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function getStagesByChallenge($id_challenge, $id_user) {
+        $con = Conexion::Conectar();
+        $consulta = $con->prepare("
+            SELECT c.id_stage, c.num_stage, c.name_stage, COALESCE(ur.completado, FALSE) AS completado, ur.fecha_completado
+            FROM retos c
+            LEFT JOIN usuarios_retos ur ON c.id_stage = ur.id_stage AND ur.id_usuario = :id_usuario
+            WHERE c.id_challenge = :id_challenge
+        ");
+        $consulta->bindParam(':id_challenge', $id_challenge);
+        $consulta->bindParam(':id_usuario', $id_user);
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+
 } 
 ?>

@@ -43,3 +43,15 @@ CREATE TABLE user_challenges (
   FOREIGN KEY (id_challenge) REFERENCES challenges(id_challenge) ON DELETE CASCADE
 );
 
+-- Creacion Tabla user_challenges
+CREATE TABLE user_stages (
+  id_user_stages INT PRIMARY KEY AUTO_INCREMENT,
+  id_user INT NOT NULL,
+  id_stage INT NOT NULL,
+  completed BOOLEAN DEFAULT FALSE,
+  start_date DATE DEFAULT NULL,
+  end_date DATE DEFAULT NULL,
+  FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE,
+  FOREIGN KEY (id_stage) REFERENCES challenges(id_stage) ON DELETE CASCADE
+);
+

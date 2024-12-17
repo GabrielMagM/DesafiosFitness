@@ -10,16 +10,16 @@ class Challenges {
         ));
     }
 
-    public function obtenerDesafios() {
-        return $this->client->obtenerDesafios();
+    public function getChallenge() {
+        return $this->client->getChallenge();
     }
 
-    public function obtenerDesafio($id_challenge) {
-        return $this->client->obtenerDesafio($idDesafio);
+    public function getChallengeById($id_challenge) {
+        return $this->client->getChallengeById($idDesafio);
     }
 
-    public function obtenerRetosPorDesafio($id_challenge, $id_user) {
-        return $this->client->obtenerRetosPorDesafio($id_challenge, $id_user);
+    public function getStagesByChallenge($id_challenge, $id_user) {
+        return $this->client->getStagesByChallenge($id_challenge, $id_user);
     }
 
 }
