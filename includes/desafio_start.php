@@ -1,26 +1,25 @@
 <?php
-session_start();
-include 'include/functions.php';
-include 'include/cliente-desafios.php';
+include_once '../Core/functions.php';
+include_once '../Core/client-challenge.php';
 
-$funciones = new Functions();
-$servicio = new Desafios();
+$function = new Functions();
+$service = new Challenge();
 
 if (!isset($_SESSION['email'])) {
     header('Location: login.php');
     exit;
 } else {
-    $nombre = $funciones->buscarUsuario($_SESSION['email']);
-    $idUsuario = $_SESSION['id_usuario'];
+    $name = $function->searchUser($_SESSION['email']);
+    $id_user = $_SESSION['id_user'];
 }
 
-$desafios = $servicio->obtenerDesafios();
+$challenge = $service->getChallenge();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_desafio'])) {
-    $idDesafio = $_POST['id_desafio'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_challenge'])) {
+    $id_challenge = $_POST['id_challenge'];
     
     if (isset($_POST['unirse'])) {
-        if ($funciones->unirseDesafio($idUsuario, $idDesafio)) {
+        if ($function->unirseDesafio($idUsuario, $idDesafio)) {
             $mensaje = "Te has unido al desafío exitosamente!";
             echo "<script>
                     setTimeout(function() {
@@ -31,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_desafio'])) {
             $mensaje_error = "Ya estás inscrito en este desafío.";
         }
     } elseif (isset($_POST['salir'])) {
-        if ($funciones->salirDesafio($idUsuario, $idDesafio)) {
+        if ($function->salirDesafio($idUsuario, $idDesafio)) {
             $mensaje = "Has salido del desafío exitosamente.";
         } else {
             $mensaje_error = "Hubo un problema al intentar salir del desafío.";
@@ -40,14 +39,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_desafio'])) {
 }
 ?>
 
+
 <!--<div id="container" class="flex flex-col bg-gray-800 rounded-lg shadow-md p-1 items-center gap-y-1 w-10/12">
     <div id="challenge_info" class="flex flex-col w-5/6" >
-        <h4 class=" font-semibold self-center rounded-sm bg-gray-600 p-1"><?php echo htmlspecialchars($name_challenge); ?></h4>
-        <p id="p" class=" font-bold break-all self-center">Etapa <?php echo htmlspecialchars($num_stage); ?> / <?php echo htmlspecialchars($total_stages); ?>: <?php echo htmlspecialchars($name_stage); ?></p>
-        <p class=" font-bold break-all text-xs"><?php echo htmlspecialchars($goal_stage); ?></p>
+        <h4 class=" font-semibold self-center rounded-sm bg-gray-600 p-1"> Desafio del Tiburon </h4>
+        <p id="p" class=" font-bold break-all self-center">Correr Hasta morir</p>
+        <p id="p" class=" font-bold break-all self-center">Etapas: 3</p>
     </div>
     <div id="image_container" class="flex" >
-        <img src="../assets/images/<?php echo htmlspecialchars($imagen_url); ?>" alt="" class="h-44 w-44 rounded-lg">
+        <img src="../assets/images/runing.webp" alt="" class="h-44 w-44 rounded-lg">
     </div>
-    <button class="bg-indigo-600 p-1 rounded-md font-bold">Unirse al Desafio</button>
-</div> -->
+
+    <div class="flex gap-2">
+        <form method="GET" action="seguimiento-desafio.php" style="display: inline;">
+            <input type="hidden" name="id_desafio" value="<?php echo $desafio['id_desafio']; ?>">
+            <button class="bg-slate-500 p-1 rounded-md font-bold" type="submit" class="btn-ver-retos">Ver Retos</button>
+        </form>
+
+        <form method="POST" action="desafios.php" style="display: inline;">
+            <input type="hidden" name="id_desafio" value="">
+            <button class="bg-indigo-600 p-1 rounded-md font-bold" type="submit" name="unirse" class="btn-unirse">Unirse al Desafío</button>
+        </form>
+    </div>
+</div>
+
+

@@ -132,7 +132,7 @@ class Functions extends Conexion{
     }
 
     
-    //----------------Mostrar challenges------------->
+    //----------------Mostrar challenges y Stages------------->
     
     public function getChallenge() {
         $con = Conexion::Conectar();
@@ -140,7 +140,7 @@ class Functions extends Conexion{
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function obtenerDesafioPorId($id_challenge) {
+    public function getChallengeById($id_challenge) {
         $con = Conexion::Conectar();
         $consulta = $con->prepare("SELECT * FROM challenges WHERE id_challenge = :id_challenge");
         $consulta->bindParam(':id_challenge', $id_challenge);
@@ -161,6 +161,44 @@ class Functions extends Conexion{
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+    //---------------Acciones Unirse, Mostrar, Salir-----------------------------
+    public function joinChallenge($idUser, $idChallenge) {
+        $con = Conexion::Conectar();
+        try {
+            // Iniciar transacción para garantizar que todo se ejecute correctamente
+            $con->beginTransaction();
+            // Insertar al usuario en el desafío (tabla user_challenges)
+            $consulta = $con->prepare("
+                INSERT INTO user_challenges (id_user, id_challenge, completed, start_date)
+                VALUES (:id_user, :id_challenge, 0, CURDATE())");
+            $consulta->execute([':id_user' => $idUser,':id_challenge' => $idChallenge]);
+            // Obtener todas las etapas (stages) asociadas al desafío
+            $consultarStages = $con->prepare("SELECT id_stage FROM stages WHERE id_challenge = :id_challenge");
+            $consultarStages>execute([':id_challenge' => $idChallenge]);
+            $stages = $consultarStages>fetchAll(PDO::FETCH_ASSOC);
+            // Insertar registros en user_stages para cada etapa (stage)
+            $queryUserStages = $con->prepare("
+                INSERT INTO user_stages (id_user, id_stage, completed, start_date)
+                VALUES (:id_user, :id_stage, 0, CURDATE())"
+            );
+            foreach ($stages as $stage) {
+                $queryUserStages->execute([':id_user' => $idUser,':id_stage' => $stage['id_stage']]);
+            }
+            // Confirmar la transacción
+            $con->commit();
+            return true;
+    
+        } catch (PDOException $e) {
+            // Revertir transacción en caso de error
+            $con->rollBack();
+            echo "Error al unirse al desafío: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    
 
 
 
