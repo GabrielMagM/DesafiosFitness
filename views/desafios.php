@@ -81,25 +81,24 @@ include '../Core/logout.php'
                         </script>
                     <?php endif; ?>
                 </div>
-                <!--Desafios Creados or la Pagina-->
-                <div id="pag_desafios" class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
+                <div id="" class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
                     <?php include '../includes/desafio_start.php' ?>
                 </div>
 
 
                 <!-- Desafios creados por el usuario -->
                 <div id="crear_desafios" class="flex justify-between items-center my-2 px-12 border-b border-gray-300 pb-2" >
-                    <h3 class="text-lg font-semibold self-center">Tus Desafios</h3>
+                    <h3 class="text-lg font-semibold ">Desafíos Recientes</h3>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
-                <?php include '../includes/desafio_user.php' ?>
+                    <?php include '../includes/desafio_all.php' ?>
                 </div>
                 <!-- Desafios creados por Otros Usuarios -->
-                <div id="crear_desafios" class="flex justify-between items-center my-2 px-12 border-b border-gray-300 pb-2">
-                    <h3 class="text-lg font-semibold  self-center">Desafíos Creados</h3>
+                <div id="crear_desafios" class="flex justify-between items-center my-2 px-12 border-b border-gray-300 pb-2" >
+                    <h3 class="text-lg font-semibold ">Desafíos Recientes</h3>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                    
+                <div class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
+                    <?php include '../includes/desafio_all.php' ?>
                 </div>
             </div>    
         </section>

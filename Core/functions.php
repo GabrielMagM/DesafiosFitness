@@ -45,6 +45,7 @@ class Functions extends Conexion{
 
 
     //SECCION PARA BUSCAR USUARIOS DENTRO DE LA BD
+    
     public function getUser($id_user)
     {
         $con = Conexion::Conectar();
