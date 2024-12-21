@@ -153,7 +153,7 @@ class Functions extends Conexion{
         try {
             $con = Conexion::Conectar();
             $consulta = $con->prepare("
-                SELECT c.id_stage, c.num_stage, c.name_stage, COALESCE(ur.completed, 0) AS completed, ur.start_date, ur.end_date
+                SELECT c.id_stage, c.num_stage, c.name_stage, c.goal_stage, COALESCE(ur.completed, 0) AS completed, ur.start_date, ur.end_date
                 FROM stages c
                 LEFT JOIN user_stages ur ON c.id_stage = ur.id_stage AND ur.id_user = :id_user
                 WHERE c.id_challenge = :id_challenge
@@ -169,7 +169,7 @@ class Functions extends Conexion{
 
 
     //---------------Acciones Unirse, Mostrar, Salir-----------------------------
-    public function joinChallenge($idUser, $idChallenge) {
+    public function joinChallenge($id_user, $id_challenge) {
         $con = Conexion::Conectar();
         try {
             // Iniciar transacción para garantizar que todo se ejecute correctamente
@@ -178,10 +178,10 @@ class Functions extends Conexion{
             $consulta = $con->prepare("
                 INSERT INTO user_challenges (id_user, id_challenge, completed, start_date)
                 VALUES (:id_user, :id_challenge, 0, CURDATE())");
-            $consulta->execute([':id_user' => $idUser,':id_challenge' => $idChallenge]);
+            $consulta->execute([':id_user' => $id_user,':id_challenge' => $id_challenge]);
             // Obtener todas las etapas (stages) asociadas al desafío
             $consultarStages = $con->prepare("SELECT id_stage FROM stages WHERE id_challenge = :id_challenge");
-            $consultarStages>execute([':id_challenge' => $idChallenge]);
+            $consultarStages>execute([':id_challenge' => $id_challenge]);
             $stages = $consultarStages>fetchAll(PDO::FETCH_ASSOC);
             // Insertar registros en user_stages para cada etapa (stage)
             $queryUserStages = $con->prepare("
@@ -189,7 +189,7 @@ class Functions extends Conexion{
                 VALUES (:id_user, :id_stage, 0, CURDATE())"
             );
             foreach ($stages as $stage) {
-                $queryUserStages->execute([':id_user' => $idUser,':id_stage' => $stage['id_stage']]);
+                $queryUserStages->execute([':id_user' => $id_user,':id_stage' => $stage['id_stage']]);
             }
             // Confirmar la transacción
             $con->commit();

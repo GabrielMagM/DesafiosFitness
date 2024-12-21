@@ -5,15 +5,15 @@ class Conexion {
         $host = "localhost";
         $baseDeDatos = 'fitness_app';
         $usuario = 'root';
-        $contrasena = "";
+        $contrasena = "newpassword";
 
         try {
             // Crear la conexión con PDO
-            $conexion = new PDO("mysql:host=$host;dbname=$baseDeDatos;charset=utf8", $usuario, $contrasena);
+            $con = new PDO("mysql:host=$host;dbname=$baseDeDatos;charset=utf8", $usuario, $contrasena);
 
             // Configurar PDO para que lance excepciones en caso de error
-            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $conexion;
+            $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $con;
         } catch (PDOException $e) {
             // Manejar el error de conexión
             echo "Error de conexión: " . $e->getMessage();

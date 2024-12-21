@@ -5,13 +5,6 @@ include_once '../Core/client-challenge.php';
 $function = new Functions();
 $service = new Challenges();
 
-if (!isset($_SESSION['email'])) {
-    header('Location: login.php');
-    exit;
-} else {
-    $name = $function->searchUser($_SESSION['email']);
-    $id_user = $_SESSION['id_user'];
-}
 
 $challenges = $service->getChallenges();
 

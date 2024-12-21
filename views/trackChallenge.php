@@ -2,8 +2,13 @@
 session_start();
 include_once '../Core/functions.php';
 include_once '../Core/client-challenge.php';
-
 $user = new Functions();
+
+if (!isset($_SESSION['email'])) {
+    header('Location: login.php');
+    exit;
+}
+
 $id_user = $_SESSION['id_user'];
 $id_challenge = $_GET['id_challenge'];
 
@@ -26,7 +31,7 @@ try {
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
-<body class="bg-slate-800 text-white font-sans leading-normal tracking-normal">
+<body class="bg-slate-800 text-white font-sans leading-normal tracking-normal outline-1">
     <!-- Encabezado -->
     <nav>
         <?php if (isset($_SESSION['email'])): ?>
@@ -39,33 +44,36 @@ try {
     <!-- Contenido Principal -->
     <main class="mx-6 my-4">
         <section id="txt_welcome" class="bg-gray-900 p-6 rounded-lg shadow-md">
-        <div class="main-container">
-        <div class="seguimiento-container">
-            <div class="mensajes">
-                <?php if (isset($mensaje)) echo "<p style='color: green;'>$mensaje</p>";
-                      elseif (isset($mensaje_error)) echo "<p style='color: red;'>$mensaje_error</p>"; ?>
-            </div>
-            <h2><?php echo htmlspecialchars($challenge['name_challenge']); ?></h2>
-            <p><strong>Etapas :</strong> <?php echo htmlspecialchars($challenge['total_stages']); ?></p>
+            <div class="main-container flex justify-center items-center">
+                <div class="flex flex-col seguimiento-container bg-slate-800 p-4 justify-center rounded-md items-center gap-3">
+                    <div class="mensajes">
+                        <?php if (isset($mensaje)) echo "<p style='color: green;'>$mensaje</p>";
+                            elseif (isset($mensaje_error)) echo "<p style='color: red;'>$mensaje_error</p>"; ?>
+                    </div>
+                    
+                    <h1 class="self-center justify-self-center text-3xl"><?php echo htmlspecialchars($challenge['name_challenge']); ?></h1>
+                    <p class="self-center justify-self-center text-xl"><strong>Etapas :</strong> <?php echo htmlspecialchars($challenge['total_stages']); ?></p>
 
-            <h3>Retos del Desafío</h3>
-            <ul class="retos-lista">
-                <?php foreach ($stages as $stage): ?>
-                <li class="reto-item ">
-                    <span><?php echo htmlspecialchars($stage['name_stage']); ?></span>
-                </li>
-                <?php endforeach; ?>
-            </ul>
-
-            <div class="botones-accion">
-                <!-- Botón para regresar a la página anterior -->
-                <div class="boton">
-                    <button onclick="history.go(-1)">← Regresar</button>
+                    <h2 class="text-xl">Retos del Desafío</h2>
+                    <ul class="retos-lista">
+                        <?php foreach ($stages as $stage): ?>
+                        <li class="reto-item shadow-md bg-slate-900 mb-2 text-xl py-1 px-2 rounded-md">
+                            <span>Reto: <?php echo htmlspecialchars($stage['num_stage']); ?> :</span>
+                            <span><?php echo htmlspecialchars($stage['name_stage']); ?></span>
+                            <span><?php echo htmlspecialchars($stage['goal_stage']); ?></span>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <img src="../assets/images/<?php echo htmlspecialchars($challenge['imagen_url']);?>" alt="" class="h-64 w-60 rounded-lg">
+                    <div class="botones-accion">
+                        <!-- Botón para regresar a la página anterior -->
+                        <div class="boton">
+                            <button class=" bg-lime-700 py-1 px-3 rounded-md" onclick="history.go(-1)">← Regresar</button>
+                        </div>
+                        <!-- Botón para salirse del desafío -->
+                    </div>
                 </div>
-                <!-- Botón para salirse del desafío -->
             </div>
-        </div>
-    </div>
         </section>
     </main>
 

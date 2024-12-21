@@ -1,9 +1,9 @@
 <?php
-
 session_start();
 include_once '../Core/functions.php';
 
 $user = new Functions();
+
 // Lógica para cerrar sesión
 include '../Core/logout.php'
 ?>
