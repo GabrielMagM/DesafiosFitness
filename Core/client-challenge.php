@@ -10,12 +10,12 @@ class Challenges {
         ));
     }
 
-    public function getChallenge() {
-        return $this->client->getChallenge();
+    public function getChallenges() {
+        return $this->client->getChallenges();
     }
 
-    public function getChallengeById($id_challenge) {
-        return $this->client->getChallengeById($idDesafio);
+    public function getChallenge($id_challenge) {
+        return $this->client->getChallenge($id_challenge);
     }
 
     public function getStagesByChallenge($id_challenge, $id_user) {

@@ -13,8 +13,8 @@ class ServiciosDesafios {
     }
 
     // Obtener todos los desafíos
-    public function getChallenge() {
-        $challenges = $this->functions->getChallenge();
+    public function getChallenges() {
+        $challenges = $this->functions->getChallenges();
         if ($challenges) {
             return $challenges;
         } else {
@@ -23,7 +23,7 @@ class ServiciosDesafios {
     }
 
     // Obtener desafíos por ID
-    public function getChallengeById($id_challenge) {
+    public function getChallenge($id_challenge) {
         $challenge = $this->functions->getChallengeById($id_challenge);
         if ($challenge) {
             return $challenge;
@@ -46,7 +46,7 @@ class ServiciosDesafios {
 }
 
 // Configurar y manejar el servidor SOAP
-$options = array('uri' => "http://localhost/parcial3/include/servicio-challenges.php");
+$options = array('uri' => "http://localhost/PHP/DesafiosFitness/Core/service-challenge.php");
 $server = new SoapServer(null, $options);
 $server->setClass('ServiciosDesafios');
 

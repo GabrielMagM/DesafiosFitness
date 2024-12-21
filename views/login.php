@@ -78,7 +78,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
                     <!-- Redirección automática usando JavaScript -->
                     <script>
                     setTimeout(function() {
-                        window.location.href = "dashboard.php";
+                        window.location.href = "index.php";
                     }, 2000); // Redirige después de 2 segundos
                     </script>
                     <?php else: ?>

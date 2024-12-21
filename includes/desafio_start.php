@@ -13,7 +13,7 @@ if (!isset($_SESSION['email'])) {
     $id_user = $_SESSION['id_user'];
 }
 
-$challenges = $service->getChallenge();
+$challenges = $service->getChallenges();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_challenge'])) {
     $id_challenge = $_POST['id_challenge'];
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_challenge'])) {
             $mensaje = "Te has unido al desafío exitosamente!";
             echo "<script>
                     setTimeout(function() {
-                        window.location.href = 'seguimiento-desafio.php?id_desafio=$id_challenge';
+                        window.location.href = 'trackChallenge.php?id_challenge=$id_challenge';
                     }, 1000);
                   </script>";
         } else {
@@ -54,13 +54,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_challenge'])) {
             <img src="../assets/images/<?php echo htmlspecialchars($challenge['imagen_url']);?>" alt="" class="h-44 w-44 rounded-lg">
         </div>
         <div class="flex gap-2">
-            <form method="GET" action="../views/seguimiento-desafio.php" style="display: inline;">
-                <input type="hidden" name="id_desafio" value="<?php echo $desafio['id_desafio']; ?>">
+            <form method="GET" action="../views/trackChallenge.php" style="display: inline;">
+                <input type="hidden" name="id_challenge" value="<?php echo $challenge['id_challenge']; ?>">
                 <button class="bg-slate-500 p-1 rounded-md font-bold" type="submit" class="btn-ver-retos">Ver Retos</button>
             </form>
 
             <form method="POST" action="desafios.php" style="display: inline;">
-                <input type="hidden" name="id_desafio" value="">
+                <input type="hidden" name="id_challenge" value="">
                 <button class="bg-indigo-600 p-1 rounded-md font-bold" type="submit" name="unirse" class="btn-unirse">Unirse al Desafío</button>
             </form>
         </div>

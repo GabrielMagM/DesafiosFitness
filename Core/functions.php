@@ -135,7 +135,7 @@ class Functions extends Conexion{
     
     //----------------Mostrar challenges y Stages------------->
     
-    public function getChallenge() {
+    public function getChallenges() {
         $con = Conexion::Conectar();
         $consulta = $con->query("SELECT * FROM challenges");
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -150,17 +150,21 @@ class Functions extends Conexion{
     }
 
     public function getStagesByChallenge($id_challenge, $id_user) {
-        $con = Conexion::Conectar();
-        $consulta = $con->prepare("
-            SELECT c.id_stage, c.num_stage, c.name_stage, COALESCE(ur.completado, FALSE) AS completado, ur.fecha_completado
-            FROM retos c
-            LEFT JOIN usuarios_retos ur ON c.id_stage = ur.id_stage AND ur.id_usuario = :id_usuario
-            WHERE c.id_challenge = :id_challenge
-        ");
-        $consulta->bindParam(':id_challenge', $id_challenge);
-        $consulta->bindParam(':id_usuario', $id_user);
-        $consulta->execute();
-        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $con = Conexion::Conectar();
+            $consulta = $con->prepare("
+                SELECT c.id_stage, c.num_stage, c.name_stage, COALESCE(ur.completed, 0) AS completed, ur.start_date, ur.end_date
+                FROM stages c
+                LEFT JOIN user_stages ur ON c.id_stage = ur.id_stage AND ur.id_user = :id_user
+                WHERE c.id_challenge = :id_challenge
+            ");
+            $consulta->bindParam(':id_challenge', $id_challenge, PDO::PARAM_INT);
+            $consulta->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new Exception("Error al obtener los retos: " . $e->getMessage());
+        }
     }
 
 
@@ -198,6 +202,9 @@ class Functions extends Conexion{
             return false;
         }
     }
+
+
+    
 
     
 
