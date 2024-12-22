@@ -30,6 +30,13 @@ try {
     <title>Desafíos Fitness</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        .bebas-neue-regular {
+            font-family: "Bebas Neue", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
 </head>
 <body class="bg-slate-800 text-white font-sans leading-normal tracking-normal outline-1">
     <!-- Encabezado -->
@@ -43,28 +50,28 @@ try {
 
     <!-- Contenido Principal -->
     <main class="mx-6 my-4">
-        <section id="txt_welcome" class="bg-gray-900 p-6 rounded-lg shadow-md">
+        <section id="txt_welcome" class="bg-gray-900 p-3 rounded-lg shadow-md">
             <div class="main-container flex justify-center items-center">
-                <div class="flex flex-col seguimiento-container bg-slate-800 p-4 justify-center rounded-md items-center gap-3">
+                <div class="flex flex-col seguimiento-container bg-slate-800 p-2 justify-center rounded-md items-center gap-1">
                     <div class="mensajes">
                         <?php if (isset($mensaje)) echo "<p style='color: green;'>$mensaje</p>";
                             elseif (isset($mensaje_error)) echo "<p style='color: red;'>$mensaje_error</p>"; ?>
                     </div>
                     
-                    <h1 class="self-center justify-self-center text-3xl"><?php echo htmlspecialchars($challenge['name_challenge']); ?></h1>
-                    <p class="self-center justify-self-center text-xl"><strong>Etapas :</strong> <?php echo htmlspecialchars($challenge['total_stages']); ?></p>
+                    <h1 class="font-bold self-center justify-self-center"><?php echo htmlspecialchars($challenge['name_challenge']); ?></h1>
+                    <p class="self-center justify-self-center"><strong>Cantidad de Etapas :</strong> <?php echo htmlspecialchars($challenge['total_stages']); ?></p>
 
-                    <h2 class="text-xl">Retos del Desafío</h2>
+                    <h2 class="">Retos del Desafío</h2>
                     <ul class="retos-lista">
                         <?php foreach ($stages as $stage): ?>
-                        <li class="reto-item shadow-md bg-slate-900 mb-2 text-xl py-1 px-2 rounded-md">
+                        <li class="text-sm reto-item shadow-md bg-slate-900 mb-2 py-1 px-2 rounded-md">
                             <span>Reto: <?php echo htmlspecialchars($stage['num_stage']); ?> :</span>
                             <span><?php echo htmlspecialchars($stage['name_stage']); ?></span>
                             <span><?php echo htmlspecialchars($stage['goal_stage']); ?></span>
                         </li>
                         <?php endforeach; ?>
                     </ul>
-                    <img src="../assets/images/<?php echo htmlspecialchars($challenge['imagen_url']);?>" alt="" class="h-64 w-60 rounded-lg">
+                    <img src="../assets/images/<?php echo htmlspecialchars($challenge['imagen_url']);?>" alt="" class="h-56 w-52 rounded-lg">
                     <div class="botones-accion">
                         <!-- Botón para regresar a la página anterior -->
                         <div class="boton">

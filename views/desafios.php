@@ -20,7 +20,7 @@ include '../Core/logout.php'
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         *{
-           
+           outline: 1px solid red;
         }
        
         .bebas-neue-regular {
@@ -54,8 +54,8 @@ include '../Core/logout.php'
 
     <!-- Contenido Principal -->
     <main class="mx-6 mb-2 mt-2 text-white">
-        <section id="txt_welcome" class="bg-gray-900 p-6 rounded-lg shadow-md">
-            <h2 class=" text-xl font-semibold mb-4 ">Bienvenido a los Desafíos Fitness</h2>        
+        <section id="txt_welcome" class="bg-gray-900 p-4 rounded-lg shadow-md text-md">
+            <h2 class="font-semibold mb-4 ">Bienvenido a los Desafíos Fitness</h2>        
             <p class="mt-4 ">Algunos desafíos para mejorar tu condición física. Únete y mantente motivado.</p>
         </section>
 
@@ -66,10 +66,10 @@ include '../Core/logout.php'
 
             <div id="desafios_container" class="flex flex-col bg-gray-900 rounded-md w-full">
                 <div id="crear_desafios" class="flex justify-between items-center my-2 px-12 border-b border-gray-300 pb-2" >
-                    <h3 class="text-lg font-semibold ">Desafíos Recientes</h3>
+                    <h3 class="font-semibold ">Desafíos de la WEb</h3>
                     <?php if (isset($_SESSION['email'])): ?>
             <!-- Si el usuario está registrado, permite crear un desafío -->
-                        <button id="button" onclick="window.location.href='crear_desafio.php'" class="bg-indigo-500 font-bold rounded-lg px-4 py-2">Crear un Desafío</button>
+                        <button id="button" onclick="window.location.href='crear_desafio.php'" class="bg-indigo-500 font-bold rounded-lg px-2 py-2 text-sm">Crear un Desafío</button>
                     <?php else: ?>
                         <!-- Si el usuario no está registrado, muestra el mensaje de alerta y redirige a login.php -->
                         <button id="button" onclick="alertaIniciarSesion()" class="bg-indigo-500 font-bold rounded-lg px-4 py-1">Crear un Desafío</button>
@@ -88,14 +88,14 @@ include '../Core/logout.php'
 
                 <!-- Desafios creados por el usuario -->
                 <div id="crear_desafios" class="flex justify-between items-center my-2 px-12 border-b border-gray-300 pb-2" >
-                    <h3 class="text-lg font-semibold ">Desafíos Recientes</h3>
+                    <h3 class="font-semibold ">Desafíos del Usuario</h3>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
                     <?php include '../includes/desafio_all.php' ?>
                 </div>
                 <!-- Desafios creados por Otros Usuarios -->
                 <div id="crear_desafios" class="flex justify-between items-center my-2 px-12 border-b border-gray-300 pb-2" >
-                    <h3 class="text-lg font-semibold ">Desafíos Recientes</h3>
+                    <h3 class="font-semibold ">Desafíos de Otros</h3>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-4 items-center gap-y-6 justify-center place-items-center">
                     <?php include '../includes/desafio_all.php' ?>

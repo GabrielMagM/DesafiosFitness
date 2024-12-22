@@ -40,9 +40,9 @@ include '../Core/logout.php';
 
     <!-- Contenido Principal -->
     <main id="main" class="mt-4 m-0">
-        <section id="section" class="flex flex-col p-6 rounded-lg shadow-md">
-            <h2 id="h2_titulo" class="text-xl font-semibold mb-4 ">Bienvenido a los Desafíos Fitness</h2>        
-            <p id="txt_welcome" class="mt-4">Aquí encontrarás una variedad de desafíos para mejorar tu condición física. Únete y mantente motivado.</p>
+        <section id="section" class="flex flex-col p-6 rounded-lg shadow-md text-md">
+            <h2 id="h2_titulo" class="font-semibold px-2">Bienvenido a los Desafíos Fitness</h2>        
+            <p id="txt_welcome" class="mt-4 px-2">Aquí encontrarás una variedad de desafíos para mejorar tu condición física. Únete y mantente motivado.</p>
             <br>
             <!-- Carrusel -->
             <div id="carousel_container" class="relative w-full h-[500px] overflow-hidden rounded-lg shadow-md">

@@ -4,9 +4,9 @@
     <div id="h_container" class="flex flex-wrap justify-between items-center px-12">
         <img id="logo" src="../assets/images/Siiiu.png" alt="Logo" class="h-14">
         <nav id="ul" class="flex justify-between gap-6">
-            <a href="index.php" class="text-white hover:underline bebas-neue-regular text-2xl m-3">Inicio</a>
-            <a href="desafios.php" class="text-white hover:underline bebas-neue-regular text-2xl m-3">Desafíos</a>
-            <a href="#" class="text-white hover:underline bebas-neue-regular text-2xl m-3">Informe</a>
+            <a href="index.php" class="text-white hover:underline bebas-neue-regular text-xl m-3">Inicio</a>
+            <a href="desafios.php" class="text-white hover:underline bebas-neue-regular text-xl m-3">Desafíos</a>
+            <a href="#" class="text-white hover:underline bebas-neue-regular text-xl m-3">Informe</a>
         </nav>
         <div id="h-container2" class="flex items-center gap-4">
             <div id="perfil_container" class="relative group">

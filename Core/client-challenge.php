@@ -4,14 +4,20 @@ class Challenges {
 
     public function __construct() {
         $this->client = new SoapClient(null, array(
-            'location' => "http://localhost/DesafiosFitness/DesafiosFitness/Core/service-challenge.php",
-            'uri'      => "http://localhost/DesafiosFitness/DesafiosFitness/Core/service-challenge.php",
+            'location' => "http://localhost/PHP/DesafiosFitness/Core/service-challenge.php",
+            'uri'      => "http://localhost/PHP/DesafiosFitness/Core/service-challenge.php",
             'trace'    => 1,
         ));
     }
 
     public function getChallenges() {
-        return $this->client->getChallenges();
+        try {
+            return $this->client->getChallenges();
+        } catch (SoapFault $e) {
+            // Maneja el error de la forma que necesites
+            echo "Error en la consulta: " . $e->getMessage();
+            return null; // Devuelve null en caso de error
+        }
     }
 
     public function getChallenge($id_challenge) {
