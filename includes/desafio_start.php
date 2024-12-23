@@ -6,22 +6,49 @@ $function = new Functions();
 $service = new Challenges();
 
 try {
-    // Intentamos obtener los desafíos
-    $challenges = $service->getChallenges();
-} catch (SoapFault $e) {
-    // Si hay un error (como no hay desafíos), mostramos un mensaje amigable
+    $id_user = $_SESSION['id_user'] ?? null; // Obtén el ID del usuario desde la sesión
+    if (!$id_user) {
+        throw new Exception("Usuario no autenticado.");
+    }
+    // Obtener solo los desafíos disponibles para el usuario
+    $challenges = $service->getAvailableChallenges($id_user);
+} catch (Exception $e) {
     $challenges = null; // Indicamos que no hay desafíos
-    $errorMessage = "No hay desafíos disponibles en este momento. ¡Vuelve más tarde!";
+    $errorMessage = $e->getMessage();
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_challenge'])) {
+    $id_user = $_SESSION['id_user'] ?? null; // Asegúrate de que el usuario esté autenticado
+    $id_challenge = $_POST['id_challenge'];
+    $challenge_name = $_POST['challenge_name'] ?? 'el desafío'; // Pasar el nombre del desafío desde el formulario
+    
+    if ($id_user && isset($_POST['unirse'])) {
+        $result = $function->joinChallenge($id_user, $id_challenge);
+        if ($result) {
+            $mensaje = "Te has unido al desafío exitosamente!";
+            echo "<script>
+                    alert('¡Te has unido al desafío \"$challenge_name\" exitosamente!');
+                    setTimeout(function() {
+                        window.location.href = 'desafios.php';
+                    }, 1000);
+                  </script>";
+        } else {
+            $mensaje_error = "Hubo un error al unirse al desafío.";
+        }
+    } else {
+        $mensaje_error = "Por favor, inicia sesión primero.";
+    }
+}
+
 ?>
 
 <?php if ($challenges === null): ?>
     <!-- Mostrar mensaje si no hay desafíos disponibles -->
-    <p class="text-red-500"><?php echo isset($errorMessage) ? htmlspecialchars($errorMessage) : "No se pudieron cargar los desafíos."; ?></p>
+        <p class="ml-20 my-5 p-2 w-5/6"><?php echo isset($errorMessage) ? htmlspecialchars($errorMessage) : "No Hay Desafios Disponibles"; ?></p>  
 <?php else: ?>
     <!-- Si hay desafíos, mostramos la lista -->
     <?php foreach ($challenges as $challenge): ?>
-        <div id="container" class="flex flex-col bg-gray-800 rounded-lg shadow-md p-2 items-center gap-y-1 w-3/4 text-xs">
+        <div id="container" class="flex flex-col bg-gray-800 rounded-lg shadow-md p-2 items-center gap-y-1 w-3/4 text-xs my-2">
             <div id="challenge_info" class="flex flex-col w-5/6">
                 <h4 class=" font-semibold self-center rounded-sm bg-gray-600 p-1"> <?php echo htmlspecialchars($challenge['name_challenge']); ?></h4>
                 <p id="p" class="font-bold break-all self-center">Etapas: <?php echo htmlspecialchars($challenge['total_stages']); ?></p>
@@ -41,7 +68,8 @@ try {
                 </form>
 
                 <form method="POST" action="desafios.php" style="display: inline;">
-                    <input type="hidden" name="id_challenge" value="">
+                    <input type="hidden" name="id_challenge" value="<?php echo $challenge['id_challenge']; ?>">
+                    <input type="hidden" name="challenge_name" value="<?php echo htmlspecialchars($challenge['name_challenge']); ?>">
                     <button class="text-xs bg-indigo-600 p-1 rounded-md font-bold" type="submit" name="unirse" class="btn-unirse">Unirse al Desafío</button>
                 </form>
             </div>

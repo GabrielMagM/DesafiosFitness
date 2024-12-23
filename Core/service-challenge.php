@@ -13,8 +13,8 @@ class ServiciosDesafios {
     }
 
     // Obtener todos los desafíos
-    public function getChallenges() {
-        $challenges = $this->functions->getChallenges();
+    public function getAvailableChallenges($id_user) {
+        $challenges = $this->functions->getAvailableChallenges($id_user);
         if ($challenges) {
             return $challenges;
         } else {

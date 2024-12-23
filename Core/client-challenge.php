@@ -10,12 +10,12 @@ class Challenges {
         ));
     }
 
-    public function getChallenges() {
+    public function getAvailableChallenges($id_user) {
         try {
-            return $this->client->getChallenges();
+            return $this->client->getAvailableChallenges($id_user);
         } catch (SoapFault $e) {
             // Maneja el error de la forma que necesites
-            echo "Error en la consulta: " . $e->getMessage();
+            //echo " " . $e->getMessage();
             return null; // Devuelve null en caso de error
         }
     }

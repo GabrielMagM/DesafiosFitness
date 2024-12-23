@@ -167,34 +167,69 @@ class Functions extends Conexion{
         }
     }
 
+    public function getAvailableChallenges($id_user) {
+        $con = Conexion::Conectar();
+        $consulta = $con->prepare("
+            SELECT * 
+            FROM challenges 
+            WHERE id_challenge NOT IN (SELECT id_challenge FROM user_challenges WHERE id_user = :id_user)
+        ");
+        $consulta->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getJoinedChallenges($id_user) {
+        $con = Conexion::Conectar();
+        $consulta = $con->prepare("
+            SELECT c.* 
+            FROM challenges c
+            JOIN user_challenges uc ON c.id_challenge = uc.id_challenge
+            WHERE uc.id_user = :id_user
+        ");
+        $consulta->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     //---------------Acciones Unirse, Mostrar, Salir-----------------------------
     public function joinChallenge($id_user, $id_challenge) {
         $con = Conexion::Conectar();
         try {
-            // Iniciar transacción para garantizar que todo se ejecute correctamente
+            // Verificar si el usuario ya está inscrito en el desafío
+            $verificarInscripcion = $con->prepare("
+                SELECT COUNT(*) FROM user_challenges WHERE id_user = :id_user AND id_challenge = :id_challenge
+            ");
+            $verificarInscripcion->execute([':id_user' => $id_user, ':id_challenge' => $id_challenge]);
+            $inscrito = $verificarInscripcion->fetchColumn();
+    
+            if ($inscrito > 0) {
+                // Si ya está inscrito, devolvemos un mensaje o false
+                return "Ya estás inscrito en este desafío.";
+            }
+            // Iniciar transacción
             $con->beginTransaction();
             // Insertar al usuario en el desafío (tabla user_challenges)
             $consulta = $con->prepare("
                 INSERT INTO user_challenges (id_user, id_challenge, completed, start_date)
                 VALUES (:id_user, :id_challenge, 0, CURDATE())");
-            $consulta->execute([':id_user' => $id_user,':id_challenge' => $id_challenge]);
+            $consulta->execute([':id_user' => $id_user, ':id_challenge' => $id_challenge]);
             // Obtener todas las etapas (stages) asociadas al desafío
             $consultarStages = $con->prepare("SELECT id_stage FROM stages WHERE id_challenge = :id_challenge");
-            $consultarStages>execute([':id_challenge' => $id_challenge]);
-            $stages = $consultarStages>fetchAll(PDO::FETCH_ASSOC);
+            $consultarStages->execute([':id_challenge' => $id_challenge]);
+            $stages = $consultarStages->fetchAll(PDO::FETCH_ASSOC);
+    
             // Insertar registros en user_stages para cada etapa (stage)
             $queryUserStages = $con->prepare("
                 INSERT INTO user_stages (id_user, id_stage, completed, start_date)
                 VALUES (:id_user, :id_stage, 0, CURDATE())"
             );
             foreach ($stages as $stage) {
-                $queryUserStages->execute([':id_user' => $id_user,':id_stage' => $stage['id_stage']]);
+                $queryUserStages->execute([':id_user' => $id_user, ':id_stage' => $stage['id_stage']]);
             }
             // Confirmar la transacción
             $con->commit();
             return true;
-    
         } catch (PDOException $e) {
             // Revertir transacción en caso de error
             $con->rollBack();
@@ -202,6 +237,7 @@ class Functions extends Conexion{
             return false;
         }
     }
+    
 
 
     
