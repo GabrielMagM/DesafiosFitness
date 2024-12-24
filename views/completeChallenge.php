@@ -20,6 +20,24 @@ try {
     echo "Error al obtener los datos: " . $e->getMessage();
     exit;
 }
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_stage'])) {
+    $id_stage = $_POST['id_stage'];
+    $fechaUltimaCompletado = $user->obtenerFechaCompletado($id_user, $id_stage);
+    $ahora = new DateTime();
+    $intervalo = $fechaUltimaCompletado ? $ahora->diff(new DateTime($fechaUltimaCompletado)) : null;
+
+    // Verifica si ha pasado el tiempo de espera de 10 segundos
+    if (!$intervalo || $intervalo->s >= 10 || $intervalo->i >= 1) { // Incluir minutos para asegurar
+        $user->completarReto($id_user, $id_stage); // Marcar el reto como completado
+        header("Location: seguimiento-desafio.php?id_challenge=$id_challenge");
+        exit;
+    } else {
+        $mensaje_error = "Debes esperar 10 segundos para marcar este reto como completado nuevamente.";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -69,6 +87,17 @@ try {
                             <span><?php echo htmlspecialchars($stage['name_stage']); ?></span>
                             <span><?php echo htmlspecialchars($stage['goal_stage']); ?></span>
                         </li>
+
+                        <?php if (!$reto['completado'] && $puedeCompletar && $usuario->usuarioInscritoEnDesafio($idUsuario, $idDesafio)): ?>
+                            <form action="seguimiento-desafio.php?id_desafio=<?php echo $idDesafio; ?>" method="POST"
+                                class="completar-form">
+                                <input type="hidden" name="id_reto" value="<?php echo $reto['id_reto']; ?>">
+                                <button type="submit" class="btn-completar">Marcar como Completado</button>
+                            </form>
+                            <?php elseif ($reto['completado'] === 1 ): ?>
+                                <span class="completado-texto">Completado</span>
+                        <?php endif; ?>
+
                         <?php endforeach; ?>
                     </ul>
                     <img src="../assets/images/<?php echo htmlspecialchars($challenge['imagen_url']);?>" alt="" class="h-56 w-52 rounded-lg">

@@ -20,6 +20,9 @@ try {
     $challenges = null;
     $errorMessage = $e->getMessage();
 }
+
+
+
 ?>
 
 <div id="sidebar_container" class="bg-gray-900 text-white w-96 rounded-md">
@@ -32,7 +35,7 @@ try {
         <?php else: ?>
             <?php foreach ($challenges as $challenge): ?>
                 <li class="mb-3 bg-gray-700 rounded">
-                    <form method="GET" action="seguimiento-desafios.php" style="display:inline;">
+                    <form method="GET" action="completeChallenge.php" style="display:inline;">
                         <input type="hidden" name="id_challenge" value="<?php echo $challenge['id_challenge']; ?>">
                         <button type="submit" class="flex text-left w-full bg-transparent border-none text-white p-2 gap-x-2">
                             <img src="../assets/images/<?php echo htmlspecialchars($challenge['imagen_url']);?>" alt="" class=" w-6 h-6 rounded-sm">
