@@ -31,9 +31,14 @@ try {
             <li class="text-gray-400">No te has unido a ningún desafío.</li>
         <?php else: ?>
             <?php foreach ($challenges as $challenge): ?>
-                <li class="flex flex-column mb-2 gap-x-2 p-2 bg-gray-700 rounded cursor-pointer" onclick="openModal(<?php echo $challenge['id_challenge']; ?>)">
-                    <img src="../assets/images/<?php echo htmlspecialchars($challenge['imagen_url']);?>" alt="" class=" w-6 h-6 rounded-sm">
-                    <?php echo htmlspecialchars($challenge['name_challenge']); ?>
+                <li class="mb-3 bg-gray-700 rounded">
+                    <form method="GET" action="seguimiento-desafios.php" style="display:inline;">
+                        <input type="hidden" name="id_challenge" value="<?php echo $challenge['id_challenge']; ?>">
+                        <button type="submit" class="flex text-left w-full bg-transparent border-none text-white p-2 gap-x-2">
+                            <img src="../assets/images/<?php echo htmlspecialchars($challenge['imagen_url']);?>" alt="" class=" w-6 h-6 rounded-sm">
+                            <?php echo htmlspecialchars($challenge['name_challenge']); ?>
+                        </button>
+                    </form>
                 </li>
             <?php endforeach; ?>
         <?php endif; ?>
