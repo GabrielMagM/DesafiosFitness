@@ -17,6 +17,7 @@ try {
     $errorMessage = $e->getMessage();
 }
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_challenge'])) {
     $id_user = $_SESSION['id_user'] ?? null; // Asegúrate de que el usuario esté autenticado
     $id_challenge = $_POST['id_challenge'];
