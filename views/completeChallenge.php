@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_stage'])) {
     // Verifica si ha pasado el tiempo de espera de 10 segundos
     if (!$intervalo || $intervalo->s >= 10 || $intervalo->i >= 1) { // Incluir minutos para asegurar
         $user->completarReto($id_user, $id_stage); // Marcar el reto como completado
-        header("Location: seguimiento-desafio.php?id_challenge=$id_challenge");
+        header("Location: completeChallenge.php?id_challenge=$id_challenge");
         exit;
     } else {
         $mensaje_error = "Debes esperar 10 segundos para marcar este reto como completado nuevamente.";
@@ -88,13 +88,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_stage'])) {
                             <span><?php echo htmlspecialchars($stage['goal_stage']); ?></span>
                         </li>
 
-                        <?php if (!$reto['completado'] && $puedeCompletar && $usuario->usuarioInscritoEnDesafio($idUsuario, $idDesafio)): ?>
-                            <form action="seguimiento-desafio.php?id_desafio=<?php echo $idDesafio; ?>" method="POST"
+                        <?php if (!$stage['completed'] && $puedeCompletar && $user->usuarioInscritoEnDesafio($id_user, $id_challenge)): ?>
+                            <form action="completeChallenge.php?id_challenge=<?php echo $id_challenge; ?>" method="POST"
                                 class="completar-form">
-                                <input type="hidden" name="id_reto" value="<?php echo $reto['id_reto']; ?>">
+                                <input type="hidden" name="id_stage" value="<?php echo $stage['id_stage']; ?>">
                                 <button type="submit" class="btn-completar">Marcar como Completado</button>
                             </form>
-                            <?php elseif ($reto['completado'] === 1 ): ?>
+                            <?php elseif ($stage['completed'] === 1 ): ?>
                                 <span class="completado-texto">Completado</span>
                         <?php endif; ?>
 

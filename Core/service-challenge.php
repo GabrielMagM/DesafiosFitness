@@ -46,7 +46,7 @@ class ServiciosDesafios {
 }
 
 // Configurar y manejar el servidor SOAP
-$options = array('uri' => "http://localhost/PHP/DesafiosFitness/Core/service-challenge.php");
+$options = array('uri' => "http://localhost/DesafiosFitness/DesafiosFitness/Core/service-challenge.php");
 $server = new SoapServer(null, $options);
 $server->setClass('ServiciosDesafios');
 
