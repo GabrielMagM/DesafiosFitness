@@ -239,6 +239,33 @@ class Functions extends Conexion{
     }
     
 
+    public function completeStage($id_user, $id_stage) {
+        $con = Conexion::Conectar();
+        
+        try {
+            // Iniciar una transacción para asegurar integridad
+            $con->beginTransaction();
+    
+            // Actualizar el stage como completado
+            $consulta = $con->prepare("
+                UPDATE user_stages 
+                SET completed = 1, end_date = NOW() 
+                WHERE id_user = :id_user AND id_stage = :id_stage
+            ");
+            $consulta->execute([':id_user' => $id_user, ':id_stage' => $id_stage]);
+    
+            // Confirmar la transacción
+            $con->commit();
+            
+            return true;
+        } catch (PDOException $e) {
+            // Revertir transacción en caso de error
+            $con->rollBack();
+            echo "Error al completar el stage: " . $e->getMessage();
+            return false;
+        }
+    }
+
 
     
 

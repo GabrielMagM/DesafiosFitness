@@ -4,8 +4,8 @@ class Challenges {
 
     public function __construct() {
         $this->client = new SoapClient(null, array(
-            'location' => "http://localhost/DesafiosFitness/DesafiosFitness/Core/service-challenge.php",
-            'uri'      => "http://localhost/DesafiosFitness/DesafiosFitness/Core/service-challenge.php",
+            'location' => "http://localhost/PHP/DesafiosFitness/Core/service-challenge.php",
+            'uri'      => "http://localhost/PHP/DesafiosFitness/Core/service-challenge.php",
             'trace'    => 1,
         ));
     }
