@@ -284,7 +284,66 @@ class Functions extends Conexion{
         }
     }
 
+    public function updateUserStatistics($id_user) {
+        $con = Conexion::Conectar();
     
+        // Obtener el número de desafíos a los que se ha unido
+        $consultaJoined = $con->prepare("
+            SELECT COUNT(*) 
+            FROM user_challenges 
+            WHERE id_user = :id_user
+        ");
+        $consultaJoined->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+        $consultaJoined->execute();
+        $challengesJoined = $consultaJoined->fetchColumn();
+    
+        // Obtener el número de desafíos completados
+        $consultaCompleted = $con->prepare("
+            SELECT COUNT(*) 
+            FROM user_challenges 
+            WHERE id_user = :id_user AND completed = 1
+        ");
+        $consultaCompleted->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+        $consultaCompleted->execute();
+        $challengesCompleted = $consultaCompleted->fetchColumn();
+    
+        // Obtener el número de desafíos en curso (no completados)
+        $consultaInProgress = $con->prepare("
+            SELECT COUNT(*) 
+            FROM user_challenges 
+            WHERE id_user = :id_user AND completed = 0
+        ");
+        $consultaInProgress->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+        $consultaInProgress->execute();
+        $challengesInProgress = $consultaInProgress->fetchColumn();
+    
+        // Actualizar la tabla de estadísticas
+        $consultaUpdate = $con->prepare("
+            INSERT INTO user_statistics (id_user, challenges_joined, challenges_completed, challenges_in_progress)
+            VALUES (:id_user, :challenges_joined, :challenges_completed, :challenges_in_progress)
+            ON DUPLICATE KEY UPDATE 
+                challenges_joined = :challenges_joined, 
+                challenges_completed = :challenges_completed,
+                challenges_in_progress = :challenges_in_progress
+        ");
+        $consultaUpdate->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+        $consultaUpdate->bindParam(':challenges_joined', $challengesJoined, PDO::PARAM_INT);
+        $consultaUpdate->bindParam(':challenges_completed', $challengesCompleted, PDO::PARAM_INT);
+        $consultaUpdate->bindParam(':challenges_in_progress', $challengesInProgress, PDO::PARAM_INT);
+        $consultaUpdate->execute();
+    }
+    
+    public function getUserStatistics($id_user) {
+        $con = Conexion::Conectar();
+        $consulta = $con->prepare("
+            SELECT * 
+            FROM user_statistics 
+            WHERE id_user = :id_user
+        ");
+        $consulta->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+        $consulta->execute();
+        return $consulta->fetch(PDO::FETCH_ASSOC);
+    }
 
 
     

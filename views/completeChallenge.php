@@ -57,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['complete_challenge'])
         $mensaje_error = "No se pudo completar el desafío. Por favor, intenta de nuevo.";
     }
 }
+
 ?>
 
 
@@ -83,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['complete_challenge'])
 </head>
 <body class="bg-slate-800 text-white font-sans leading-normal tracking-normal outline-1">
     <!-- Encabezado -->
-    <nav>
+    <nav class="mx-6 pt-3">
         <?php if (isset($_SESSION['email'])): ?>
             <?php include '../includes/header_log.php'; ?>
         <?php else: ?>

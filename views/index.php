@@ -26,7 +26,7 @@ include '../Core/logout.php';
 </head>
 <body id="body" class="bg-slate-800 font-sans leading-normal tracking-normal text-white">
     <!-- Header parte Superior de la Página -->
-    <nav id="nav">
+    <nav class="mx-6 pt-3" id="nav">
         <?php if (isset($_SESSION['email'])): ?>
             <?php
             // Obtener el nombre del usuario basado en su correo electrónico

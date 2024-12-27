@@ -6,7 +6,7 @@
         <nav id="ul" class="flex justify-between gap-6">
             <a href="index.php" class="text-white hover:underline bebas-neue-regular text-xl m-3">Inicio</a>
             <a href="desafios.php" class="text-white hover:underline bebas-neue-regular text-xl m-3">Desafíos</a>
-            <a href="#" class="text-white hover:underline bebas-neue-regular text-xl m-3">Informe</a>
+            <a href="stats.php" class="text-white hover:underline bebas-neue-regular text-xl m-3">Informe</a>
         </nav>
         <div id="h-container2" class="flex items-center gap-4">
             <div id="perfil_container" class="relative group">
