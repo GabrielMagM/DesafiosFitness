@@ -20,7 +20,7 @@ include '../Core/logout.php'
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         *{
-           outline: 1px solid red;
+           
         }
        
         .bebas-neue-regular {
@@ -33,7 +33,7 @@ include '../Core/logout.php'
 
 <body class="bg-slate-800 font-sans leading-normal tracking-normal">
     <!-- Encabezado -->
-    <nav>
+    <nav class="mx-6 pt-3">
         <style>
             .bebas-neue-regular {
                 font-family: "Bebas Neue", serif;
@@ -65,11 +65,11 @@ include '../Core/logout.php'
             <?php include '../includes/sidebar.php';?>
 
             <div id="desafios_container" class="flex flex-col bg-gray-900 rounded-md w-full">
-                <div id="crear_desafios" class="flex justify-between items-center my-2 px-12 border-b border-gray-300 pb-2" >
-                    <h3 class="font-semibold ">Desafíos de la WEb</h3>
+                <div id="crear_desafios" class="flex justify-between items-center border-gray-300 border-b py-2 px-12 gap-x-2" >
+                    <h3 class="font-semibold ">Desafíos de la Web</h3>
                     <?php if (isset($_SESSION['email'])): ?>
             <!-- Si el usuario está registrado, permite crear un desafío -->
-                        <button id="button" onclick="window.location.href='crear_desafio.php'" class="bg-indigo-500 font-bold rounded-lg px-2 py-2 text-sm">Crear un Desafío</button>
+                        <button id="button" onclick="window.location.href='crear_desafio.php'" class="bg-indigo-500 font-bold rounded-lg px-1 py-1 text-sm">Crear un Desafío</button>
                     <?php else: ?>
                         <!-- Si el usuario no está registrado, muestra el mensaje de alerta y redirige a login.php -->
                         <button id="button" onclick="alertaIniciarSesion()" class="bg-indigo-500 font-bold rounded-lg px-4 py-1">Crear un Desafío</button>

@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_challenge'])) {
 
 <?php if ($challenges === null): ?>
     <!-- Mostrar mensaje si no hay desafíos disponibles -->
-        <p class="ml-20 my-5 p-2 w-5/6"><?php echo isset($errorMessage) ? htmlspecialchars($errorMessage) : "No Hay Desafios Disponibles"; ?></p>  
+        <p class="p-5"><?php echo isset($errorMessage) ? htmlspecialchars($errorMessage) : "No Hay Desafios Disponibles"; ?></p>  
 <?php else: ?>
     <!-- Si hay desafíos, mostramos la lista -->
     <?php foreach ($challenges as $challenge): ?>

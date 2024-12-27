@@ -8,7 +8,6 @@ if (!isset($_SESSION['email'])) {
     header('Location: login.php');
     exit;
 }
-
 $id_user = $_SESSION['id_user'];
 $id_challenge = $_GET['id_challenge'];
 
@@ -25,21 +24,39 @@ try {
 // Manejo de completar reto usando funciones PHP
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_stage'])) {
     $id_stage = $_POST['id_stage'];
+    $result = $user->completeStage($id_user, $id_stage);
 
-    // Verifica si ha pasado el tiempo de espera de 10 segundos
-    if (!$intervalo || $intervalo->s >= 10 || $intervalo->i >= 1) { // Incluir minutos para asegurar
-        $user->completarReto($id_user, $id_stage); // Marcar el reto como completado
-        header("Location: seguimiento-desafio.php?id_desafio=$idDesafio");
+    if ($result) {
+        header("Location: completeChallenge.php?id_challenge=$id_challenge");
         exit;
     } else {
-        $mensaje_error = "Debes esperar 10 segundos para marcar este reto como completado nuevamente.";
+        $mensaje_error = "No se pudo completar el reto.";
     }
 }
+
 
 // Verificar si todos los retos están completados
 $allStagesCompleted = array_reduce($stages, function ($carry, $stage) {
     return $carry && $stage['completed']; // Asume que tienes un campo `completed` en los datos
 }, true);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['complete_challenge'])) {
+    // Llamar a la función para completar el desafío
+    $result = $user->completeChallenge($id_user, $id_challenge);
+
+    if ($result) {
+        // Mensaje de éxito
+        $mensaje = "¡Desafío completado con éxito!";
+        // Redirigir después de 3 segundos con JavaScript
+        echo "<script>
+            setTimeout(function() {
+                window.location.href = 'desafios.php';
+            }, 3000);
+        </script>";
+    } else {
+        $mensaje_error = "No se pudo completar el desafío. Por favor, intenta de nuevo.";
+    }
+}
 ?>
 
 
@@ -90,19 +107,18 @@ $allStagesCompleted = array_reduce($stages, function ($carry, $stage) {
                     <h2 class="">Retos del Desafío</h2>
                     <ul class="retos-lista ">
                         <?php foreach ($stages as $stage): ?>
-                            <li class="text-sm reto-item shadow-md bg-slate-900 py-1 px-2 rounded-md mb-1">
-                                <span>Reto: <?php echo htmlspecialchars($stage['num_stage']); ?> :</span>
-                                <span><?php echo htmlspecialchars($stage['name_stage']); ?></span>
-                                <span><?php echo htmlspecialchars($stage['goal_stage']); ?></span>
-
-                                <?php if (!$reto['completed']): ?>
-                                    <form action="completeChallenge.php?id_challenge=<?php echo $id_challenge; ?>" method="POST"
-                                        class="completar-form">
+                            <li class="text-sm reto-item shadow-md bg-slate-900 py-1 px-1 rounded-md mb-1">
+                                <span>Reto <?php echo htmlspecialchars($stage['num_stage']); ?> : <?php echo htmlspecialchars($stage['name_stage']); ?></span>
+                                <span><?php echo htmlspecialchars($stage['goal_stage']); ?> </span>
+                                <?php if (!$stage['completed']): ?>
+                                    <form action="completeChallenge.php?id_challenge=<?php echo $id_challenge; ?>" method="POST" class="completar-form flex justify-center py-1">
                                         <input type="hidden" name="id_stage" value="<?php echo $stage['id_stage']; ?>">
-                                        <button type="submit" class="btn-completar">completar</button>
+                                        <button type="submit" class="btn-completar bg-green-600 py-1 px-1 rounded-md text-white font-bold">Completar</button>
                                     </form>
-                                    <?php elseif ($reto['completed']): ?>
-                                    <span class="completado-texto">Completado</span>
+                                <?php elseif ($stage['completed']): ?>
+                                    <div class="flex justify-center py-1">
+                                        <span class="completado-texto bg-gray-600 py-1 px-1 rounded-md text-white font-bold">Completado</span>
+                                    </div>
                                 <?php endif; ?>
                             </li>
                         <?php endforeach; ?>
@@ -113,7 +129,7 @@ $allStagesCompleted = array_reduce($stages, function ($carry, $stage) {
                         <div class="boton">
                             <button class=" bg-lime-700 py-1 px-3 rounded-md" onclick="history.go(-1)">← Regresar</button>
                         </div>
-                        <form method="POST" action="completeChallenge.php" style="display: inline;">
+                        <form method="POST" action="completeChallenge.php?id_challenge=<?php echo $id_challenge; ?>" style="display: inline;">
                             <input type="hidden" name="id_challenge" value="<?php echo $id_challenge; ?>">
                             <button class="bg-green-600 py-1 px-3 rounded-md text-white font-bold" type="submit" name="complete_challenge"
                                 <?php echo $allStagesCompleted ? '' : 'disabled'; ?>>

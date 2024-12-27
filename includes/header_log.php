@@ -1,7 +1,7 @@
 <!--<link rel="stylesheet" href="../assets/css/header_log.css">-->
 
-<header id="header" class="bg-gray-900 text-white shadow-md mt-3 mx-6 rounded-md py-1">
-    <div id="h_container" class="flex flex-wrap justify-between items-center px-12">
+<header id="header" class="bg-gray-900 text-white shadow-md rounded-md">
+    <div id="h_container" class="flex flex-wrap justify-between items-center px-4">
         <img id="logo" src="../assets/images/Siiiu.png" alt="Logo" class="h-14">
         <nav id="ul" class="flex justify-between gap-6">
             <a href="index.php" class="text-white hover:underline bebas-neue-regular text-xl m-3">Inicio</a>

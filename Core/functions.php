@@ -8,21 +8,17 @@ class Functions extends Conexion{
     public function registerUser($username, $email, $password){
         try{
             $con = Conexion::Conectar();
-    
             // Cifrar la contraseña
-    
             $consulta = $con->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
             $consulta->bindParam(':username', $username);
             $consulta->bindParam(':email', $email);
             $consulta->bindParam(':password', $password);
             $consulta->execute();
-    
         } catch (PDOException $e){
             echo "Error al Registrar Usuario: " . $e->getMessage();
         }
     }
     
-
     public function loginUser($email, $password){
         try{
             $con = Conexion::Conectar();
@@ -30,7 +26,6 @@ class Functions extends Conexion{
             $consulta->bindParam(':email', $email);
             $consulta->execute();
             $user = $consulta->fetch(PDO::FETCH_ASSOC);
-    
             // Comparar contraseñas sin cifrar
             if ($user && $user['password'] === $password) {
                 return true;
@@ -43,9 +38,7 @@ class Functions extends Conexion{
         }
     }
 
-
     //SECCION PARA BUSCAR USUARIOS DENTRO DE LA BD
-    
     public function getUser($id_user)
     {
         $con = Conexion::Conectar();
@@ -84,9 +77,7 @@ class Functions extends Conexion{
         }
     }
 
-
     //------Aqui Estará la Seccion de challenges-------------//
-
     public function createChallenge($name_challenge, $image_url, $total_stages, $createdBy) {
         $con = Conexion::Conectar();
     
@@ -185,7 +176,7 @@ class Functions extends Conexion{
             SELECT c.* 
             FROM challenges c
             JOIN user_challenges uc ON c.id_challenge = uc.id_challenge
-            WHERE uc.id_user = :id_user
+            WHERE uc.id_user = :id_user AND uc.completed = 0
         ");
         $consulta->bindParam(':id_user', $id_user, PDO::PARAM_INT);
         $consulta->execute();
@@ -265,6 +256,35 @@ class Functions extends Conexion{
             return false;
         }
     }
+
+    public function completeChallenge($id_user, $id_challenge) {
+        $con = Conexion::Conectar();
+        
+        try {
+            // Iniciar una transacción para asegurar integridad
+            $con->beginTransaction();
+    
+            // Actualizar el stage como completado
+            $consulta = $con->prepare("
+                UPDATE user_challenges 
+                SET completed = 1, end_date = NOW() 
+                WHERE id_user = :id_user AND id_challenge = :id_challenge
+            ");
+            $consulta->execute([':id_user' => $id_user, ':id_challenge' => $id_challenge]);
+    
+            // Confirmar la transacción
+            $con->commit();
+            
+            return true;
+        } catch (PDOException $e) {
+            // Revertir transacción en caso de error
+            $con->rollBack();
+            echo "Error al completar el challenge: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    
 
 
     
