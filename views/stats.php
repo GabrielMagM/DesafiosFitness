@@ -19,6 +19,7 @@ if (!$statistics) {
         'challenges_joined' => 0,
         'challenges_completed' => 0,
         'challenges_in_progress' => 0,
+        'stages_completed' => 0,
     ];
 }
 ?>
@@ -48,10 +49,21 @@ if (!$statistics) {
 <body class="bg-slate-800 text-white font-sans leading-normal tracking-normal outline-1">
     <!-- Encabezado -->
     <nav class="mx-6 pt-3">
+        <style>
+            .bebas-neue-regular {
+                font-family: "Bebas Neue", serif;
+                font-weight: 400;
+                font-style: normal;
+            }
+        </style>
         <?php if (isset($_SESSION['email'])): ?>
-            <?php include '../includes/header_log.php'; ?>
+            <?php
+            // Obtener el nombre del usuario basado en su correo electrónico
+            $userName = $user->searchUser($_SESSION['email']);
+            ?>
+            <?php include '../includes/header_log.php';?>
         <?php else: ?>
-            <?php include '../includes/header_noLog.php'; ?>
+            <?php include '../includes/header_noLog.php';?>
         <?php endif; ?>
     </nav>
 
@@ -64,7 +76,7 @@ if (!$statistics) {
                     <h2>Estadisticas de los Desafios</h2>
                     <div class="flex flex-col justify-center items-center">
                         <span>Desafíos Completados: <?php echo $statistics['challenges_completed']; ?></span>
-                        <span>Retos Completados: <?php echo $statistics['challenges_completed']; ?></span>
+                        <span>Retos Completados: <?php echo $statistics['stages_completed']; ?></span>
                         <span>Desafíos Inscritos: <?php echo $statistics['challenges_in_progress']; ?></span>
                         <div class="barra-progreso bg-gray-700 rounded w-full h-4 mt-2 relative overflow-hidden">
                             <div class="progreso bg-green-500 h-full" style="width: <?php echo min(100, ($statistics['challenges_completed'] / max(1, $statistics['challenges_joined'])) * 100); ?>%;"></div>
